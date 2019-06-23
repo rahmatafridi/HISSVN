@@ -1,0 +1,62 @@
+﻿@model HIS.Domain.Models.Patient
+@{
+    ViewBag.Title = "Register";
+    ViewBag.PageTitle = "Patient Particulars";
+}
+
+<form id="RegistrationForm" role="form" method="post" action="@Url.Action("Register")">
+
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-red-sunglo">
+                        <i class="icon-settings font-red-sunglo"></i>
+                        <span class="caption-subject bold uppercase">Basic Info</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input has-success">
+                            @Html.TextBoxFor(a => a.Name, new { placeholder = "Name", @class = "form-control input-sm required", data_fieldname="Name" })
+                            <label for="Name">Name</label>
+                            <span class="help-block">Patient's Full Name...</span>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            @Html.TextBoxFor(a => a.FatherName, new { placeholder = "Father/Husband Name", @class = "form-control input-sm required", data_fieldname="Name" })
+                            <label for="FatherName">Name</label>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions noborder">
+                        <button class="btn blue" type="button" onclick="SubmitForm();">Submit</button>
+                        <button class="btn default" type="reset">Reset</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        function SubmitForm() {
+            if (Global.ValidateRequiredFields()) {
+                Global.SubmitFormViaAjax("RegistrationForm", "@Url.Action("Register","Patient")");
+            }
+            else {
+                Global.ShowAlertMessage("Please enter all required fields", "error", "Error");
+            }
+        }
+
+    </script>
+    
+    }

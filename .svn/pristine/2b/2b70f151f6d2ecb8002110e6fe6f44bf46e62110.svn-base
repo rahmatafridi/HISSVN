@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Web.Models;
+using HIS.Domain.Models.Menu;
+using HIS.BLL.BLL;
+
+namespace HIS.Web.Controllers
+{
+    public class CommonController : Controller
+    {
+        //
+        // GET: /Common/
+
+        public ActionResult PagingFooter(int pageSize, int totalRecords, string url)
+        {
+            Pagination page = new Pagination() {
+               PageSize = pageSize,
+               TotalRecords = totalRecords,
+               Url = url
+            };
+            return PartialView("_PagingFooter",page);
+        }
+
+        [OutputCache(Duration =100)]
+        public ActionResult GetMenus()
+        {
+            int userId = Helper.GetLoggedInUserId(), organizationId = Helper.GetLoggedInUserOrganization();
+            List<Menu> menus = new MenuBll().GetUserMenus(userId, organizationId);
+
+            return View("Sidebar", menus);
+        }
+
+        public ActionResult UnAuthorized(string msg)
+        {
+            ViewBag.Message = msg;
+
+            return View();
+        }
+
+    }
+}

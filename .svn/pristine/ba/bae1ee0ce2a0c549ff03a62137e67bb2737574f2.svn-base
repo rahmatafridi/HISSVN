@@ -1,0 +1,188 @@
+﻿@model List<HIS.Domain.Models.Role.Role>
+@{
+    ViewBag.Title = "Role List";
+
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * TotalRecords) / PageSize));
+
+}
+
+<div class="portlet box blue-hoki bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-purple-soft"></i>
+            Role List
+        </div>
+        <div class="actions">
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" title="Add New" onclick="AddEditRole(0)">
+                <i class="fa fa-plus"></i>
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true"> List </a>
+            </li>
+            <li class="">
+                <a id="idRoleAddEdit" href="#tab_1_2" data-toggle="tab" aria-expanded="false" onclick="AddNewRole();"> Add New </a>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_1_1">
+
+                <div class="row">
+                    <div class="col-xs-10 col-sm-4">
+                        <input class="form-control" id="SearchText" onkeyup="SearchRoles();" placeholder="Enter text to search" />
+                    </div>
+                    <div class="col-xs-2 col-sm-1">
+                        <button type="button" onclick="SearchFromServer();" class="btn btn-block dark btn-outline sbold uppercase"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="table-responsive">
+                            @if (Model == null || Model.Count < 1)
+                            {
+                                <h2>No Data found</h2>
+                            }
+                            else
+                            {
+                                <table class="table table-bordered table-striped table-condensed table-hover table-light" id="RoleList">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>                                               
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    @foreach (HIS.Domain.Models.Role.Role sc in Model)
+                                    {
+                                        <tr class="DataRow">
+                                            <td>@sc.vRoleName</td>
+                                            <td>@sc.vRoleDescription</td>                                                
+                                            <td> <span href="#" onclick="AddEditRole(@sc.iRoleId)"> <i class="fa fa-edit"></i></span> </td>
+                                            <td><span onclick="DeleteRole(@sc.iRoleId)"> <i class="fa fa-remove"></i></span></td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    @Html.Action("PagingFooter", "Common", new { pageSize = PageSize, totalRecords = TotalRecords, url = Url.Action("RoleList", "Role").ToString() })
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="tab_1_2">
+                <div id="tabAddRole"></div>
+
+            </div>
+
+
+        </div>
+        <div class="clearfix margin-bottom-20"> </div>
+    </div>
+</div>
+
+
+
+<div class="spacer5"></div>
+
+<script type="text/javascript">
+    function SearchRoles() {
+        var text = $.trim($("#SearchText").val().toLowerCase());
+
+        if (text == "") {
+            $(".DataRow").show();
+        }
+        else {
+            $(".DataRow").each(function () {
+                var roleName = $(this).find("td:nth-child(1)").html().toLowerCase();
+                var roleDescription = $(this).find("td:nth-child(2)").html().toLowerCase();                  
+
+                if (roleName.indexOf(text) < 0 && roleDescription.indexOf(text) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        }
+
+    }
+
+    function SearchFromServer() {
+        window.location = "@Url.Action("RoleList", "Role")/?searchText=" + document.getElementById("SearchText").value;
+    }
+
+    document.getElementById("SearchText").addEventListener("keypress", function (e) {
+
+
+        if (e.keyCode == 13) {
+            SearchFromServer();
+        }
+    });
+
+    function AddEditRole(id) {
+    //    alert(id);
+        $.ajax({
+            url: '@Url.Action("RoleForm", "Role")',
+            type: "Get",
+            dataType: "html",
+            data: { id: id},
+            async: true,
+            success: function (msg) {
+                $("#tabAddRole").html(msg);                 
+                Global.ActiveTab("idRoleAddEdit");
+            },
+            error: function () {
+                Global.ShowAlertMessage("An error occured", "error", "Error");
+            }
+
+        });
+
+    }
+
+    function DeleteRole(id) {
+        if (confirm("Do you wish to delete the role?")) {
+                $.ajax({
+                url: '@Url.Action("DeleteRoleById", "Role")',
+                type: "Post",
+                dataType: "json",
+                data: { id: id},
+                async: true,
+                success: function (msg) {
+                    Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                    if (msg.RedirectUrl !== "" && msg.RedirectUrl != null && msg.RedirectUrl != "undefined") {
+                        Global.RedirectToUrl(msg.RedirectUrl);
+                    }
+                },
+                error: function () {
+                    Global.ShowAlertMessage("An error occured", "error", "Error");
+                }
+
+            });
+        }
+    }
+
+</script>

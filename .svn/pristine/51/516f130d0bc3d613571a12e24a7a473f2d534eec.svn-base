@@ -1,0 +1,30 @@
+﻿@model HIS.Web.Models.Pagination
+@{
+    // int NextOffset = Model.Offset + Model.PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * Model.TotalRecords) / Model.PageSize));
+    //  int CurrentPage = NextOffset / Model.PageSize;   
+    Layout = null;
+}
+
+    <div class="col-sm-8 col-xs-12">
+        @if (TotalPages > 1)
+        {
+            <ul class="pagination pagination-sm">
+
+                @for (int i = 1; i <= TotalPages; i++)
+                {
+                    <li>
+                        <a href="@Model.Url/?offset=@(Model.PageSize * (i - 1))&pageSize=@Model.PageSize">@i </a>
+                    </li>    
+                }
+            </ul>
+        }
+        @if (Model.TotalRecords >0)
+        {
+            <h2>Total @Model.TotalRecords found</h2>    
+        }
+        
+
+
+    </div>
+

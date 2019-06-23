@@ -1,0 +1,20 @@
+USE [HIS]
+GO
+
+/****** Object:  Table [dbo].[tblReligion]    Script Date: 7/4/2017 11:15:56 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblReligion](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[vReligion] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_tblReligion] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+

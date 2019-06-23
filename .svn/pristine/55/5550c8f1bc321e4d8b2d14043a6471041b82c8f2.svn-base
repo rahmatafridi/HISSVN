@@ -1,0 +1,245 @@
+﻿@model HIS.Domain.Models.User.User
+@{
+    ViewBag.Title = "User Type";
+   // Layout = null;
+}
+
+<form action="@Url.Action("UserForm","User")" class="form-horizontal" id="frmUser">
+    @Html.HiddenFor(a => a.UserId)
+    @Html.HiddenFor(a => a.OrganizationId)
+    @Html.HiddenFor(a => a.CreatedDate)
+    @Html.HiddenFor(a => a.CreatedUserId)
+    @Html.HiddenFor(a => a.UpdateDate)
+    @Html.HiddenFor(a => a.UpdateUserId)
+
+    <div class="form-body" style="margin-top:32px">
+        @* <h3 class="form-section">Add/Edit User Type</h3>*@
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">User Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.UserName, new { data_fieldname = "User Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Email</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.Email, new { data_fieldname = "Email", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Password</label>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(a => a.Password , new { data_fieldname = "Password", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Is Active</label>
+                    <div class="col-md-9">
+                        @Html.CheckBoxFor(a => a.IsActive, new { data_fieldname = "Is Active", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <h3 class="form-section">Personal Info</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">First Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.FirstName, new { data_fieldname = "First Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Last Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.LastName, new { data_fieldname = "Last Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Title</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.TitleId, (List<SelectListItem>)ViewBag.Titles, new { data_fieldname = "Title", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Gender</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.Gender, (List<SelectListItem>)ViewBag.Genders, new { data_fieldname = "Gender", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Country</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.CountryId, (List<SelectListItem>)ViewBag.Countries, new { data_fieldname = "Country", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Gender</label>
+                    <div class="col-md-9">
+                        @*@Html.DropDownListFor(a => a.CityId, null, new { data_fieldname = "City", @class = "form-control" })*@
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Address</label>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(a => a.Address, new { data_fieldname = "Address", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Phone</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.PhoneNo, new { data_fieldname = "Phone", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Emergency No</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.EmergencyContactNumber, new { data_fieldname = "Emergency No", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Emergency Contact Person</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.EmergencyContactPerson, new { data_fieldname = "Emr. Contact No", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Designation</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.Designation, new { data_fieldname = "Designation", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+    </div>
+   
+    
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="button" class="btn green" onclick="Global.SubmitFormViaAjax('frmUser')">Submit</button>
+                        <button type="reset" class="btn default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"> </div>
+        </div>
+    </div>
+</form>
+
+
+
+

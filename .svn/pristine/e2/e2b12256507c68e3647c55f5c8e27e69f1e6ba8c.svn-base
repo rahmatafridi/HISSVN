@@ -1,0 +1,65 @@
+﻿ var Global = new function () {
+    this.ValidateRequiredFields = function () {
+        var isvalid = true;
+
+
+        $(".required").each(function () {
+            if ($.trim($(this).val()) === "") {
+                $(this).closest(".form-group").addClass("has-error");
+                $(this).siblings(".help-block").html($(this).data("fieldname") + " is Required field to Proceed");
+                isvalid = false;
+                return false;
+            }
+            else {
+                $(this).closest(".form-group").removeClass("has-error has-warning");
+            }
+        });
+
+        return isvalid;
+    },
+
+        this.ResetValidationMessages = function () {
+            $(".required").each(function () {
+                $(this).closest(".form-group").removeClass("has-error has-warning");
+                $(this).siblings(".help-block").html("");
+
+            });
+        },
+
+        this.ShowAlertMessage = function (message, type, heading) {
+            toastr[type](message, heading);
+        },
+
+        this.SubmitFormViaAjax = function (formid, url) {
+       
+            Global.ResetValidationMessages();
+
+            if (!Global.ValidateRequiredFields()) {
+                // do nothing
+            }
+
+            else {
+                url = url || $("#"+formid).attr("action");
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    dataType: "json",
+                    data: $("#" + formid).serialize(),
+                    async: true,
+                    success: function (msg) {
+                        Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                    },
+                    error: function () {
+                        Global.ShowAlertMessage("An error occured", "error", "Error");
+                    }
+
+                });
+            }
+
+
+        };
+    this.ActiveTab = function (tab) {
+        $('.nav-tabs a[id="' + tab + '"]').tab('show');
+    };
+    
+};

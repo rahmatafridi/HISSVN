@@ -1,0 +1,301 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
+
+namespace HIS.DAL.DbHelper
+{
+
+    public class Database
+    {
+        #region Initialization
+        static SqlConnection Connection { get; set; }
+        SqlCommand Command { get; set; }
+        SqlTransaction transaction{get; set;}
+
+
+        public Database()
+        {
+            CreateDatabase();
+           
+        }
+        #endregion
+
+        #region DataBase
+        /// <summary>
+        /// Create connection with the "DefaultConnection" connection string
+        /// </summary>
+        public void CreateDatabase()
+        {
+            if (Connection == null || Connection.State != System.Data.ConnectionState.Open)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+
+                Connection = new SqlConnection(connectionString);
+                try
+                {
+                    Connection.Open();
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+        }
+
+        public void CreateDatabase(string connectionStringName)
+        {
+            if (Connection == null || Connection.State != System.Data.ConnectionState.Open)
+            {
+                Connection = new SqlConnection(ConfigurationManager.ConnectionStrings[connectionStringName].ToString());
+
+                try
+                {
+                    Connection.Open();
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+        }
+
+
+        public DataSet LoadDataSetAgainstQuery(string query, System.Data.CommandType type, ref List<DbParameter> parameters)
+        {
+            DataSet ds = new DataSet();
+
+            try
+            {
+
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+
+
+
+
+                SqlDataAdapter da = new SqlDataAdapter(Command);
+
+                da.Fill(ds);
+
+                // fill any output parameter values..
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        if (param.Direction == ParameterDirection.Output || param.Direction == ParameterDirection.InputOutput)
+                        {
+                            param.Value = Command.Parameters[param.Name].Value;
+                        }
+                    }
+                }
+
+                
+
+                Command.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            
+
+            return ds;
+           
+        }
+
+        public int ExecuteNonQuery(string query, CommandType type, ref List<DbParameter> parameters)
+        {
+            int result = 0;
+
+            try
+            {
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+                Command.Transaction = transaction;
+                result = Command.ExecuteNonQuery();
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        if (param.Direction == ParameterDirection.Output || param.Direction == ParameterDirection.InputOutput)
+                        {
+                            param.Value = Command.Parameters[param.Name].Value;
+                        }
+                    }
+                }
+
+                Command.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            
+
+            return result;
+        }
+
+        public object ExecuteScalar(string query, System.Data.CommandType type, ref List<DbParameter> parameters)
+        {
+            object result = null;
+
+            try
+            {
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+                Command.Transaction = transaction;
+                result = Command.ExecuteScalar();
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        if (param.Direction == ParameterDirection.Output  ||  param.Direction  == ParameterDirection.InputOutput)
+                        {
+                            param.Value = Command.Parameters[param.Name].Value;
+                        }
+                    }
+                }
+
+                Command.Dispose();
+               
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+            return result;
+        }
+        public void BeginTransaction()
+        {
+            if (Connection == null || Connection.State != System.Data.ConnectionState.Open)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+
+                Connection = new SqlConnection(connectionString);
+                
+                try
+                {
+                    Connection.Open();
+
+                    // Start a local transaction.
+                    transaction = Connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                    
+                }
+                catch (SqlException ex)
+                {
+
+                    throw ex;
+                }
+            }
+            else
+            {
+                transaction = Connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+               
+            }
+        }
+        public void Commit()
+        {
+            try
+            {  
+                    transaction.Commit();
+                  
+                    // do redirect
+             
+
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void RollBack()
+        {
+            try
+            {
+                
+                    transaction.Rollback();
+        
+                    // do redirect
+       
+
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+        }
+
+    }
+  
+
+    #endregion
+
+
+    public class DbParameter
+    {
+        public string Name { get; set; }
+        public DbType Type { get; set; }
+        public ParameterDirection Direction { get; set; }
+        public int Length { get; set; }
+        public object Value { get; set; }
+    }
+
+}

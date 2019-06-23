@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.DAL.DAL;
+using HIS.Domain.Models;
+using HIS.Domain.Models.Common;
+
+namespace HIS.BLL.BLL
+{
+    public class CommonBll:ICommonBll
+    {
+        private ICommonDal CommonDal { get; set; }
+        public CommonBll()
+        {
+            CommonDal = new CommonDal();
+        }
+
+
+        public int InsertTitle(string title)
+        {
+            return CommonDal.InsertTitle(title);
+        }
+
+        public List<Title> Titles
+        {
+            get
+            {
+                return CommonDal.GetTitles();
+            }
+        }
+
+        public List<Country> Countries
+        {
+            get
+            {
+                return CommonDal.GetCountries();
+            }
+        }
+
+        public List<City> Cities
+        {
+            get
+            {
+                return CommonDal.GetCities(1);
+            }
+        }
+
+        public List<Gender> Genders
+        {
+            get
+            {
+                return CommonDal.GetGenders();
+            }
+        }
+    }
+
+    public interface ICommonBll
+    {
+        int InsertTitle(string title);
+        List<Title> Titles { get; }
+
+        List<Country> Countries { get; }
+        List<Gender> Genders { get; }
+        List<City> Cities { get; }
+    }
+}

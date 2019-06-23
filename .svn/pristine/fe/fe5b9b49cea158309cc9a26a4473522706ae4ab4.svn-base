@@ -1,0 +1,310 @@
+﻿@model HIS.Domain.Models.User.User
+@{
+    ViewBag.Title = "User";
+    Layout = null;
+}
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+</section>
+<form action="@Url.Action("UserForm","User")" class="form-horizontal" id="frmUser">
+    @Html.HiddenFor(a => a.UserId)
+    @Html.HiddenFor(a => a.OrganizationId)
+    @Html.HiddenFor(a => a.CreatedDate)
+    @Html.HiddenFor(a => a.CreatedUserId)
+    @Html.HiddenFor(a => a.UpdateDate)
+    @Html.HiddenFor(a => a.UpdateUserId)
+
+    <div class="form-body" style="margin-top:32px">
+        <div class="title"><h1 class="form-section">User Detail</h1></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">User Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.UserName, new { data_fieldname = "User Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Email</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.Email, new { data_fieldname = "Email", @class = "form-control required email", title="Email is required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Password</label>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(a => a.Password , new { data_fieldname = "Password", @class = "form-control required",title="Password is required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Is Active</label>
+                    <div class="col-md-9">
+                        @Html.CheckBoxFor(a => a.IsActive, new { data_fieldname = "Is Active", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <h3 class="form-section">Personal Info</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">First Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.FirstName, new { data_fieldname = "First Name", @class = "form-control required", title = "First Name is required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Last Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.LastName, new { data_fieldname = "Last Name", @class = "form-control required", title = "Last Name is required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Title</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.TitleId, (List<SelectListItem>)ViewBag.Titles, new { data_fieldname = "Title", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Gender</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.Gender, (List<SelectListItem>)ViewBag.Genders, new { data_fieldname = "Gender", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Address</label>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(a => a.Address, new { data_fieldname = "Address", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Phone</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.PhoneNo, new { data_fieldname = "Phone", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Emergency No</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.EmergencyContactNumber, new { data_fieldname = "Emergency No", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Emergency Contact Person</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.EmergencyContactPerson, new { data_fieldname = "Emr. Contact No", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Designation</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.Designation, new { data_fieldname = "Designation", @class = "form-control required", title = "Designation is required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+    </div>
+
+    <div class="panel-group accordion scrollable" id="accordion">
+        <div class="panel panel-default">
+        <div class="panel-heading" style="background:#57c4d0;">
+            <h4 class="panel-title">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#RolesDiv" aria-expanded="false"> Roles</a>
+            </h4>
+        </div>
+        <div id="RolesDiv" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+            <div class="panel-body">
+                <div class="icheck-inline">
+                    @foreach (HIS.Domain.Models.Role.Role role in ViewBag.Roles)
+                    {
+                        <input type="checkbox" class="chkRole icheck" data-checkbox="icheckbox_square-blue" id="role_@role.iRoleId" name="userrole" data-id="@role.iRoleId" @((ViewBag.AssignedRoles as List<int> ).Contains(role.iRoleId) ? "checked=\"checked\"" : "") />
+                        <label for="role_@role.iRoleId" title="@role.vRoleDescription">@role.vRoleName </label>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background:#57c4d0;">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#TypesDiv" aria-expanded="false">User Types</a>
+                </h4>
+            </div>
+            <div id="TypesDiv" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                    <div class="icheck-inline">
+                        @foreach (HIS.Domain.Models.User.UserType role in ViewBag.Types)
+                        {
+                            <input type="checkbox" class="chkType icheck" data-checkbox="icheckbox_square-blue" id="type_@role.UserTypeId" name="userrole" data-id="@role.UserTypeId" @((ViewBag.AssignedTypes as List<int> ).Contains(role.UserTypeId) ? "checked=\"checked\"" : "") />
+                            <label for="type_@role.UserTypeId" title="@role.UserTypeName">@role.UserTypeName</label>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   </div>
+
+
+    
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="button" class="btn green" onclick="SubmitForm();">Submit</button>
+                        <button type="reset" class="btn default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"> </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function SubmitForm() {
+        var userFormData = $("#frmUser").serialize();
+        var userTypeCounter = 0;
+        var roleCounter = 0;
+        $(".chkRole:checked").each(function () {
+            userFormData += '&' + $.param({ 'iRoleId': $(this).data("id") });
+            roleCounter = roleCounter + 1;
+        });
+        $(".chkType:checked").each(function () {
+            userFormData += '&' + $.param({ 'UserTypeId': $(this).data("id") });
+            userTypeCounter = userTypeCounter + 1;
+        });
+
+        var result = $("#frmUser").valid();
+            if (!result) {
+                // do nothing
+            }
+            else {
+                if (roleCounter > 0 && userTypeCounter>0) {
+                    $.ajax({
+                        url: '@Url.Action("UserForm", "User")',
+                        type: "POST",
+                        dataType: "json",
+                        data: userFormData,
+                        async: true,
+                        success: function (msg) {
+                            Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                            data = msg.Data;
+                            if (msg.RedirectUrl != "" && msg.RedirectUrl != null) {
+                                Global.RedirectToUrl(msg.RedirectUrl);
+                            }
+                        },
+                        error: function (result) {
+                            Global.ShowValidationError("frmUser",result)
+                            Global.ShowAlertMessage("An error occured", "error", "Error");
+                        }
+
+                    });
+                } else {
+                    Global.ShowAlertMessage("Must select any Role and User Type", "error", "Error");
+                }
+            }
+
+    }
+ 
+</script>    
+
+

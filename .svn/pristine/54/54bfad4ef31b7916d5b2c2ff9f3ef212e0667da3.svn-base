@@ -1,0 +1,66 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.ModulePermission;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class ModulePermissionBLL : IModulePermissionBll
+    {
+        #region Initialization
+
+        private IModulePermissionDAL ModulePermissionDal { get; set; }
+
+        public ModulePermissionBLL()
+        {
+            ModulePermissionDal = new ModulePermissionDAL();
+        }
+
+        #endregion
+
+        #region Module Permission
+
+        public List<ModulePermission> GetModulePermission(SearchCriteria criteria, out int TotalRecords)
+        {
+            return ModulePermissionDal.GetModulePermission(criteria, out TotalRecords);
+        }
+
+        public ModulePermission GetModulePermissionById(int id)
+        {
+            return ModulePermissionDal.GetModulePermissionById(id);
+        }
+
+        public int DeleteModulePermissionById(int id)
+        {
+            return ModulePermissionDal.DeleteModulePermissionById(id);
+        }
+
+        public bool SaveModulePermission(ModulePermission modulePermission)
+        {
+            return ModulePermissionDal.SaveModulePermission(modulePermission);
+        }
+
+        #endregion
+
+    }
+
+    public interface IModulePermissionBll
+    {
+        #region Module Permission
+
+        List<ModulePermission> GetModulePermission(SearchCriteria criteria, out int TotalRecords);
+
+        ModulePermission GetModulePermissionById(int id);
+
+        int DeleteModulePermissionById(int id);
+
+        bool SaveModulePermission(ModulePermission modulePermission);
+
+        #endregion
+
+    }
+}

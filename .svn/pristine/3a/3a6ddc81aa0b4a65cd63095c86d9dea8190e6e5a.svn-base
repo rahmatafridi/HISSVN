@@ -1,0 +1,28 @@
+			   USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 6/25/2017 6:36:33 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_GetUsernameEmailCount]
+@p_Username varchar(30),
+@p_Email varchar(70),
+@p_UserId int
+as
+begin
+if @p_UserId=null or @p_UserId=0
+Begin
+select count(*) from tblUser where vEmail = @p_Email
+or vUserName = @p_Username;
+end
+ELSE IF @p_UserId  >0
+BEGIN
+select count(*) from tblUser where (vEmail = @p_Email
+or vUserName = @p_Username) and iUserId<>@p_UserId;
+END
+
+
+end
+

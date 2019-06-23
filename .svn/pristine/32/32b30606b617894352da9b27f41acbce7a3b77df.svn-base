@@ -1,0 +1,103 @@
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveSms]    Script Date: 6/30/2017 11:58:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[pr_SaveSms]
+(
+	@p_SmsId int
+	,@p_SmsSubject nvarchar(max)= null
+	,@p_SmsBody text= null
+	,@p_SmsPriority int= null
+,@p_OrganizationId int= null
+,@p_ToAddress nvarchar(max)= null
+,@p_CcAddress nvarchar(max)= null
+,@p_CreatedUserId int= null
+,@p_ScheduleDateTime datetime= null
+,@p_Prirority int = null
+
+)
+AS
+BEGIN
+INSERT INTO tblSms (dScheduleDateTime
+,bIsSent
+,vToAddress
+,vCcAddress
+,vSubject
+,tSmsBody
+
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iPriority
+) values (@p_ScheduleDateTime 
+,0 
+,@p_ToAddress 
+,@p_CcAddress 
+,@p_SmsSubject 
+,@p_SmsBody 
+
+,@p_OrganizationId 
+,@p_CreatedUserId 
+,SYSDATETIME()
+,@p_Prirority 
+ );
+END
+		  go
+		  USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveEmail]    Script Date: 7/1/2017 12:01:28 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[pr_SaveEmail]
+(
+	@p_EmailId int
+	,@p_EmailSubject nvarchar(max)= null
+	,@p_EmailBody text= null
+	,@p_EmailPriority int= null
+,@p_OrganizationId int= null
+,@p_ToAddress nvarchar(max) = null
+,@p_CcAddress nvarchar(max)= null
+,@p_CreatedUserId int= null
+,@p_ScheduleDateTime datetime= null
+,@p_Prirority int = null
+
+)
+AS
+BEGIN
+INSERT INTO tblEmail (dScheduleDateTime
+,bIsSent
+,vToAddress
+,vCcAddress
+,vSubject
+,tEmailBody
+
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iPriority
+) values (@p_ScheduleDateTime 
+,0 
+,@p_ToAddress 
+,@p_CcAddress 
+,@p_EmailSubject 
+,@p_EmailBody 
+
+,@p_OrganizationId 
+,@p_CreatedUserId 
+,SYSDATETIME()
+,@p_Prirority
+ );
+END
+
+
+
+
+
+
+
+

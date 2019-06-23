@@ -1,0 +1,421 @@
+﻿@model HIS.Domain.Models.Patient.Patient
+@{
+    ViewBag.Title = "PatientForm";
+    ViewBag.PageTitle = "Patient Particulars";
+    Layout = null;
+}
+
+<form action="@Url.Action("PatientForm","Patient")" method="post">
+
+
+
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Patient
+            </div>
+            @*<div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                </div>*@
+        </div>
+        <div class="portlet-body">
+            <div class="panel-group accordion" id="accordion1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accBasicInfo" aria-expanded="false"> Basic Info </a>
+                        </h4>
+                    </div>
+                    <div id="accBasicInfo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Title</label>
+                                            @Html.DropDownListFor(a => a.TitleId, new SelectList(ViewBag.Titles, "TitleId", "TitleName", Model.TitleId),new {@class="form-control" })
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">First Name</label>
+                                            @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Middle Name</label>
+                                            @Html.TextBoxFor(a => a.MiddleName, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Last Name</label>
+                                            @Html.TextBoxFor(a => a.LastName, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Father/Husband Name</label>
+                                            @Html.TextBoxFor(a => a.FatherHusbandName, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Nationality</label>
+                                            @Html.DropDownListFor(a => a.Nationality, (SelectList)ViewBag.Country, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Gender</label>
+                                            @Html.DropDownListFor(a => a.GenderId, (SelectList)ViewBag.Gender, new {@class="form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Date of Birth</label>
+                                            @Html.TextBoxFor(a=> a.DateOfBirth, new {@class="form-control datepicker" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Marital Status</label>
+                                            @Html.DropDownListFor(a => a.MaritalStatus, (SelectList)ViewBag.MaritalStatus, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Religion</label>
+                                            @Html.DropDownListFor(a => a.ReligionId, (SelectList)ViewBag.Religion, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                               
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Country</label>
+                                            @Html.DropDownListFor(a => a.CountryId, (SelectList)ViewBag.Country, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">CNIC</label>
+                                            @Html.TextBoxFor(a => a.Cnic, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                @*<h3 class="form-section">Address</h3>*@
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accContactInfo" aria-expanded="false"> Contact Info </a>
+                        </h4>
+                    </div>
+                    <div id="accContactInfo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Contact Number</label>
+                                            @Html.TextBoxFor(a => a.ContactNumber, new {@class="form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">House No</label>
+                                            @Html.TextBoxFor(a => a.HouseNo, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Street No</label>
+                                            @Html.TextBoxFor(a => a.StreetNo, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Area</label>
+                                            @Html.TextBoxFor(a => a.Area, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+                                            @Html.TextBoxFor(a => a.Email, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            @Html.TextBoxFor(a => a.State, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Postal Code</label>
+                                            @Html.TextBoxFor(a => a.PostalCode, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    
+                                </div>
+                                <!--/row-->
+                               
+                                @*<h3 class="form-section">Address</h3>*@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accSecurityInfo" aria-expanded="false"> Personal Info </a>
+                        </h4>
+                    </div>
+                    <div id="accSecurityInfo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Preferred Language</label>
+                                            @Html.DropDownListFor(a => a.PreferredLanguage, (SelectList)ViewBag.Languages, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Mother Maiden Name</label>
+                                            @Html.TextBoxFor(a => a.MotherMaidenName, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Ethnic Group</label>
+                                            @Html.DropDownListFor(a => a.EthnicGroup, (SelectList)ViewBag.Ethnicities, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Birth Place</label>
+                                            @Html.TextBoxFor(a => a.BirthPlace, new { @class = "form-control" })
+                                            
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                @*<h3 class="form-section">Address</h3>*@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accEmergencyInfo" aria-expanded="false"> Emergency Info </a>
+                        </h4>
+                    </div>
+                    <div id="accEmergencyInfo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Emergency Contact Name</label>
+                                            @Html.TextBoxFor(a => a.EmergencyName, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Emergency No</label>
+                                            @Html.TextBoxFor(a => a.EmergencyContact, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#patImageDiv" aria-expanded="false"> Image</a>
+                        </h4>
+                    </div>
+                    <div id="patImageDiv" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-outline yellow-mint" onclick="InitializeImage();">Start</button>
+                                        <button type="button" id="btnTakePicture" style="display:none;" class="btn btn-outline yellow-mint" onclick="take_snapshot();">Take</button>
+                                        <input type="hidden" id="ImageDataUri" name="ImageDataUri" />
+                                        <div id="CameraBox">
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div id="ImagePreview" style="margin-top: 38px;"> 
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions right">
+        <button type="button" class="btn default">Cancel</button>
+        <button type="submit" class="btn blue">
+            <i class="fa fa-check"></i> Save
+        </button>
+    </div>
+</form>
+
+
+ 
+<script src="@Url.Content("~/Content/Scripts/webcam.min.js")"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Global.FormDatePicker("datepicker");
+    });
+
+
+    function InitializeImage() {
+        Webcam.set({
+            width: 320,
+            height: 240,
+           
+        });
+        Webcam.attach('#CameraBox');
+        $("#btnTakePicture").show();
+    }
+    
+
+    function take_snapshot() {
+        Webcam.snap(function (data_uri) {
+            document.getElementById('ImagePreview').innerHTML = '<img src="' + data_uri + '"/>';
+            $('#ImageDataUri').val(data_uri);
+        });
+    }
+
+</script>
+

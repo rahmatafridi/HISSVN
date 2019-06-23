@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using HIS.Domain.Models.Common;
+using HIS.BLL;
+
+namespace HIS.Web.Controllers
+{
+    public class UserController : Controller
+    {
+        #region Initialization
+
+        public IUserBll _user { get; set; }
+
+        public UserController()
+        {
+            _user = new UserBll();
+        }
+
+        #endregion
+
+
+        #region User Type
+
+        public ActionResult UserTypeList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<UserType> types = new List<UserType>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+            
+            int TotalRecords = 0;
+
+            types = _user.GetUserTypes(criteria, out TotalRecords);
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+            return View(types);
+        }
+
+
+        [HttpGet]
+        public ActionResult UserTypeForm(int id = 0)
+        {
+            UserType ut = new UserType();
+
+            if (id > 0)
+            {
+                ut = _user.GetUserTypeById(id);
+                // get previous record for editing
+            }
+
+            return View(ut);
+        }
+
+        [HttpPost]
+        public ActionResult UserTypeForm(UserType uType)
+        {
+
+
+            AjaxResponse response = new AjaxResponse()
+            {
+                Type = "success",
+                Message = "Data has been updated successfully",
+                Heading = "User Type"
+
+            };
+
+            return Json(response);
+        }
+        #endregion
+
+
+
+
+
+
+    }
+}

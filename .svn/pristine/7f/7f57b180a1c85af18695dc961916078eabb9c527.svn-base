@@ -1,0 +1,287 @@
+﻿@model HIS.Domain.Models.Organization.Organization
+    @{
+        ViewBag.Title = "Organization Form";
+        Layout = null;
+    }
+    <section>
+        @Styles.Render("~/bundles/FormDesign")
+    </section>
+    <form action="@Url.Action("OrganizationForm","Organization")" class="form-horizontal" id="frmOrganization">
+        @Html.HiddenFor(a => a.iOrganizationId)
+        @Html.HiddenFor(a => a.CreatedDate)
+        @Html.HiddenFor(a => a.CreatedUserId)
+        @Html.HiddenFor(a => a.UpdateDate)
+        @Html.HiddenFor(a => a.UpdateUserId)
+        @Html.HiddenFor(a => a.OrganizationLogo)
+        @Html.HiddenFor(a => a.LanguageId)
+        @Html.HiddenFor(a => a.TimeZoneId)
+
+        <div class="form-body" style="margin-top:32px">
+            <div class="title"><h1 class="form-section">Organization Detail</h1></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vOrganizationName, new { data_fieldname = "Organization Name", @class = "form-control required", title="ammar bhai is good" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Short Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vOrganizationShortName, new { data_fieldname = "ShortName", @class = "form-control required" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Email</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vEmail, new { data_fieldname = "Email", @class = "form-control required email" })
+                             
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Domain Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vDomainName, new { data_fieldname = "Domain Name", @class = "form-control" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Activation Date</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.dActivationDate, new { data_fieldname = "ActivationDate", @class = "form-control clsDatePicker required" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Expiry Date</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.dExpiryDate, new { data_fieldname = "Expiry Date", @class = "form-control clsDatePicker" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Country</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(a => a.iCountryId, (List<SelectListItem>)ViewBag.Countries, new { data_fieldname = "Country", @class = "form-control" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">City</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(a => a.iCityId, (List<SelectListItem>)ViewBag.Cities, new { data_fieldname = "City", @class = "form-control" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Phone No</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vPhoneNo, new { data_fieldname = "Phone", @class = "form-control" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Is Active</label>
+                        <div class="col-md-9">
+                            @Html.CheckBoxFor(a => a.bIsActive, new { data_fieldname = "Is Active", @class = "form-control required" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Address</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(a => a.vAddress, new { data_fieldname = "Address", @class = "form-control" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <!--/row-->
+            <!--/row-->
+            <div class="title"><h1 class="form-section">Contact Person Detail</h1></div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vContactPersonName, new { data_fieldname = "Person Name", @class = "form-control required" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Phone No</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(a => a.vContactPersonPhoneNo, new { data_fieldname = "Phone Number", @class = "form-control required" })
+
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+            <!--/row-->
+            <!--/row-->
+
+
+
+
+        </div>
+
+        <div class="panel-group accordion scrollable" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background:#57c4d0;">
+                    <h3 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#ModulesDiv" aria-expanded="false" style="font-family:-webkit-body;"> Organization Modules</a>
+                    </h3>
+                </div>
+                <div id="ModulesDiv" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="icheck-inline">
+                            @foreach (HIS.Domain.Models.Module.Module module in ViewBag.Modules)
+                            {
+                                <input type="checkbox" class="chkModule icheck" data-checkbox="icheckbox_square-blue" id="module_@module.ModuleId" name="organizationModule" data-id="@module.ModuleId" @((ViewBag.AssignedModules as List<int>).Contains(module.ModuleId) ? "checked=\"checked\"" : "") />
+                                    <label for="module_@module.ModuleId" title="@module.ModuleName">@(module.ModuleName + " ") <span style="visibility:hidden">ddd</span></label>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn green" onclick="SubmitForm();">Submit</button>
+                            <button type="reset" class="btn default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6"> </div>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Global.FormDatePicker("clsDatePicker");
+        });
+        function SubmitForm() {
+            var organizationFormData = $("#frmOrganization").serialize();
+            var moduleCounter = 0;
+            $(".chkModule:checked").each(function () {
+                organizationFormData += '&' + $.param({ 'ModuleIds': $(this).data("id") });
+                moduleCounter = moduleCounter + 1;
+            });           
+                     
+            var result = $("#frmOrganization").valid(); 
+            if (!result) {
+                // do nothing
+            }      
+            else {                         
+                if (moduleCounter > 0) {
+                    $.ajax({
+                        url: '@Url.Action("OrganizationForm", "Organization")',
+                        type: "POST",
+                        dataType: "json",
+                        data: organizationFormData,
+                        async: true,      
+                        success: function (msg) {
+                            Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                            data = msg.Data;
+                            if (msg.RedirectUrl != "" && msg.RedirectUrl != null) {
+                                Global.RedirectToUrl(msg.RedirectUrl);
+                            }
+                        },
+                        error: function (result) {                         
+                            Global.ShowValidationError("frmOrganization",result)
+                            Global.ShowAlertMessage("An error occured", "error", "Error");
+                        }
+
+                    });
+                } else {
+                    Global.ShowAlertMessage("Must select any module", "error", "Error");
+                }
+            } 
+
+        }
+    </script>
+
+

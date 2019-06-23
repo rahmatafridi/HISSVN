@@ -1,0 +1,215 @@
+										  USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationProfile]    Script Date: 6/30/2017 2:54:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_UpdateOrganizationProfile]
+(@p_iOrganizationId int=null
+,@p_vOrganizationName nvarchar(max) =null
+,@p_vOrganizationShortName nvarchar(max)=null
+,@p_vAddress nvarchar(max)=null
+,@p_vPhoneNo nvarchar(max)=null
+,@p_iCountryId int=null
+,@p_iCityId int=null
+,@p_vContactPersonName nvarchar(max)=null
+,@p_vContactPersonPhoneNo nvarchar(max)=null
+,@p_vDomainName nvarchar(max) =null
+,@p_vOganizationLogo nvarchar(max)=null
+,@p_iLanguageId int  =null
+,@p_iTimeZoneId int = null
+)
+AS
+BEGIN
+
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vDomainName=@p_vDomainName
+,iLanguageId=@p_iLanguageId
+, iTimeZoneId = @p_iTimeZoneId
+,bFirstTimeLogin=0
+, vOrganizationLogo = @p_vOganizationLogo
+Where iOrganizationId = @p_iOrganizationId;
+Select @p_iOrganizationId;
+
+END
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateUserProfile]    Script Date: 6/30/2017 2:58:21 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_UpdateUserProfile]
+@p_iUserId int
+      ,@p_vFirstName varchar(50)
+      ,@p_vMiddleName varchar(50)=null
+      ,@p_vLastName varchar(50)
+      ,@p_iCountryId int
+      ,@p_iCityId int
+      ,@p_iTitleId int
+      ,@p_iGenderId int
+      ,@p_vFatherHusbandName varchar(50) =null
+      ,@p_vAddress varchar(150)  = null
+      ,@p_vPhoneNo varchar(50) =null
+      ,@p_vCNIC varchar(50)  =null
+      ,@p_vPassportNo varchar(50)=null
+      ,@p_vEmergencyContactNo varchar(50) =null
+      ,@p_vEmergencyContactPerson varchar(50) =  null
+      ,@p_vDesignation varchar(100)
+      
+
+as
+begin
+
+if @p_iUserId > 0 
+begin
+
+ update top (1) tblUser
+ set vFirstName = @p_vFirstName 
+      ,vMiddleName = @p_vMiddleName 
+      ,vLastName = @p_vLastName 
+      ,iCountryId = @p_iCountryId 
+      ,iCityId = @p_iCityId
+      ,iTitleId = @p_iTitleId
+      ,iGenderId = @p_iGenderId
+      -- ,vPassword = @p_vPassword
+      ,vFatherHusbandName = @p_vFatherHusbandName
+      ,vAddress = @p_vAddress
+      ,vPhoneNo = @p_vPhoneNo
+      ,vCNIC = @p_vCNIC
+      ,vPassportNo = @p_vPassportNo 
+      ,vEmergencyContactNo = @p_vEmergencyContactNo
+      ,vEmergencyContactPerson = @p_vEmergencyContactPerson
+   ,vDesignation = @p_vDesignation 
+      ,dUpdatedDate = SYSDATETIME()
+   where iUserId = @p_iUserId
+   select @p_iUserId;
+end
+end
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplate]    Script Date: 6/30/2017 5:00:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetTemplate]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdatedUserId,
+		m.iTemplateId, m.vTemplateName, m.vTemplateType,m.tTemplateBody,m.iOrganizationId
+		 from tblTemplate m
+	WHERE @p_SearchText = ''
+	OR
+	m.vTemplateName like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iTemplateId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplateById]    Script Date: 6/30/2017 5:03:12 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetTemplateById]
+(
+	@p_TemplateId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblTemplate m
+	Where m.iTemplateId = @p_TemplateId;
+
+END
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteTemplateById]    Script Date: 6/30/2017 5:04:52 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteTemplateById]
+(
+	@p_TemplateId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblTemplate 
+	Where iTemplateId = @p_TemplateId;
+
+END
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveTemplate]    Script Date: 6/30/2017 5:07:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_SaveTemplate]
+(
+	@p_TemplateId int,
+	@p_TemplateName varchar(100),
+	@p_TemplateBody text,
+	@p_TemplateType varchar(200),
+	@p_OrganizationId int,
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_TemplateId =0) 
+begin
+insert into tblTemplate(vTemplateName,tTemplateBody,vTemplateType,iOrganizationId,iCreatedUserId,dCreatedDate)
+values (@p_TemplateName,@p_TemplateBody,@p_TemplateType,@p_OrganizationId,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblTemplate
+set vTemplateName = @p_TemplateName,
+iUpdatedUserId  = @p_CreatedUserId,
+tTemplateBody = @p_TemplateBody,
+dUpdatedDate = SYSDATETIME(),
+vTemplateType = @p_TemplateType,
+iOrganizationId = @p_OrganizationId
+Where iTemplateId = @p_TemplateId
+end
+
+END
+
+
+

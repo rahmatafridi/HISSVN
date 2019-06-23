@@ -1,0 +1,163 @@
+GO
+Create Procedure [dbo].[pr_SaveOrganization]
+(@p_iOrganizationId int
+,@p_vOrganizationName nvarchar(max)
+,@p_vOrganizationShortName nvarchar(max)
+,@p_vAddress nvarchar(max)
+,@p_vPhoneNo nvarchar(max)
+,@p_iCountryId int
+,@p_iCityId int
+,@p_dActivationDate datetime
+,@p_dExpiryDate datetime
+,@p_dRegistrationDate datetime
+,@p_bIsActive bit
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vContactPersonName nvarchar(max)
+,@p_vContactPersonPhoneNo nvarchar(max)
+,@p_vEmail nvarchar(max)
+,@p_vDomainName nvarchar(max) )
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName );
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,dRegistrationDate=@p_dRegistrationDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+Where iOrganizationId = @p_iOrganizationId;
+END
+END
+
+   go
+   Create Procedure [dbo].[pr_SelectOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+GO
+Create Procedure [dbo].[pr_DeleteOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Delete  from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+GO
+
+Create PROCEDURE [dbo].[pr_GetOrganizations]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iOrganizationId
+,ut.vOrganizationName
+,ut.vOrganizationShortName
+,ut.vAddress
+,ut.vPhoneNo
+,ut.iCountryId
+,ut.iCityId
+,ut.dActivationDate
+,ut.dExpiryDate
+,ut.dRegistrationDate
+,ut.bIsActive
+,ut.iCreatedUserId
+,ut.dCreatedDate
+,ut.iUpdatedUserId
+,ut.dUpdatedDate
+,ut.vContactPersonName
+,ut.vContactPersonPhoneNo
+,ut.vEmail
+		 from tblOrganization ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vOrganizationName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iOrganizationId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END

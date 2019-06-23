@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.DAL.DbHelper;
+using HIS.Domain.Models;
+using HIS.Domain.Models.Common;
+
+namespace HIS.DAL.DAL
+{
+    public class CommonDal : ICommonDal
+    {
+        Database db;
+
+        public CommonDal()
+        {
+            db = new Database();
+        }
+
+        public int InsertTitle(string title)
+        {
+            int result = 0;
+
+            string query = "sp_InsertTitle";
+
+            List<DbParameter> par = new List<DbParameter>();
+            par.Add(new DbParameter() { Name="p_TitleName", Value = title, Direction = System.Data.ParameterDirection.Input });
+
+            result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref par);
+
+
+            return result;
+        }
+
+        public List<Title> GetTitles()
+        {
+            List<Title> titles = new List<Title>();
+
+            DataSet ds = new DataSet();
+            List<DbParameter> param = new List<DbParameter>();
+
+            ds = db.LoadDataSetAgainstQuery("SELECT iTitleId, vTitleName FROM tblTitle", CommandType.Text, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                titles = ds.Tables[0].AsEnumerable().Select(a => new Title() { TitleId = Convert.ToInt32(a["iTitleId"]),  TitleName = a["vTitleName"].ToString() }).ToList();
+            }
+
+            return titles;
+        }
+
+        public List<Country> GetCountries()
+        {
+            List<Country> titles = new List<Country>();
+
+            DataSet ds = new DataSet();
+            List<DbParameter> param = new List<DbParameter>();
+
+            ds = db.LoadDataSetAgainstQuery("SELECT * FROM tblCountry", CommandType.Text, ref param);
+
+            
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                titles = ds.Tables[0].AsEnumerable().Select(a => new Country() {  CountryId = Convert.ToInt32(a["iCountryId"]), CountryName = a["vCountryName"].ToString(), CountryShortName = a["vCountryShortName"].ToString() }).ToList();
+            }
+
+            titles.Insert(0, new Country() { CountryId = 0, CountryName = "--" });
+
+            return titles;
+        }
+
+        public List<City> GetCities(int? countryId)
+        {
+            List<City> city = new List<City>();
+
+            DataSet ds = new DataSet();
+            List<DbParameter> param = new List<DbParameter>();
+
+            ds = db.LoadDataSetAgainstQuery("SELECT * FROM tblCity", CommandType.Text, ref param);
+
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                city = ds.Tables[0].AsEnumerable().Select(a => new City() { CityId = Convert.ToInt32(a["iCityId"]), CityName = a["vCityName"].ToString(), CityShortName = a["vCityShortName"].ToString() }).ToList();
+            }
+
+            city.Insert(0, new City() { CityId = 0, CityName = "--" });
+
+            return city;
+        }
+
+        public List<Gender> GetGenders()
+        {
+            List<Gender> titles = new List<Gender>();
+
+            DataSet ds = new DataSet();
+            List<DbParameter> param = new List<DbParameter>();
+
+            ds = db.LoadDataSetAgainstQuery("SELECT * FROM tblGender", CommandType.Text, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                titles = ds.Tables[0].AsEnumerable().Select(a => new Gender() { GenderId = Convert.ToInt32(a["iGenderId"]),  GenderName = a["vGenderName"].ToString() }).ToList();
+            }
+
+            return titles;
+        }
+
+
+
+    }
+
+    public interface ICommonDal
+    {
+        int InsertTitle(string title);
+        List<Title> GetTitles();
+        List<Country> GetCountries();
+        List<Gender> GetGenders();
+        List<City> GetCities(int? countryId);
+
+    }
+}

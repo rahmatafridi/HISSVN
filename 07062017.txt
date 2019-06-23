@@ -1,0 +1,56 @@
+									   
+GO
+Alter PROCEDURE [dbo].[pr_SaveModulePermission]
+(
+@p_ModulePermissionId int,
+	@p_ModuleId int,	
+	@p_ModulePermissionCode varchar(50),
+	@p_Desription varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModulePermissionId =0) 
+begin
+insert into tblModulePermission(iModuleId,vModulePermissionCode,vDescription,iCreatedUserId,dCreatedDate)
+values (@p_ModuleId,@p_ModulePermissionCode,@p_Desription,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblModulePermission
+set vModulePermissionCode = @p_ModulePermissionCode,
+vDescription = @p_Desription,
+iModuleId=@p_ModuleId,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iModulePermissionId = @p_ModulePermissionId
+end
+
+END
+
+GO
+ALTER PROCEDURE [dbo].[pr_GetModulePermission]
+(
+ @p_SearchText varchar(100),
+ @p_Offset int,
+ @p_PageSize int
+)
+AS
+BEGIN
+
+
+ select COUNT(*) OVER () as TotalCount,  mp.dCreatedDate,m.vModuleName, mp.dUpdatedDate, mp.iCreatedUserId, mp.iUpdatedUserId,
+  mp.iModulePermissionId, mp.vModulePermissionCode, mp.vDescription
+   from tblModulePermission mp
+   inner join tblModule m
+   on m.iModuleId = mp.iModuleId
+ WHERE @p_SearchText = ''
+ OR
+ mp.vModulePermissionCode like CONCAT('%', @p_SearchText, '%')
+
+ order by mp.iModulePermissionId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+

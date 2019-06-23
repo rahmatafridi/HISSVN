@@ -1,0 +1,51 @@
+													  USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 6/21/2017 6:16:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_GetOrganizationEmailCount]
+@p_Email varchar(70),
+@p_OrganizationId int =null
+as
+begin
+if @p_OrganizationId=null or @p_OrganizationId=0
+Begin
+select count(*) from tblOrganization where vEmail = @p_Email
+end
+ELSE IF @p_OrganizationId  >0
+BEGIN
+select count(*) from tblOrganization where vEmail = @p_Email and iOrganizationId<>@p_OrganizationId;
+END
+
+;
+
+end
+
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationModule]    Script Date: 6/21/2017 6:57:29 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_SaveOrganizationCoreModule]
+@p_OrganizationId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblOrganizationModule
+	(iModuleId, iOrganizationId, iCreatedUserId, dCreatedDate)
+	Select iModuleId,@p_OrganizationId,@p_CreatedUserId,SYSDATETIME() from tblModule
+	Where iIsCore=1;
+	
+
+end
+
+
+

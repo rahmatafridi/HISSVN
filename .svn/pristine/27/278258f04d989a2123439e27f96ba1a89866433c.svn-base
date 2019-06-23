@@ -1,0 +1,66 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Module;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class ModuleBLL: IModuleBll
+    {
+        #region Initialization
+
+        private IModuleDAL ModuleDal { get; set; }
+
+        public ModuleBLL()
+        {
+            ModuleDal = new ModuleDAL();
+        }
+
+        #endregion
+
+        #region Module
+
+        public List<Module> GetModule(SearchCriteria criteria, out int TotalRecords)
+        {
+            return ModuleDal.GetModule(criteria, out TotalRecords);
+        }
+
+        public Module GetModuleById(int id)
+        {
+            return ModuleDal.GetModuleById(id);
+        }
+
+        public int DeleteModuleById(int id)
+        {
+            return ModuleDal.DeleteModuleById(id);
+        }
+
+        public bool SaveModule(Module module)
+        {
+            return ModuleDal.SaveModule(module);
+        }
+
+        #endregion
+    }
+
+    public interface IModuleBll
+    {
+        #region Module
+
+        List<Module> GetModule(SearchCriteria criteria, out int TotalRecords);
+
+        Module GetModuleById(int id);
+
+        int DeleteModuleById(int id);
+
+        bool SaveModule(Module module);
+
+        #endregion
+
+    }
+
+}

@@ -1,0 +1,301 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using HIS.Domain.Models.Common;
+using HIS.BLL;
+using HIS.Domain.Models.Organization;
+using HIS.BLL.BLL;
+using HIS.Domain.Models.Module;
+using HIS.Web.Filters;
+
+namespace HIS.Web.Controllers
+{
+    public class OrganizationController : Controller
+    {
+        #region Initialization
+
+        public IOrganizationBLL _organizationBll { get; set; }
+        public ICommonBll _commonBll { get; set; }
+        public IModuleBll _moduleBll { get; set; }
+
+        public OrganizationController()
+        {
+            _organizationBll = new OrganizationBLL();
+            _commonBll = new CommonBll();
+            _moduleBll = new ModuleBLL();
+        }
+
+        #endregion
+
+
+        #region Organization
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [CheckUserRights]
+        public ActionResult OrganizationList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Organization> organizations = new List<Organization>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+
+            int TotalRecords = 0;
+
+            organizations = _organizationBll.GetOrganizations(criteria, out TotalRecords).Where(a=>a.iStatus==1).ToList();
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+            return View(organizations);
+        }
+        [CheckUserRights]
+        public ActionResult OrganizationForm(int id = 0)
+        {
+            Organization organization = new Organization();
+
+            #region Dropdown data Intialization
+
+            ViewBag.Cities = _commonBll.Cities.AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.CityName,
+                Value = a.CityId.ToString()
+            }).ToList();
+            ViewBag.Countries = _commonBll.Countries.AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.CountryName,
+                Value = a.CountryId.ToString()
+            }).ToList();
+
+            int total = 0;
+            ViewBag.Modules = _moduleBll.GetModule(new SearchCriteria() { Offset = 0, PageSize = 500, SearchText = "" }, out total)
+                .Where(a=>a.IsCore==0).ToList();
+
+            ViewBag.AssignedModules = _organizationBll.GetOrganizationModulesAssignedIds(id);
+
+            ViewBag.TimeZones = _commonBll.GetTimeZone().AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text ="(UTC "+a.WorldTimeZoneOffSet+") "+ a.WorldTimeZoneName,
+                Value = a.WorldTimeZoneId.ToString()
+            }).ToList();
+            ViewBag.Languages = _commonBll.GetLanguages().AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.LanguageName,
+                Value = a.LanguageId.ToString()
+            }).ToList();
+
+            ViewBag.Status = _organizationBll.GetOrganizationStatus().AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.StatusText,
+                Value = a.StatusId.ToString()
+            }).ToList();
+            #endregion
+            if (id > 0)
+            {
+                organization = _organizationBll.GetOrganizationById(id);
+                // get saved data
+            }
+
+            return View(organization);
+        }
+
+        [HttpPost]
+        [CheckUserRights]
+        [ValidateAjax]
+        public ActionResult OrganizationForm(Organization organization, List<int> ModuleIds)
+        {
+            if (!ModelState.IsValid)
+            {
+                #region Dropdown data Intialization
+                ViewBag.Cities = _commonBll.Cities.AsEnumerable().Select(a => new SelectListItem()
+                {
+                    Text = a.CityName,
+                    Value = a.CityId.ToString()
+                }).ToList();
+                ViewBag.Countries = _commonBll.Countries.AsEnumerable().Select(a => new SelectListItem()
+                {
+                    Text = a.CountryName,
+                    Value = a.CountryId.ToString()
+                }).ToList();
+
+                int total = 0;
+                ViewBag.Modules = _moduleBll.GetModule(new SearchCriteria() { Offset = 0, PageSize = 500, SearchText = "" }, out total)
+                    .Where(a => a.OrganizationId == 0 || a.OrganizationId == Helper.GetLoggedInUserOrganization()).ToList();
+                ViewBag.AssignedModules = _organizationBll.GetOrganizationModulesAssignedIds(0);
+                ViewBag.TimeZones = _commonBll.GetTimeZone().AsEnumerable().Select(a => new SelectListItem()
+                {
+                    Text = "(UTC " + a.WorldTimeZoneOffSet + ") " + a.WorldTimeZoneName,
+                    Value = a.WorldTimeZoneId.ToString()
+                }).ToList();
+                ViewBag.Languages = _commonBll.GetLanguages().AsEnumerable().Select(a => new SelectListItem()
+                {
+                    Text = a.LanguageName,
+                    Value = a.LanguageId.ToString()
+                }).ToList();
+
+                ViewBag.Status = _organizationBll.GetOrganizationStatus().AsEnumerable().Select(a => new SelectListItem()
+                {
+                    Text = a.StatusText,
+                    Value = a.StatusId.ToString()
+                }).ToList();
+                #endregion
+                return new AjaxableViewResult(organization);
+            }
+            // sir why do we need country and city for user.. ;(
+            organization.CreatedUserId = Helper.GetLoggedInUserId();
+            organization.FirstTimeLogin = false;
+            AjaxResponse res = new AjaxResponse();
+
+
+            if (_organizationBll.DoesOrganizationExists(organization.vEmail,organization.iOrganizationId))
+            {
+                res = new AjaxResponse()
+                {
+                    Message = "Email already in Use",
+                    Type = "warning",
+                    Heading = "User",
+                };
+            }
+            else
+            {
+                bool saved = _organizationBll.SaveOrganizationModule(organization,ModuleIds);
+
+                 res = new AjaxResponse()
+                {
+                    Message = saved ? "Clinic Save successfully" : "Unable to save clinic",
+                    Type = saved ? "success" : "error",
+                    Heading = "Clinic"   ,
+                    RedirectUrl= Url.Action("OrganizationList","Organization")
+                };
+
+                return Json(res);
+            }
+
+
+            return Json(res);
+        }
+
+    
+        [HttpPost]
+        public ActionResult DeleteOrganizationById(int id)
+        {
+            string message = "";
+            string mclass = "";
+            int deleted = _organizationBll.DeleteOrganizationById(id);
+            if (deleted > 0)
+            {
+                message = "Operation completed successfully";
+                mclass = "info";
+            }
+            else
+            {
+                message = "Unable to delete Organization";
+                mclass = "error";
+            }
+
+            AjaxResponse res = new AjaxResponse()
+            {
+                Message = message,
+                Type = mclass,
+                Heading = "Organization"
+            };
+
+
+            return Json(res);
+        }
+
+
+        #endregion
+
+        #region Pending Clinics
+
+        [CheckUserRights]
+        public ActionResult PendingOrganizationList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Organization> organizations = new List<Organization>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+
+            int TotalRecords = 0;
+
+            organizations = _organizationBll.GetOrganizations(criteria, out TotalRecords).Where(a=> a.iStatus==0).ToList();
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = organizations.Count();
+
+            return View(organizations);
+        }
+
+        [HttpPost]
+        [ValidateAjax]
+        public ActionResult DeclineOrganizationForm(int organizationId, string reasonData)
+        {
+            if (!ModelState.IsValid)
+            {                    
+                return new AjaxableViewResult(reasonData);
+            }
+            int declinedUserId = Helper.GetLoggedInUserId();
+            AjaxResponse res = new AjaxResponse(); 
+            
+         bool saved = _organizationBll.DeclineOrganization(organizationId,reasonData,declinedUserId);
+
+                res = new AjaxResponse()
+                {
+                    Message = saved ? "Clinic Decline successfully" : "Unable to decline clinic",
+                    Type = saved ? "success" : "error",
+                    Heading = "Clinic",
+                    RedirectUrl = Url.Action("PendingOrganizationList", "Organization")
+                };
+
+                return Json(res);   
+        }
+
+        #endregion
+
+        #region Rejected Clinics
+
+        [CheckUserRights]
+        public ActionResult RejectedOrganizationList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Organization> organizations = new List<Organization>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+
+            int TotalRecords = 0;
+
+            organizations = _organizationBll.GetOrganizations(criteria, out TotalRecords).Where(a => a.iStatus == 2).ToList();
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = organizations.Count();
+
+            return View(organizations);
+        }
+
+        #endregion
+
+
+    }
+}

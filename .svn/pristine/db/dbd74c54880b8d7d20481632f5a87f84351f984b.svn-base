@@ -1,0 +1,4131 @@
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ValidateLogin]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_ValidateLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateUserProfile]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_UpdateUserProfile]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationProfile]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_UpdateOrganizationProfile]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationAndCreateAdminRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_UpdateOrganizationAndCreateAdminRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SelectOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAlltblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SelectAlltblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAllAssignUserTypeForGrid]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SelectAllAssignUserTypeForGrid]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserType]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserAssignedTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserAssignedTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUpdateUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUpdateUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveTemplate]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SavetblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SavetblMenu]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveSms]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveOrganizationModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationCoreModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveOrganizationCoreModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModuleRolePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModuleRolePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModulePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveMenu]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveEmail]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_OrganizationAssignedModuleForRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_OrganizationAssignedModuleForRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_NewUserForApproveOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_NewUserForApproveOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypeById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserTypeById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsers]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUsers]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserRights]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserRights]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUsernameEmailCount]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTypesAssignedToUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetTypesAssignedToUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplateById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetTemplateById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetTemplate]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetSmsById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetSmsById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetSms]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRolesAssignedToUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRolesAssignedToUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRoleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetPatients]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetPatients]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetPatientById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetPatientById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetOrganizations]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetOrganizationEmailCount]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOldPasswordExistsCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetOldPasswordExistsCount]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulesAssignedToOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulesAssignedToOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermissionById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionAssignedToRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermissionAssignedToRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModuleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModuleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenuById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetMenuById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetEmailById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetEmailById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetEmail]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetDefinedRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetDefinedRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetAllMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_GetAllMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserTypeById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserTypeById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserAssignedTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserAssignedTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteTemplateById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteTemplateById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeletetblOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeletetblOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteSmsById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteSmsById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteRoleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteRoleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationModules]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteOrganizationModules]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleRolePermissions]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModuleRolePermissions]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModulePermissionById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModulePermissionById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModuleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteMenuById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteMenuById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteEmailById]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteEmailById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeclineOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_DeclineOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_CreateUpdatePatient]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_CreateUpdatePatient]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ChangePassword]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP PROCEDURE [dbo].[pr_ChangePassword]
+GO
+ALTER TABLE [dbo].[tblUserType] DROP CONSTRAINT [FK_tblUserType_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUserRole] DROP CONSTRAINT [FK_tblUserRole_tblUser]
+GO
+ALTER TABLE [dbo].[tblUserRole] DROP CONSTRAINT [FK_tblUserRole_tblRole]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblTitle]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblGender]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblCountry]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblCity]
+GO
+ALTER TABLE [dbo].[tblRoleDetail] DROP CONSTRAINT [FK_tblRoleDetail_tblRole]
+GO
+ALTER TABLE [dbo].[tblRoleDetail] DROP CONSTRAINT [FK_tblRoleDetail_tblModulePermission]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] DROP CONSTRAINT [FK_tblOrganizationModule_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] DROP CONSTRAINT [FK_tblOrganizationModule_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganization] DROP CONSTRAINT [FK_tblOrganization_tblCountry]
+GO
+ALTER TABLE [dbo].[tblOrganization] DROP CONSTRAINT [FK_tblOrganization_tblCity]
+GO
+ALTER TABLE [dbo].[tblModulePermission] DROP CONSTRAINT [FK_tblModulePermission_tblModule]
+GO
+ALTER TABLE [dbo].[tblMenu] DROP CONSTRAINT [FK_tblMenu_tblModule]
+GO
+ALTER TABLE [dbo].[tblCity] DROP CONSTRAINT [FK_tblCity_tblCountry]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblUserType]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblUser]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] DROP CONSTRAINT [DF__tblWorldT__dWorl__04AFB25B]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] DROP CONSTRAINT [DF__tblWorldT__vWorl__03BB8E22]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] DROP CONSTRAINT [DF__tblWorldT__vWorl__02C769E9]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] DROP CONSTRAINT [DF__tblMarita__vMari__7B264821]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] DROP CONSTRAINT [DF__tblMarita__vMari__7A3223E8]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] DROP CONSTRAINT [DF__tblMarita__vMari__793DFFAF]
+GO
+ALTER TABLE [dbo].[tblLanguages] DROP CONSTRAINT [DF__tblLangua__vLang__078C1F06]
+GO
+ALTER TABLE [dbo].[tblEthnicity] DROP CONSTRAINT [DF__tblEthnic__vEthn__7FEAFD3E]
+GO
+ALTER TABLE [dbo].[tblEthnicity] DROP CONSTRAINT [DF__tblEthnic__vEthn__7EF6D905]
+GO
+ALTER TABLE [dbo].[tblEthnicity] DROP CONSTRAINT [DF__tblEthnic__vEthn__7E02B4CC]
+GO
+ALTER TABLE [dbo].[tblBloodGroup] DROP CONSTRAINT [DF__tblBloodG__vBloo__76619304]
+GO
+ALTER TABLE [dbo].[tblBloodGroup] DROP CONSTRAINT [DF__tblBloodG__vBloo__756D6ECB]
+GO
+/****** Object:  Table [dbo].[tblWorldTimeZone]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblWorldTimeZone]
+GO
+/****** Object:  Table [dbo].[tblUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblUserType]
+GO
+/****** Object:  Table [dbo].[tblUserRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblUserRole]
+GO
+/****** Object:  Table [dbo].[tblUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblUser]
+GO
+/****** Object:  Table [dbo].[tblTitle]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblTitle]
+GO
+/****** Object:  Table [dbo].[tblTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblTemplate]
+GO
+/****** Object:  Table [dbo].[tblSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblSms]
+GO
+/****** Object:  Table [dbo].[tblRoleDetail]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblRoleDetail]
+GO
+/****** Object:  Table [dbo].[tblRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblRole]
+GO
+/****** Object:  Table [dbo].[tblOrganizationModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblOrganizationModule]
+GO
+/****** Object:  Table [dbo].[tblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblOrganization]
+GO
+/****** Object:  Table [dbo].[tblModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblModulePermission]
+GO
+/****** Object:  Table [dbo].[tblModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblModule]
+GO
+/****** Object:  Table [dbo].[tblMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblMenu]
+GO
+/****** Object:  Table [dbo].[tblMaritalStatus]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblMaritalStatus]
+GO
+/****** Object:  Table [dbo].[tblLanguages]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblLanguages]
+GO
+/****** Object:  Table [dbo].[tblGender]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblGender]
+GO
+/****** Object:  Table [dbo].[tblEthnicity]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblEthnicity]
+GO
+/****** Object:  Table [dbo].[tblEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblEmail]
+GO
+/****** Object:  Table [dbo].[tblCountry]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblCountry]
+GO
+/****** Object:  Table [dbo].[tblConsultantSpeciality]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblConsultantSpeciality]
+GO
+/****** Object:  Table [dbo].[tblConsultantExperience]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblConsultantExperience]
+GO
+/****** Object:  Table [dbo].[tblConsultantEducation]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblConsultantEducation]
+GO
+/****** Object:  Table [dbo].[tblConsultantDetail]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblConsultantDetail]
+GO
+/****** Object:  Table [dbo].[tblConsultant]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblConsultant]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblCity]
+GO
+/****** Object:  Table [dbo].[tblBloodGroup]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblBloodGroup]
+GO
+/****** Object:  Table [dbo].[tblAssignUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+DROP TABLE [dbo].[tblAssignUserType]
+GO
+/****** Object:  Table [dbo].[tblAssignUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblAssignUserType](
+	[iAssignUserTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[iUserTypeId] [int] NULL,
+	[iOrganizationId] [int] NULL,
+	[iUserId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblAssignUserType] PRIMARY KEY CLUSTERED 
+(
+	[iAssignUserTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblBloodGroup]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblBloodGroup](
+	[iBloodGroupId] [int] IDENTITY(1,1) NOT NULL,
+	[vBloodGroupName] [nvarchar](50) NULL,
+	[vBloodRHFactor] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[iBloodGroupId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCity](
+	[iCityId] [int] IDENTITY(1,1) NOT NULL,
+	[vCityName] [nvarchar](100) NULL,
+	[iCountryId] [int] NOT NULL,
+	[vCityShortName] [nvarchar](100) NULL,
+ CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED 
+(
+	[iCityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblConsultant]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblConsultant](
+	[iConsultantId] [int] IDENTITY(1,1) NOT NULL,
+	[iUserId] [int] NOT NULL,
+	[iBankId] [int] NULL,
+	[vBankAccountNumber] [nvarchar](150) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblConsultant] PRIMARY KEY CLUSTERED 
+(
+	[iConsultantId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblConsultantDetail]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblConsultantDetail](
+	[iConsultantDetailId] [int] IDENTITY(1,1) NOT NULL,
+	[iConsultantId] [int] NOT NULL,
+	[iOrganizationId] [int] NOT NULL,
+	[iOrganizationStatus] [int] NULL,
+	[dOrganizationJoiningDate] [datetime] NULL,
+	[iDepartmentId] [int] NULL,
+	[bConsultancy] [bit] NULL,
+	[bVisiting] [bit] NULL,
+	[vBillingCode] [nvarchar](50) NULL,
+	[vCurrentPosition] [nvarchar](150) NULL,
+	[vReason] [nvarchar](950) NULL,
+	[bReferring] [bit] NULL,
+	[iDocFee] [int] NULL,
+	[iDocShare] [int] NULL,
+	[iClinicFee] [int] NULL,
+	[iClinicShare] [int] NULL,
+	[vSignature] [nvarchar](250) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+	[dLeaveDate] [datetime] NULL,
+	[vLeaveReason] [nvarchar](550) NULL,
+ CONSTRAINT [PK_tblConsultantDetail] PRIMARY KEY CLUSTERED 
+(
+	[iConsultantDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblConsultantEducation]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblConsultantEducation](
+	[iConsultantEducationId] [int] IDENTITY(1,1) NOT NULL,
+	[iConsultantId] [int] NOT NULL,
+	[vDegreeName] [nvarchar](150) NULL,
+	[vInstitute] [nvarchar](250) NULL,
+	[dFromDate] [datetime] NULL,
+	[dToDate] [datetime] NULL,
+	[GradeOrDivision] [nvarchar](50) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+	[iEducationType] [int] NULL,
+ CONSTRAINT [PK_tblConsultantEducation] PRIMARY KEY CLUSTERED 
+(
+	[iConsultantEducationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblConsultantExperience]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblConsultantExperience](
+	[iConsultantExperienceId] [int] IDENTITY(1,1) NOT NULL,
+	[vInstitute] [nvarchar](250) NULL,
+	[dFromDate] [datetime] NULL,
+	[dToDate] [datetime] NULL,
+	[bToDate] [bit] NULL,
+	[iConsultantId] [int] NOT NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblConsultantExperience] PRIMARY KEY CLUSTERED 
+(
+	[iConsultantExperienceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblConsultantSpeciality]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblConsultantSpeciality](
+	[iConsultantSpecialityId] [int] IDENTITY(1,1) NOT NULL,
+	[iConsultantId] [int] NULL,
+	[vSpeciality] [nvarchar](450) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblConsultantSpeciality] PRIMARY KEY CLUSTERED 
+(
+	[iConsultantSpecialityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCountry]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCountry](
+	[iCountryId] [int] IDENTITY(1,1) NOT NULL,
+	[vCountryName] [nvarchar](100) NULL,
+	[vCountryShortName] [nvarchar](10) NULL,
+ CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+(
+	[iCountryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblEmail](
+	[iEmailId] [int] IDENTITY(1,1) NOT NULL,
+	[dScheduleDateTime] [datetime] NULL,
+	[bIsSent] [bit] NULL,
+	[vToAddress] [nvarchar](500) NULL,
+	[vCcAddress] [nvarchar](500) NULL,
+	[vSubject] [nvarchar](100) NULL,
+	[tEmailBody] [text] NULL,
+	[dSentDatetTime] [datetime] NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NULL,
+	[dCreatedDate] [datetime] NULL,
+	[iUpdateUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+	[iPriority] [int] NULL,
+ CONSTRAINT [PK_tblEmail] PRIMARY KEY CLUSTERED 
+(
+	[iEmailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblEthnicity]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblEthnicity](
+	[iEthnicityId] [int] IDENTITY(1,1) NOT NULL,
+	[vEthnicityLevel] [nvarchar](10) NULL,
+	[vEthnicityCode] [nvarchar](30) NULL,
+	[vEthnicityName] [nvarchar](60) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[iEthnicityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblGender]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblGender](
+	[iGenderId] [int] IDENTITY(1,1) NOT NULL,
+	[vGenderName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblGender] PRIMARY KEY CLUSTERED 
+(
+	[iGenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblLanguages]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblLanguages](
+	[iLanguagesId] [int] IDENTITY(1,1) NOT NULL,
+	[vLanguageName] [nvarchar](350) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[iLanguagesId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblMaritalStatus]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblMaritalStatus](
+	[iMaritalStatusId] [int] IDENTITY(1,1) NOT NULL,
+	[vMaritalStatusCode] [nvarchar](10) NULL,
+	[vMaritalStatusName] [nvarchar](50) NULL,
+	[vMaritalStatusDefinition] [nvarchar](1000) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[iMaritalStatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblMenu](
+	[iMenuId] [int] IDENTITY(1,1) NOT NULL,
+	[vMenuName] [nvarchar](100) NOT NULL,
+	[vMenuPath] [nvarchar](250) NOT NULL,
+	[iParentMenu] [int] NULL,
+	[iSortOrder] [int] NOT NULL,
+	[iModuleId] [int] NOT NULL,
+	[iModulePermissionId] [int] NOT NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vIconClass] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblMenu] PRIMARY KEY CLUSTERED 
+(
+	[iMenuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblModule](
+	[iModuleId] [int] IDENTITY(1,1) NOT NULL,
+	[vModuleName] [nvarchar](70) NULL,
+	[vModuleCode] [nvarchar](50) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[iIsCore] [int] NULL,
+	[dPrice] [decimal](18, 0) NULL,
+ CONSTRAINT [PK_tblModule] PRIMARY KEY CLUSTERED 
+(
+	[iModuleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblModulePermission](
+	[iModulePermissionId] [int] IDENTITY(1,1) NOT NULL,
+	[vModulePermissionCode] [nvarchar](50) NULL,
+	[vDescription] [nvarchar](150) NULL,
+	[iModuleId] [int] NOT NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblModulePermission] PRIMARY KEY CLUSTERED 
+(
+	[iModulePermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrganization](
+	[iOrganizationId] [int] IDENTITY(1,1) NOT NULL,
+	[vOrganizationName] [nvarchar](100) NOT NULL,
+	[vOrganizationShortName] [nvarchar](30) NULL,
+	[vAddress] [nvarchar](250) NULL,
+	[vPhoneNo] [nvarchar](20) NULL,
+	[iCountryId] [int] NULL,
+	[iCityId] [int] NULL,
+	[dActivationDate] [datetime] NULL,
+	[dExpiryDate] [datetime] NULL,
+	[dRegistrationDate] [datetime] NULL,
+	[bIsActive] [bit] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vContactPersonName] [nvarchar](100) NULL,
+	[vContactPersonPhoneNo] [nvarchar](20) NULL,
+	[vEmail] [nvarchar](50) NULL,
+	[vDomainName] [nvarchar](70) NULL,
+	[iLanguageId] [int] NULL,
+	[iTimeZoneId] [int] NULL,
+	[vOrganizationLogo] [nvarchar](max) NULL,
+	[iStatus] [int] NULL,
+	[vReason] [nvarchar](max) NULL,
+	[iStatusUserId] [int] NULL,
+	[bFirstTimeLogin] [bit] NULL,
+ CONSTRAINT [PK_Organization] PRIMARY KEY CLUSTERED 
+(
+	[iOrganizationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrganizationModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrganizationModule](
+	[iOrganizationModuleId] [int] IDENTITY(1,1) NOT NULL,
+	[iOrganizationId] [int] NULL,
+	[iModuleId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblOrganizationModule] PRIMARY KEY CLUSTERED 
+(
+	[iOrganizationModuleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblRole](
+	[iRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[vRoleName] [nvarchar](50) NULL,
+	[vRoleDescription] [nvarchar](150) NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblRole] PRIMARY KEY CLUSTERED 
+(
+	[iRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblRoleDetail]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblRoleDetail](
+	[iRoleDetailId] [int] IDENTITY(1,1) NOT NULL,
+	[iRoleId] [int] NULL,
+	[vModulePermissionId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[iModuleId] [int] NULL,
+ CONSTRAINT [PK_tblRoleDetail] PRIMARY KEY CLUSTERED 
+(
+	[iRoleDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblSms](
+	[iSmsId] [int] IDENTITY(1,1) NOT NULL,
+	[vSubject] [nvarchar](200) NULL,
+	[iOrganizationId] [int] NULL,
+	[tSmsBody] [text] NULL,
+	[bIsSent] [bit] NULL,
+	[dScheduleDateTime] [datetime] NULL,
+	[dSentDatetTime] [datetime] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vToAddress] [nvarchar](max) NULL,
+	[vCcAddress] [nvarchar](max) NULL,
+	[iPriority] [int] NULL,
+ CONSTRAINT [PK_tblSms] PRIMARY KEY CLUSTERED 
+(
+	[iSmsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblTemplate](
+	[iTemplateId] [int] IDENTITY(1,1) NOT NULL,
+	[vTemplateName] [nvarchar](50) NULL,
+	[vTemplateType] [nvarchar](20) NULL,
+	[tTemplateBody] [text] NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NULL,
+	[dCreatedDate] [datetime] NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblTemplate] PRIMARY KEY CLUSTERED 
+(
+	[iTemplateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblTitle]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblTitle](
+	[iTitleId] [int] IDENTITY(1,1) NOT NULL,
+	[vTitleName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblTitle] PRIMARY KEY CLUSTERED 
+(
+	[iTitleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUser](
+	[iUserId] [int] IDENTITY(1,1) NOT NULL,
+	[vUserName] [nvarchar](50) NULL,
+	[vEmail] [nvarchar](50) NULL,
+	[vFirstName] [nvarchar](50) NULL,
+	[vMiddleName] [nvarchar](50) NULL,
+	[vLastName] [nvarchar](50) NULL,
+	[iCountryId] [int] NULL,
+	[iCityId] [int] NULL,
+	[iTitleId] [int] NULL,
+	[iGenderId] [int] NULL,
+	[vPassword] [nvarchar](50) NULL,
+	[vFatherHusbandName] [nvarchar](100) NULL,
+	[bIsFirstTimeLogin] [bit] NULL,
+	[vAddress] [nvarchar](150) NULL,
+	[vPhoneNo] [nvarchar](20) NULL,
+	[vCNIC] [nvarchar](50) NULL,
+	[vPassportNo] [nvarchar](50) NULL,
+	[vEmergencyContactNo] [nvarchar](20) NULL,
+	[vEmergencyContactPerson] [nvarchar](50) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vDesignation] [nvarchar](20) NULL,
+	[bIsActive] [bit] NULL,
+	[iOrganizationId] [int] NULL,
+ CONSTRAINT [PK_tblUser] PRIMARY KEY CLUSTERED 
+(
+	[iUserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUserRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserRole](
+	[iUserRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[iRoleId] [int] NULL,
+	[iUserId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblUserRole] PRIMARY KEY CLUSTERED 
+(
+	[iUserRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserType](
+	[iUserTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[vUserTypeName] [nvarchar](50) NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblUserType] PRIMARY KEY CLUSTERED 
+(
+	[iUserTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblWorldTimeZone]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblWorldTimeZone](
+	[iWorldTimeZoneId] [int] IDENTITY(1,1) NOT NULL,
+	[vWorldTimeZoneAbbr] [nvarchar](50) NULL,
+	[vWorldTimeZoneName] [nvarchar](2000) NULL,
+	[dWorldTimeZoneOffset] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[iWorldTimeZoneId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[tblAssignUserType] ON 
+
+INSERT [dbo].[tblAssignUserType] ([iAssignUserTypeId], [iUserTypeId], [iOrganizationId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (4, 12, 6, 8, 8, CAST(N'2017-06-25T06:40:24.310' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblAssignUserType] ([iAssignUserTypeId], [iUserTypeId], [iOrganizationId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1017, 12, 2061, 1018, 8, CAST(N'2017-07-30T12:51:56.850' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblAssignUserType] OFF
+SET IDENTITY_INSERT [dbo].[tblBloodGroup] ON 
+
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (1, N'A', N'Positive')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (2, N'B', N'Positive')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (3, N'A', N'Negative')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (4, N'B', N'Negative')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (5, N'AB', N'Positive')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (6, N'AB', N'Negative')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (7, N'O', N'Positive')
+INSERT [dbo].[tblBloodGroup] ([iBloodGroupId], [vBloodGroupName], [vBloodRHFactor]) VALUES (8, N'O', N'Negative')
+SET IDENTITY_INSERT [dbo].[tblBloodGroup] OFF
+SET IDENTITY_INSERT [dbo].[tblCity] ON 
+
+INSERT [dbo].[tblCity] ([iCityId], [vCityName], [iCountryId], [vCityShortName]) VALUES (1, N'Lahore', 1, N'LHR')
+SET IDENTITY_INSERT [dbo].[tblCity] OFF
+SET IDENTITY_INSERT [dbo].[tblCountry] ON 
+
+INSERT [dbo].[tblCountry] ([iCountryId], [vCountryName], [vCountryShortName]) VALUES (1, N'Pakistan', N'PK')
+SET IDENTITY_INSERT [dbo].[tblCountry] OFF
+SET IDENTITY_INSERT [dbo].[tblEmail] ON 
+
+INSERT [dbo].[tblEmail] ([iEmailId], [dScheduleDateTime], [bIsSent], [vToAddress], [vCcAddress], [vSubject], [tEmailBody], [dSentDatetTime], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdateUserId], [dUpdatedDate], [iPriority]) VALUES (3, CAST(N'2017-07-01T00:00:00.000' AS DateTime), 0, N'ammar@gmail.com', NULL, N'Registration', N'<p>Hello &nbsp;ammar@gmail.com</p><p>we receive &nbsp;your request. we will get back to you very soon.</p><p>Thank You</p><p><br></p>', NULL, -1, 0, CAST(N'2017-07-01T00:03:26.733' AS DateTime), NULL, NULL, 1)
+INSERT [dbo].[tblEmail] ([iEmailId], [dScheduleDateTime], [bIsSent], [vToAddress], [vCcAddress], [vSubject], [tEmailBody], [dSentDatetTime], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdateUserId], [dUpdatedDate], [iPriority]) VALUES (4, CAST(N'2017-07-30T00:00:00.000' AS DateTime), 0, N'ammar@gmail.com', NULL, N'Registration', N'<p>Hello &nbsp;ammar@gmail.com</p><p>we receive &nbsp;your request. we will get back to you very soon.</p><p>Thank You</p><p><br></p>', NULL, -1, 0, CAST(N'2017-07-30T12:50:57.640' AS DateTime), NULL, NULL, 1)
+SET IDENTITY_INSERT [dbo].[tblEmail] OFF
+SET IDENTITY_INSERT [dbo].[tblEthnicity] ON 
+
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (1, N'1', N'2135-2', N'Hispanic or Latino')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (2, N'2', N'2137-8', N'Spaniard')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (3, N'3', N'2138-6', N'Andalusian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (4, N'3', N'2139-4', N'Asturian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (5, N'3', N'2140-2', N'Castillian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (6, N'3', N'2141-0', N'Catalonian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (7, N'3', N'2142-8', N'Belearic Islander')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (8, N'3', N'2143-6', N'Gallego')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (9, N'3', N'2144-4', N'Valencian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (10, N'3', N'2145-1', N'Canarian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (11, N'3', N'2146-9', N'Spanish Basque')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (12, N'2', N'2148-5', N'Mexican')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (13, N'3', N'2149-3', N'Mexican American')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (14, N'3', N'2150-1', N'Mexicano')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (15, N'3', N'2151-9', N'Chicano')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (16, N'3', N'2152-7', N'La Raza')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (17, N'3', N'2153-5', N'Mexican American Indian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (18, N'2', N'2155-0', N'Central American')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (19, N'3', N'2156-8', N'Costa Rican')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (20, N'3', N'2157-6', N'Guatemalan')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (21, N'3', N'2158-4', N'Honduran')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (22, N'3', N'2159-2', N'Nicaraguan')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (23, N'3', N'2160-0', N'Panamanian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (24, N'3', N'2161-8', N'Salvadoran')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (25, N'3', N'2162-6', N'Central American Indian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (26, N'3', N'2163-4', N'Canal Zone')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (27, N'2', N'2165-9', N'South American')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (28, N'3', N'2166-7', N'Argentinean')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (29, N'3', N'2167-5', N'Bolivian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (30, N'3', N'2168-3', N'Chilean')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (31, N'3', N'2169-1', N'Colombian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (32, N'3', N'2170-9', N'Ecuadorian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (33, N'3', N'2171-7', N'Paraguayan')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (34, N'3', N'2172-5', N'Peruvian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (35, N'3', N'2173-3', N'Uruguayan')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (36, N'3', N'2174-1', N'Venezuelan')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (37, N'3', N'2175-8', N'South American Indian')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (38, N'3', N'2176-6', N'Criollo')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (39, N'2', N'2178-2', N'Latin American')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (40, N'2', N'2180-8', N'Puerto Rican')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (41, N'2', N'2182-4', N'Cuban')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (42, N'2', N'2184-0', N'Dominican')
+INSERT [dbo].[tblEthnicity] ([iEthnicityId], [vEthnicityLevel], [vEthnicityCode], [vEthnicityName]) VALUES (43, N'1', N'2186-5', N'Not Hispanic or Latino')
+SET IDENTITY_INSERT [dbo].[tblEthnicity] OFF
+SET IDENTITY_INSERT [dbo].[tblGender] ON 
+
+INSERT [dbo].[tblGender] ([iGenderId], [vGenderName]) VALUES (1, N'Male')
+INSERT [dbo].[tblGender] ([iGenderId], [vGenderName]) VALUES (2, N'Female')
+SET IDENTITY_INSERT [dbo].[tblGender] OFF
+SET IDENTITY_INSERT [dbo].[tblLanguages] ON 
+
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (1, N'Mandarin')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (2, N'Spanish')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (3, N'English')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (4, N'Hindi[a]')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (5, N'Arabic')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (6, N'Portuguese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (7, N'Bengali (Bangla)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (8, N'Russian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (9, N'Japanese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (10, N'Punjabi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (11, N'German')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (12, N'Javanese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (13, N'Wu (e.g. Shanghainese)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (14, N'Malay (inc. Malaysian and Indonesian)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (15, N'Telugu')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (16, N'Vietnamese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (17, N'Korean')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (18, N'French')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (19, N'Marathi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (20, N'Tamil')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (21, N'Urdu')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (22, N'Turkish')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (23, N'Italian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (24, N'Yue (incl. Cantonese)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (25, N'Thai')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (26, N'Gujarati')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (27, N'Jin')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (28, N'Southern Min (incl. Hokkien and Teochew)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (29, N'Persian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (30, N'Polish')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (31, N'Pashto')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (32, N'Kannada')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (33, N'Xiang (Hunanese)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (34, N'Malayalam')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (35, N'Sundanese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (36, N'Hausa')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (37, N'Odia (Oriya)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (38, N'Burmese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (39, N'Hakka')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (40, N'Ukrainian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (41, N'Bhojpuri')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (42, N'Tagalog')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (43, N'Yoruba')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (44, N'Maithili')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (45, N'Uzbek')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (46, N'Sindhi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (47, N'Amharic')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (48, N'Fula')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (49, N'Romanian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (50, N'Oromo')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (51, N'Igbo')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (52, N'Azerbaijani')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (53, N'Awadhi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (54, N'Gan Chinese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (55, N'Cebuano (Visayan)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (56, N'Dutch')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (57, N'Kurdish')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (58, N'Serbo-Croatian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (59, N'Malagasy')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (60, N'Saraiki')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (61, N'Nepali')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (62, N'Sinhalese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (63, N'Chittagonian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (64, N'Zhuang')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (65, N'Khmer')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (66, N'Turkmen')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (67, N'Assamese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (68, N'Madurese')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (69, N'Somali')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (70, N'Marwari')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (71, N'Magahi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (72, N'Haryanvi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (73, N'Hungarian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (74, N'Chhattisgarhi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (75, N'Greek')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (76, N'Chewa')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (77, N'Deccan')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (78, N'Akan')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (79, N'Kazakh')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (80, N'Northern Min[disputed – discuss]')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (81, N'Sylheti')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (82, N'Zulu')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (83, N'Czech')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (84, N'Kinyarwanda')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (85, N'Dhundhari')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (86, N'Haitian Creole')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (87, N'Eastern Min (inc. Fuzhounese)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (88, N'Ilocano')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (89, N'Quechua')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (90, N'Kirundi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (91, N'Swedish')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (92, N'Hmong')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (93, N'Shona')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (94, N'Uyghur')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (95, N'Hiligaynon/Ilonggo (Visayan)')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (96, N'Mossi')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (97, N'Xhosa')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (98, N'Belarusian')
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (99, N'Balochi')
+GO
+INSERT [dbo].[tblLanguages] ([iLanguagesId], [vLanguageName]) VALUES (100, N'Konkani')
+SET IDENTITY_INSERT [dbo].[tblLanguages] OFF
+SET IDENTITY_INSERT [dbo].[tblMaritalStatus] ON 
+
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (1, N'A', N'Annulled', N'Marriage contract has been declared null and to not have existed')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (2, N'D', N'Divorced', N'Marriage contract has been declared dissolved and inactive')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (3, N'I', N'Interlocutory', N'Subject to an Interlocutory Decree')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (4, N'L', N'Legally Separated', N'Legally Separated')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (5, N'M', N'Married', N'A current marriage contract is active')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (6, N'P', N'Polygamous', N'More than 1 current spouse')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (7, N'S', N'Never Married', N'No marriage contract has ever been entered')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (8, N'T', N'Domestic Partner', N'Person declares that a domestic partner relationship exists')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (9, N'U', N'Unmarried', N'Currently not in a marriage contract')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (10, N'W', N'Widowed', N'The spouse has died')
+INSERT [dbo].[tblMaritalStatus] ([iMaritalStatusId], [vMaritalStatusCode], [vMaritalStatusName], [vMaritalStatusDefinition]) VALUES (11, N'UNK', N'Unknown', N'Description:A proper value is applicable, but not known. Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless: Those properties themselves directly translate to a semantic of unknown. E.g. a local code sent as a translation that conveys unknown. Those properties further qualify the nature of what is unknown. E.g. specifying a use code of H and a URL prefix of tel: to convey that it is the home phone number that is unknown')
+SET IDENTITY_INSERT [dbo].[tblMaritalStatus] OFF
+SET IDENTITY_INSERT [dbo].[tblMenu] ON 
+
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1, N'User Management', N'/User/Index', 0, 2, 7, 17, 8, CAST(N'2017-06-24T14:53:51.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (2, N'UserType', N'/UserType/Index', 1, 1, 8, 19, 8, CAST(N'2017-06-07T20:04:50.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (3, N'UserType List', N'/User/UserTypeList', 2, 1, 8, 19, 8, CAST(N'2017-06-07T20:05:55.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (4, N'Module', N'/Module/Index', 1, 1, 6, 13, 8, CAST(N'2017-06-07T20:07:07.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (5, N'Module List', N'/Module/ModuleList', 4, 1, 6, 13, 8, CAST(N'2017-06-07T20:10:25.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (6, N'Module Permission', N'/Module/ModulePermissionList', 4, 2, 9, 15, 8, CAST(N'2017-06-07T20:09:09.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (7, N'Organization', N'/Organization/OrganizationList', 1, 1, 4, 9, 8, CAST(N'2017-06-07T20:24:38.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (8, N'Organization List', N'/Organization/OrganizationList', 7, 1, 4, 9, 8, CAST(N'2017-06-07T20:25:13.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (9, N'User', N'/User/Index', 1, 2, 7, 17, 8, CAST(N'2017-06-07T20:25:59.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (10, N'Role', N'/Role/RoleList', 1, 5, 5, 11, 8, CAST(N'2017-06-07T20:26:43.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (11, N'Role List', N'/Role/RoleList', 10, 1, 5, 11, 8, CAST(N'2017-06-07T20:27:25.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (12, N'Menu', N'/Menu/MenuList', 1, 6, 10, 21, 8, CAST(N'2017-06-07T20:28:03.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (13, N'Menu List', N'/Menu/MenuList', 12, 7, 10, 21, 8, CAST(N'2017-06-07T20:29:00.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (14, N'User List', N'/User/UserList', 9, 8, 7, 17, 8, CAST(N'2017-06-07T20:30:05.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (15, N'Patient', N'/Patient/PatientList', 0, 1, 11, 23, 8, CAST(N'2017-07-30T12:59:38.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1015, N'Pending Clinics', N'/Organization/PendingOrganizationList/', 7, 2, 4, 1023, 8, CAST(N'2017-06-22T07:13:55.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1016, N'Reject Clinic List', N'/Organization/RejectedOrganizationList/', 7, 3, 4, 1024, 8, CAST(N'2017-06-23T05:42:51.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1017, N'Patient List', N'/Patient/PatientList', 15, 1, 11, 23, 8, CAST(N'2017-06-24T14:52:25.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1021, N'Template', N'/Template/TemplateList/', 1, 6, 1012, 1026, 8, CAST(N'2017-06-30T17:52:30.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1022, N'Template List', N'/Template/TemplateList', 1021, 1, 1012, 1026, 8, CAST(N'2017-06-30T17:53:54.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+SET IDENTITY_INSERT [dbo].[tblMenu] OFF
+SET IDENTITY_INSERT [dbo].[tblModule] ON 
+
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (4, N'Organization', N'Org', 0, CAST(N'2017-06-07T14:37:58.207' AS DateTime), 8, CAST(N'2017-06-25T10:07:02.270' AS DateTime), 2, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (5, N'Role', N'Role', 0, CAST(N'2017-06-07T14:42:36.613' AS DateTime), NULL, NULL, 1, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (6, N'Module', N'Module', 0, CAST(N'2017-06-07T14:43:24.853' AS DateTime), NULL, NULL, 2, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (7, N'User', N'User', 0, CAST(N'2017-06-07T14:43:43.953' AS DateTime), NULL, NULL, 1, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (8, N'UserType', N'UserType', 0, CAST(N'2017-06-07T14:44:01.997' AS DateTime), NULL, NULL, 2, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (9, N'Module Permission', N'Module Permission', 0, CAST(N'2017-06-07T14:44:55.650' AS DateTime), NULL, NULL, 2, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (10, N'Menu', N'Menu', 0, CAST(N'2017-06-07T14:46:58.680' AS DateTime), NULL, NULL, 2, CAST(0 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (11, N'Patient', N'Patient', 8, CAST(N'2017-06-17T01:01:55.833' AS DateTime), 8, CAST(N'2017-06-24T14:51:49.040' AS DateTime), 0, CAST(200 AS Decimal(18, 0)))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iIsCore], [dPrice]) VALUES (1012, N'Template', N'Temp', 8, CAST(N'2017-06-30T17:49:51.677' AS DateTime), NULL, NULL, 2, CAST(100 AS Decimal(18, 0)))
+SET IDENTITY_INSERT [dbo].[tblModule] OFF
+SET IDENTITY_INSERT [dbo].[tblModulePermission] ON 
+
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (9, N'OrganizationList', N'Permission For Organization List', 4, 0, CAST(N'2017-06-07T17:07:08.510' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (10, N'OrganizationForm', N'Permission For Organization Form', 4, 0, CAST(N'2017-06-07T17:46:25.243' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (11, N'RoleList', N'Permission For Role List', 5, 0, CAST(N'2017-06-07T17:46:55.247' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'RoleForm', N'Permission For Role Form', 5, 0, CAST(N'2017-06-07T17:47:17.833' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (13, N'ModuleList', N'Permission For Module List', 6, 0, CAST(N'2017-06-07T17:47:41.607' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (14, N'ModuleForm', N'Permission For Module Form', 6, 0, CAST(N'2017-06-07T17:47:59.847' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (15, N'ModulePermissionList', N'Permission For Module Permission List', 9, 0, CAST(N'2017-06-07T17:48:28.823' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (16, N'ModulePermissionForm', N'Permission For Module Permission Form', 9, 0, CAST(N'2017-06-07T17:48:53.427' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (17, N'UserList', N'Permission For User List', 7, 0, CAST(N'2017-06-07T17:49:18.320' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (18, N'UserForm', N'Permission For User Form', 7, 0, CAST(N'2017-06-07T17:49:38.967' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (19, N'UserTypeList', N'Permission For User Type List', 8, 0, CAST(N'2017-06-07T17:50:03.203' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (20, N'UserTypeForm', N'Permission For User Type Form', 8, 0, CAST(N'2017-06-07T17:50:34.087' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (21, N'MenuList', N'Permission For Menu List', 10, 0, CAST(N'2017-06-07T17:50:54.093' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (22, N'MenuForm', N'Permission For Menu Form', 10, 0, CAST(N'2017-06-07T17:51:10.243' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (23, N'PatientList', N'this permission is for patient list', 11, 0, CAST(N'2017-06-17T01:12:35.080' AS DateTime), 0, CAST(N'2017-06-24T14:46:22.773' AS DateTime))
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1023, N'PendingOrganizationList', N'This permission is for Pending Clinics', 4, 0, CAST(N'2017-06-22T07:13:39.370' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1024, N'RejectedOrganizationList', N'This Permission is for Rejected Organization List', 4, 0, CAST(N'2017-06-23T05:39:38.850' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1026, N'TemplateList', N'Template List Permission', 1012, 0, CAST(N'2017-06-30T17:50:21.090' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1027, N'TemplateForm', N'Template Form', 1012, 0, CAST(N'2017-06-30T17:50:35.063' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblModulePermission] OFF
+SET IDENTITY_INSERT [dbo].[tblOrganization] ON 
+
+INSERT [dbo].[tblOrganization] ([iOrganizationId], [vOrganizationName], [vOrganizationShortName], [vAddress], [vPhoneNo], [iCountryId], [iCityId], [dActivationDate], [dExpiryDate], [dRegistrationDate], [bIsActive], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vContactPersonName], [vContactPersonPhoneNo], [vEmail], [vDomainName], [iLanguageId], [iTimeZoneId], [vOrganizationLogo], [iStatus], [vReason], [iStatusUserId], [bFirstTimeLogin]) VALUES (6, N'LogicSpirits', N'Logic', N'Lahore Pakistan', N'03224341025', 1, 1, CAST(N'2017-06-01T00:00:00.000' AS DateTime), CAST(N'2020-11-25T00:00:00.000' AS DateTime), CAST(N'2017-06-07T18:22:09.290' AS DateTime), 1, 8, CAST(N'2017-06-24T14:25:42.390' AS DateTime), 0, CAST(N'2017-06-24T14:25:42.390' AS DateTime), N'Abdul Ali Farooqi', N'03219992979', N'taurus.ammar@gmail.com', N'www.logicspirit.com', 1, 1, NULL, 1, NULL, NULL, NULL)
+INSERT [dbo].[tblOrganization] ([iOrganizationId], [vOrganizationName], [vOrganizationShortName], [vAddress], [vPhoneNo], [iCountryId], [iCityId], [dActivationDate], [dExpiryDate], [dRegistrationDate], [bIsActive], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vContactPersonName], [vContactPersonPhoneNo], [vEmail], [vDomainName], [iLanguageId], [iTimeZoneId], [vOrganizationLogo], [iStatus], [vReason], [iStatusUserId], [bFirstTimeLogin]) VALUES (2061, N'Shalamar Hospital', N'Shalamar', N'lahore pakistan', N'03224341025', 1, 1, CAST(N'2017-01-30T00:00:00.000' AS DateTime), CAST(N'2017-10-31T00:00:00.000' AS DateTime), CAST(N'2017-07-30T12:50:57.587' AS DateTime), 1, 0, CAST(N'2017-07-30T12:50:57.587' AS DateTime), 8, CAST(N'2017-07-30T12:50:57.587' AS DateTime), N'aLI', N'0322434', N'ammar@gmail.com', N'gmail.com', 3, 148, NULL, 1, N'testing', NULL, 0)
+SET IDENTITY_INSERT [dbo].[tblOrganization] OFF
+SET IDENTITY_INSERT [dbo].[tblOrganizationModule] ON 
+
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (37, 6, 4, 8, CAST(N'2017-06-17T01:51:38.737' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (39, 6, 6, 8, CAST(N'2017-06-17T01:51:38.737' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (41, 6, 8, 8, CAST(N'2017-06-17T01:51:38.737' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (42, 6, 9, 8, CAST(N'2017-06-17T01:51:38.737' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (43, 6, 10, 8, CAST(N'2017-06-17T01:51:38.740' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1087, 6, 5, 8, CAST(N'2017-06-24T14:25:42.407' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1088, 6, 7, 8, CAST(N'2017-06-24T14:25:42.407' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1089, 6, 11, 8, CAST(N'2017-06-24T14:25:42.407' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (2102, 6, 1012, 8, CAST(N'2017-06-30T00:00:00.000' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (2118, 2061, 5, 0, CAST(N'2017-07-30T12:50:57.623' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (2119, 2061, 7, 0, CAST(N'2017-07-30T12:50:57.623' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (2120, 2061, 11, 0, CAST(N'2017-07-30T12:50:57.623' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblOrganizationModule] OFF
+SET IDENTITY_INSERT [dbo].[tblRole] ON 
+
+INSERT [dbo].[tblRole] ([iRoleId], [vRoleName], [vRoleDescription], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'Admin', N'Admin Role', 6, 0, CAST(N'2017-06-07T18:36:20.987' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime))
+INSERT [dbo].[tblRole] ([iRoleId], [vRoleName], [vRoleDescription], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1022, N'Admin', N'Role For Clinic Admin', 2061, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblRole] OFF
+SET IDENTITY_INSERT [dbo].[tblRoleDetail] ON 
+
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1158, 12, 9, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1159, 12, 10, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1160, 12, 1023, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1161, 12, 1024, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1162, 12, 13, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 6)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1163, 12, 14, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 6)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1164, 12, 19, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 8)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1165, 12, 20, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 8)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1166, 12, 15, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 9)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1167, 12, 16, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 9)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1168, 12, 21, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 10)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1169, 12, 22, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 10)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1170, 12, 11, 0, CAST(N'2017-06-30T17:52:21.147' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1171, 12, 12, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1172, 12, 17, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1173, 12, 18, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1174, 12, 23, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 11)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1175, 12, 1026, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 1012)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1176, 12, 1027, 0, CAST(N'2017-06-30T17:52:21.150' AS DateTime), NULL, NULL, 1012)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1177, 1022, 11, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1178, 1022, 12, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1179, 1022, 17, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1180, 1022, 18, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (1181, 1022, 23, 8, CAST(N'2017-07-30T12:51:56.837' AS DateTime), NULL, NULL, 11)
+SET IDENTITY_INSERT [dbo].[tblRoleDetail] OFF
+SET IDENTITY_INSERT [dbo].[tblSms] ON 
+
+INSERT [dbo].[tblSms] ([iSmsId], [vSubject], [iOrganizationId], [tSmsBody], [bIsSent], [dScheduleDateTime], [dSentDatetTime], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vToAddress], [vCcAddress], [iPriority]) VALUES (2, N'Registration', -1, N'<p>Hello &nbsp;ammar@gmail.com</p><p>we receive &nbsp;your request. we will get back to you very soon.</p><p>Thank You</p><p><br></p>', 0, CAST(N'2017-07-01T00:00:00.000' AS DateTime), NULL, 0, CAST(N'2017-07-01T00:03:26.737' AS DateTime), NULL, NULL, N'03224341025', NULL, 1)
+INSERT [dbo].[tblSms] ([iSmsId], [vSubject], [iOrganizationId], [tSmsBody], [bIsSent], [dScheduleDateTime], [dSentDatetTime], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vToAddress], [vCcAddress], [iPriority]) VALUES (3, N'Registration', -1, N'<p>Hello &nbsp;ammar@gmail.com</p><p>we receive &nbsp;your request. we will get back to you very soon.</p><p>Thank You</p><p><br></p>', 0, CAST(N'2017-07-30T00:00:00.000' AS DateTime), NULL, 0, CAST(N'2017-07-30T12:50:57.650' AS DateTime), NULL, NULL, N'03224341025', NULL, 1)
+SET IDENTITY_INSERT [dbo].[tblSms] OFF
+SET IDENTITY_INSERT [dbo].[tblTemplate] ON 
+
+INSERT [dbo].[tblTemplate] ([iTemplateId], [vTemplateName], [vTemplateType], [tTemplateBody], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (4, N'EmailRegistration', N'Email', N'<p>Hello &nbsp;##CustomerName##</p><p>we receive &nbsp;your request. we will get back to you very soon.</p><p>Thank You</p><p><br></p>', 0, 8, CAST(N'2017-06-30T23:20:05.690' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblTemplate] ([iTemplateId], [vTemplateName], [vTemplateType], [tTemplateBody], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (5, N'SmsRegistration', N'Sms', N'<p>Hello ##CustomerName##</p><p>Thank You. we will get back to you very soon</p><p><br></p><p>Thank you.</p>', 0, 8, CAST(N'2017-06-30T23:21:04.130' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblTemplate] OFF
+SET IDENTITY_INSERT [dbo].[tblTitle] ON 
+
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (1, N'Mr.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (2, N'Ms.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (3, N'Mrs.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (4, N'Dr.')
+SET IDENTITY_INSERT [dbo].[tblTitle] OFF
+SET IDENTITY_INSERT [dbo].[tblUser] ON 
+
+INSERT [dbo].[tblUser] ([iUserId], [vUserName], [vEmail], [vFirstName], [vMiddleName], [vLastName], [iCountryId], [iCityId], [iTitleId], [iGenderId], [vPassword], [vFatherHusbandName], [bIsFirstTimeLogin], [vAddress], [vPhoneNo], [vCNIC], [vPassportNo], [vEmergencyContactNo], [vEmergencyContactPerson], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vDesignation], [bIsActive], [iOrganizationId]) VALUES (8, N'ammarmuhiuddin', N'taurus.ammar@gmail.com', N'Ammar', NULL, N'Muhi ud din', 1, 1, 1, 1, N'123', NULL, 0, N'lahore', N'03224341025', NULL, NULL, N'03224341025', N'Ammar', 0, CAST(N'2017-06-07T18:57:34.467' AS DateTime), 0, CAST(N'2017-06-25T06:40:23.770' AS DateTime), N'Software', 1, 6)
+INSERT [dbo].[tblUser] ([iUserId], [vUserName], [vEmail], [vFirstName], [vMiddleName], [vLastName], [iCountryId], [iCityId], [iTitleId], [iGenderId], [vPassword], [vFatherHusbandName], [bIsFirstTimeLogin], [vAddress], [vPhoneNo], [vCNIC], [vPassportNo], [vEmergencyContactNo], [vEmergencyContactPerson], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vDesignation], [bIsActive], [iOrganizationId]) VALUES (1018, N'ammar@gmail.com', N'ammar@gmail.com', N'ammar', NULL, N'Ali', 1, 1, 1, 1, N'123', N'Tst', 0, N'lahore', N'32323', N'3520194633551', NULL, N'0322', N'ai', 8, CAST(N'2017-07-30T12:51:56.850' AS DateTime), 1018, CAST(N'2017-07-30T12:55:54.890' AS DateTime), N'Software', 1, 2061)
+SET IDENTITY_INSERT [dbo].[tblUser] OFF
+SET IDENTITY_INSERT [dbo].[tblUserRole] ON 
+
+INSERT [dbo].[tblUserRole] ([iUserRoleId], [iRoleId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (6, 12, 8, 8, CAST(N'2017-06-25T06:40:23.830' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserRole] ([iUserRoleId], [iRoleId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (1012, 1022, 1018, 8, CAST(N'2017-07-30T12:51:56.850' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblUserRole] OFF
+SET IDENTITY_INSERT [dbo].[tblUserType] ON 
+
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (10, N'Both', NULL, 0, CAST(N'2017-06-07T18:17:20.750' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (11, N'Other', NULL, 0, CAST(N'2017-06-07T18:17:29.303' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'Admin', NULL, 0, CAST(N'2017-06-07T18:17:37.553' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (13, N'Patient', NULL, 0, CAST(N'2017-06-07T18:18:58.607' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblUserType] OFF
+SET IDENTITY_INSERT [dbo].[tblWorldTimeZone] ON 
+
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (1, N'ACDT', N'Australian Central Daylight Savings Time', N'+10.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (2, N'ACST', N'Australian Central Standard Time', N'+9.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (3, N'ACT', N'Acre Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (4, N'ACT', N'ASEAN Common Time', N'+6.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (5, N'ADT', N'Atlantic Daylight Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (6, N'AEDT', N'Australian Eastern Daylight Savings Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (7, N'AEST', N'Australian Eastern Standard Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (8, N'AFT', N'Afghanistan Time', N'+4.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (9, N'AKDT', N'Alaska Daylight Time', N'-8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (10, N'AKST', N'Alaska Standard Time', N'-9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (11, N'AMST', N'Amazon Summer Time (Brazil)[1]', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (12, N'AMT', N'Amazon Time (Brazil)[2]', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (13, N'AMT', N'Armenia Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (14, N'ART', N'Argentina Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (15, N'AST', N'Arabia Standard Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (16, N'AST', N'Atlantic Standard Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (17, N'AWST', N'Australian Western Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (18, N'AZOST', N'Azores Summer Time', N'±00')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (19, N'AZOT', N'Azores Standard Time', N'-1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (20, N'AZT', N'Azerbaijan Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (21, N'BDT', N'Brunei Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (22, N'BIOT', N'British Indian Ocean Time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (23, N'BIT', N'Baker Island Time', N'-12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (24, N'BOT', N'Bolivia Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (25, N'BRST', N'Brasilia Summer Time', N'-2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (26, N'BRT', N'Brasilia Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (27, N'BST', N'Bangladesh Standard Time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (28, N'BST', N'Bougainville Standard Time[3]', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (29, N'BST', N'British Summer Time (British Standard Time from Feb 1968 to Oct 1971)', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (30, N'BTT', N'Bhutan Time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (31, N'CAT', N'Central Africa Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (32, N'CCT', N'Cocos Islands Time', N'+6.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (33, N'CDT', N'Central Daylight Time (North America)', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (34, N'CDT', N'Cuba Daylight Time[4]', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (35, N'CEST', N'Central European Summer Time (Cf. HAEC)', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (36, N'CET', N'Central European Time', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (37, N'CHADT', N'Chatham Daylight Time', N'+13:45')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (38, N'CHAST', N'Chatham Standard Time', N'+12:45')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (39, N'CHOT', N'Choibalsan Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (40, N'CHOST', N'Choibalsan Summer Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (41, N'CHST', N'Chamorro Standard Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (42, N'CHUT', N'Chuuk Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (43, N'CIST', N'Clipperton Island Standard Time', N'-8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (44, N'CIT', N'Central Indonesia Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (45, N'CKT', N'Cook Island Time', N'-10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (46, N'CLST', N'Chile Summer Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (47, N'CLT', N'Chile Standard Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (48, N'COST', N'Colombia Summer Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (49, N'COT', N'Colombia Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (50, N'CST', N'Central Standard Time (North America)', N'-6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (51, N'CST', N'China Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (52, N'ACST', N'Central Standard Time (Australia)', N'+9.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (53, N'ACDT', N'Central Summer Time (Australia)', N'+10.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (54, N'CST', N'Cuba Standard Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (55, N'CT', N'China time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (56, N'CVT', N'Cape Verde Time', N'-1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (57, N'CWST', N'Central Western Standard Time (Australia) unofficial', N'+8:45')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (58, N'CXT', N'Christmas Island Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (59, N'DAVT', N'Davis Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (60, N'DDUT', N'Dumont Urville Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (61, N'DFT', N'AIX specific equivalent of Central European Time[5]', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (62, N'EASST', N'Easter Island Summer Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (63, N'EAST', N'Easter Island Standard Time', N'-6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (64, N'EAT', N'East Africa Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (65, N'ECT', N'Eastern Caribbean Time (does not recognise DST)', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (66, N'ECT', N'Ecuador Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (67, N'EDT', N'Eastern Daylight Time (North America)', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (68, N'AEDT', N'Eastern Summer Time (Australia)', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (69, N'EEST', N'Eastern European Summer Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (70, N'EET', N'Eastern European Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (71, N'EGST', N'Eastern Greenland Summer Time', N'±00')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (72, N'EGT', N'Eastern Greenland Time', N'-1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (73, N'EIT', N'Eastern Indonesian Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (74, N'EST', N'Eastern Standard Time (North America)', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (75, N'AEST', N'Eastern Standard Time (Australia)', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (76, N'FET', N'Further-eastern European Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (77, N'FJT', N'Fiji Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (78, N'FKST', N'Falkland Islands Summer Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (79, N'FKT', N'Falkland Islands Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (80, N'FNT', N'Fernando de Noronha Time', N'-2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (81, N'GALT', N'Galapagos Time', N'-6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (82, N'GAMT', N'Gambier Islands', N'-9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (83, N'GET', N'Georgia Standard Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (84, N'GFT', N'French Guiana Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (85, N'GILT', N'Gilbert Island Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (86, N'GIT', N'Gambier Island Time', N'-9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (87, N'GMT', N'Greenwich Mean Time', N'±00')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (88, N'GST', N'South Georgia and the South Sandwich Islands', N'-2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (89, N'GST', N'Gulf Standard Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (90, N'GYT', N'Guyana Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (91, N'HADT', N'Hawaii-Aleutian Daylight Time', N'-9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (92, N'HAEC', N'Heure Avancée Europe Centrale francised name for CEST', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (93, N'HAST', N'Hawaii-Aleutian Standard Time', N'-10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (94, N'HKT', N'Hong Kong Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (95, N'HMT', N'Heard and McDonald Islands Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (96, N'HOVST', N'Khovd Summer Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (97, N'HOVT', N'Khovd Standard Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (98, N'ICT', N'Indochina Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (99, N'IDT', N'Israel Daylight Time', N'+3')
+GO
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (100, N'IOT', N'Indian Ocean Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (101, N'IRDT', N'Iran Daylight Time', N'+4.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (102, N'IRKT', N'Irkutsk Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (103, N'IRST', N'Iran Standard Time', N'+3.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (104, N'IST', N'Indian Standard Time', N'+5.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (105, N'IST', N'Irish Standard Time[6]', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (106, N'IST', N'Israel Standard Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (107, N'JST', N'Japan Standard Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (108, N'KGT', N'Kyrgyzstan time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (109, N'KOST', N'Kosrae Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (110, N'KRAT', N'Krasnoyarsk Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (111, N'KST', N'Korea Standard Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (112, N'LHST', N'Lord Howe Standard Time', N'+10.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (113, N'LHST', N'Lord Howe Summer Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (114, N'LINT', N'Line Islands Time', N'+14')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (115, N'MAGT', N'Magadan Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (116, N'MART', N'Marquesas Islands Time', N'-9.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (117, N'MAWT', N'Mawson Station Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (118, N'MDT', N'Mountain Daylight Time (North America)', N'-6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (119, N'MET', N'Middle European Time Same zone as CET', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (120, N'MEST', N'Middle European Summer Time Same zone as CEST', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (121, N'MHT', N'Marshall Islands', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (122, N'MIST', N'Macquarie Island Station Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (123, N'MIT', N'Marquesas Islands Time', N'-9.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (124, N'MMT', N'Myanmar Standard Time', N'+6.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (125, N'MSK', N'Moscow Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (126, N'MST', N'Malaysia Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (127, N'MST', N'Mountain Standard Time (North America)', N'-7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (128, N'MUT', N'Mauritius Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (129, N'MVT', N'Maldives Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (130, N'MYT', N'Malaysia Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (131, N'NCT', N'New Caledonia Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (132, N'NDT', N'Newfoundland Daylight Time', N'-2.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (133, N'NFT', N'Norfolk Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (134, N'NPT', N'Nepal Time', N'+5:45')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (135, N'NST', N'Newfoundland Standard Time', N'-3.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (136, N'NT', N'Newfoundland Time', N'-3.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (137, N'NUT', N'Niue Time', N'-11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (138, N'NZDT', N'New Zealand Daylight Time', N'+13')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (139, N'NZST', N'New Zealand Standard Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (140, N'OMST', N'Omsk Time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (141, N'ORAT', N'Oral Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (142, N'PDT', N'Pacific Daylight Time (North America)', N'-7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (143, N'PET', N'Peru Time', N'-5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (144, N'PETT', N'Kamchatka Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (145, N'PGT', N'Papua New Guinea Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (146, N'PHOT', N'Phoenix Island Time', N'+13')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (147, N'PHT', N'Philippine Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (148, N'PKT', N'Pakistan Standard Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (149, N'PMDT', N'Saint Pierre and Miquelon Daylight time', N'-2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (150, N'PMST', N'Saint Pierre and Miquelon Standard Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (151, N'PONT', N'Pohnpei Standard Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (152, N'PST', N'Pacific Standard Time (North America)', N'-8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (153, N'PST', N'Philippine Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (154, N'PYST', N'Paraguay Summer Time (South America)[7]', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (155, N'PYT', N'Paraguay Time (South America)[8]', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (156, N'RET', N'Réunion Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (157, N'ROTT', N'Rothera Research Station Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (158, N'SAKT', N'Sakhalin Island time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (159, N'SAMT', N'Samara Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (160, N'SAST', N'South African Standard Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (161, N'SBT', N'Solomon Islands Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (162, N'SCT', N'Seychelles Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (163, N'SGT', N'Singapore Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (164, N'SLST', N'Sri Lanka Standard Time', N'+5.5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (165, N'SRET', N'Srednekolymsk Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (166, N'SRT', N'Suriname Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (167, N'SST', N'Samoa Standard Time', N'-11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (168, N'SST', N'Singapore Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (169, N'SYOT', N'Showa Station Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (170, N'TAHT', N'Tahiti Time', N'-10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (171, N'THA', N'Thailand Standard Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (172, N'TFT', N'Indian/Kerguelen', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (173, N'TJT', N'Tajikistan Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (174, N'TKT', N'Tokelau Time', N'+13')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (175, N'TLT', N'Timor Leste Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (176, N'TMT', N'Turkmenistan Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (177, N'TRT', N'Turkey Time', N'+3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (178, N'TOT', N'Tonga Time', N'+13')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (179, N'TVT', N'Tuvalu Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (180, N'ULAST', N'Ulaanbaatar Summer Time', N'+9')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (181, N'ULAT', N'Ulaanbaatar Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (182, N'USZ1', N'Kaliningrad Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (183, N'', N'Coordinated Universal Time', N'±00')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (184, N'UYST', N'Uruguay Summer Time', N'-2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (185, N'UYT', N'Uruguay Standard Time', N'-3')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (186, N'UZT', N'Uzbekistan Time', N'+5')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (187, N'VET', N'Venezuelan Standard Time', N'-4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (188, N'VLAT', N'Vladivostok Time', N'+10')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (189, N'VOLT', N'Volgograd Time', N'+4')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (190, N'VOST', N'Vostok Station Time', N'+6')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (191, N'VUT', N'Vanuatu Time', N'+11')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (192, N'WAKT', N'Wake Island Time', N'+12')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (193, N'WAST', N'West Africa Summer Time', N'+2')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (194, N'WAT', N'West Africa Time', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (195, N'WEST', N'Western European Summer Time', N'+1')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (196, N'WET', N'Western European Time', N'0')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (197, N'WIT', N'Western Indonesian Time', N'+7')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (198, N'WST', N'Western Standard Time', N'+8')
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (199, N'YAKT', N'Yakutsk Time', N'+9')
+GO
+INSERT [dbo].[tblWorldTimeZone] ([iWorldTimeZoneId], [vWorldTimeZoneAbbr], [vWorldTimeZoneName], [dWorldTimeZoneOffset]) VALUES (200, N'YEKT', N'Yekaterinburg Time', N'+5')
+SET IDENTITY_INSERT [dbo].[tblWorldTimeZone] OFF
+ALTER TABLE [dbo].[tblBloodGroup] ADD  DEFAULT (NULL) FOR [vBloodGroupName]
+GO
+ALTER TABLE [dbo].[tblBloodGroup] ADD  DEFAULT (NULL) FOR [vBloodRHFactor]
+GO
+ALTER TABLE [dbo].[tblEthnicity] ADD  DEFAULT (NULL) FOR [vEthnicityLevel]
+GO
+ALTER TABLE [dbo].[tblEthnicity] ADD  DEFAULT (NULL) FOR [vEthnicityCode]
+GO
+ALTER TABLE [dbo].[tblEthnicity] ADD  DEFAULT (NULL) FOR [vEthnicityName]
+GO
+ALTER TABLE [dbo].[tblLanguages] ADD  DEFAULT (NULL) FOR [vLanguageName]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] ADD  DEFAULT (NULL) FOR [vMaritalStatusCode]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] ADD  DEFAULT (NULL) FOR [vMaritalStatusName]
+GO
+ALTER TABLE [dbo].[tblMaritalStatus] ADD  DEFAULT (NULL) FOR [vMaritalStatusDefinition]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] ADD  DEFAULT (NULL) FOR [vWorldTimeZoneAbbr]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] ADD  DEFAULT (NULL) FOR [vWorldTimeZoneName]
+GO
+ALTER TABLE [dbo].[tblWorldTimeZone] ADD  DEFAULT (NULL) FOR [dWorldTimeZoneOffset]
+GO
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblUser] FOREIGN KEY([iUserId])
+REFERENCES [dbo].[tblUser] ([iUserId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblUser]
+GO
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblUserType] FOREIGN KEY([iUserTypeId])
+REFERENCES [dbo].[tblUserType] ([iUserTypeId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblUserType]
+GO
+ALTER TABLE [dbo].[tblCity]  WITH CHECK ADD  CONSTRAINT [FK_tblCity_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblCity] CHECK CONSTRAINT [FK_tblCity_tblCountry]
+GO
+ALTER TABLE [dbo].[tblMenu]  WITH CHECK ADD  CONSTRAINT [FK_tblMenu_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblMenu] CHECK CONSTRAINT [FK_tblMenu_tblModule]
+GO
+ALTER TABLE [dbo].[tblModulePermission]  WITH CHECK ADD  CONSTRAINT [FK_tblModulePermission_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblModulePermission] CHECK CONSTRAINT [FK_tblModulePermission_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganization]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganization_tblCity] FOREIGN KEY([iCityId])
+REFERENCES [dbo].[tblCity] ([iCityId])
+GO
+ALTER TABLE [dbo].[tblOrganization] CHECK CONSTRAINT [FK_tblOrganization_tblCity]
+GO
+ALTER TABLE [dbo].[tblOrganization]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganization_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblOrganization] CHECK CONSTRAINT [FK_tblOrganization_tblCountry]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganizationModule_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] CHECK CONSTRAINT [FK_tblOrganizationModule_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganizationModule_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] CHECK CONSTRAINT [FK_tblOrganizationModule_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblRoleDetail]  WITH CHECK ADD  CONSTRAINT [FK_tblRoleDetail_tblModulePermission] FOREIGN KEY([vModulePermissionId])
+REFERENCES [dbo].[tblModulePermission] ([iModulePermissionId])
+GO
+ALTER TABLE [dbo].[tblRoleDetail] CHECK CONSTRAINT [FK_tblRoleDetail_tblModulePermission]
+GO
+ALTER TABLE [dbo].[tblRoleDetail]  WITH CHECK ADD  CONSTRAINT [FK_tblRoleDetail_tblRole] FOREIGN KEY([iRoleId])
+REFERENCES [dbo].[tblRole] ([iRoleId])
+GO
+ALTER TABLE [dbo].[tblRoleDetail] CHECK CONSTRAINT [FK_tblRoleDetail_tblRole]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblCity] FOREIGN KEY([iCityId])
+REFERENCES [dbo].[tblCity] ([iCityId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblCity]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblCountry]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblGender] FOREIGN KEY([iGenderId])
+REFERENCES [dbo].[tblGender] ([iGenderId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblGender]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblTitle] FOREIGN KEY([iTitleId])
+REFERENCES [dbo].[tblTitle] ([iTitleId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblTitle]
+GO
+ALTER TABLE [dbo].[tblUserRole]  WITH CHECK ADD  CONSTRAINT [FK_tblUserRole_tblRole] FOREIGN KEY([iRoleId])
+REFERENCES [dbo].[tblRole] ([iRoleId])
+GO
+ALTER TABLE [dbo].[tblUserRole] CHECK CONSTRAINT [FK_tblUserRole_tblRole]
+GO
+ALTER TABLE [dbo].[tblUserRole]  WITH CHECK ADD  CONSTRAINT [FK_tblUserRole_tblUser] FOREIGN KEY([iUserId])
+REFERENCES [dbo].[tblUser] ([iUserId])
+GO
+ALTER TABLE [dbo].[tblUserRole] CHECK CONSTRAINT [FK_tblUserRole_tblUser]
+GO
+ALTER TABLE [dbo].[tblUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblUserType_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblUserType] CHECK CONSTRAINT [FK_tblUserType_tblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ChangePassword]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_ChangePassword]
+(
+	@p_UserId int,
+	@p_vNewPassword varchar(MAX)
+	
+	
+)
+AS
+BEGIN
+
+Update tblUser
+Set vPassword = @p_vNewPassword,
+iUpdatedUserId = @p_UserId,
+dUpdatedDate = SYSDATETIME(),
+bIsFirstTimeLogin = 0
+Where iUserId = @p_UserId;
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_CreateUpdatePatient]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_CreateUpdatePatient]
+								@p_PatId              INT,
+                                        @p_vFirstName         VARCHAR(50),
+                                        @p_vMiddleName        VARCHAR(50),
+                                        @p_vLastName          VARCHAR(50),
+                                        @p_dDob               DATE,
+                                        @p_iTitleId           INT,
+                                        @p_iGenderId          INT,
+                                        @p_iCountryId         INT,
+                                        @p_iBloodGroup        INT,
+                                        @p_vMrno              VARCHAR(50),
+                                        @p_vContactNo         VARCHAR(50),
+                                        @p_vHouseNo           VARCHAR(50),
+                                        @p_vStreetNo          VARCHAR(50),
+                                        @p_vArea              VARCHAR(50),
+                                        @p_vEmergencyName     VARCHAR(50),
+                                        @p_vEmergencyContact  VARCHAR(50),
+                                        @p_vState             VARCHAR(50),
+                                        @p_vPostalCode        VARCHAR(50),
+                                        @p_iUserId            INT,
+                                        @p_vUserAccessCode    VARCHAR(50),
+                                        @p_bIsActive          BIT,
+                                        @p_vFatherHusbandName VARCHAR(50),
+                                        @p_vEmail             VARCHAR(75),
+                                        @p_vPictureUrl        VARCHAR(150),
+                                        @p_vSignatureUrl      VARCHAR(150),
+                                        @p_iEmergencyRelation INT,
+                                        @p_vCNIC              VARCHAR(50),
+                                        @p_iCreatedUserId     INT,
+                                        @p_iMaritalStatus     INT,
+                                        @p_iReligion          INT,
+                                        @p_iPreferredLanguage INT,
+                                        @p_vNationality       VARCHAR(50),
+                                        @p_vMotherMaidenName  VARCHAR(50),
+                                        @p_iEthnicGroup       INT,
+                                        @p_vBirthPlace        VARCHAR(50)
+AS
+     BEGIN
+         IF @p_PatId <= 0
+             BEGIN
+                 INSERT INTO dbo.tblPatient
+                 (
+        --Id - this column value is auto-generated
+                 vFirstName,
+                 vMiddleName,
+                 vLastName,
+                 dDob,
+                 iTitleId,
+                 iGenderId,
+                 iCountryId,
+                 iBloodGroup,
+                 vMrno,
+                 vContactNo,
+                 vHouseNo,
+                 vStreetNo,
+                 vArea,
+                 vEmergencyName,
+                 vEmergencyContact,
+                 vState,
+                 vPostalCode,
+                 iUserId,
+                 vUserAccessCode,
+                 bIsActive,
+                 vFatherHusbandName,
+                 vEmail,
+                 vPictureUrl,
+                 vSignatureUrl,
+                 iEmergencyRelation,
+                 vCNIC,
+                 iCreatedUserId,
+                 dCreatedDate,
+                 iMaritalStatus,
+                 iReligion,
+                 iPreferredLanguage,
+                 vNationality,
+                 vMotherMaidenName,
+                 iEthnicGroup,
+                 vBirthPlace
+                 )
+                 VALUES
+                 (
+        -- Id - bigint
+                 @p_vFirstName,
+                 @p_vMiddleName,
+                 @p_vLastName,
+                 @p_dDob,
+                 @p_iTitleId,
+                 @p_iGenderId,
+                 @p_iCountryId,
+                 @p_iBloodGroup,
+                 @p_vMrno,
+                 @p_vContactNo,
+                 @p_vHouseNo,
+                 @p_vStreetNo,
+                 @p_vArea,
+                 @p_vEmergencyName,
+                 @p_vEmergencyContact,
+                 @p_vState,
+                 @p_vPostalCode,
+                 @p_iUserId,
+                 @p_vUserAccessCode,
+                 @p_bIsActive,
+                 @p_vFatherHusbandName,
+                 @p_vEmail,
+                 @p_vPictureUrl,
+                 @p_vSignatureUrl,
+                 @p_iEmergencyRelation,
+                 @p_vCNIC,
+                 @p_iCreatedUserId,
+                 GETDATE(),
+                 @p_iMaritalStatus,
+                 @p_iReligion,
+                 @p_iPreferredLanguage,
+                 @p_vNationality,
+                 @p_vMotherMaidenName,
+                 @p_iEthnicGroup,
+                 @p_vBirthPlace
+                 );
+         END;
+             ELSE
+             BEGIN
+                 UPDATE dbo.tblPatient
+                   SET
+       --Id - this column value is auto-generated
+                       dbo.tblPatient.vFirstName = @p_vFirstName, -- nvarchar
+                       dbo.tblPatient.vMiddleName = @p_vMiddleName, -- nvarchar
+                       dbo.tblPatient.vLastName = @p_vLastName, -- nvarchar
+                       dbo.tblPatient.dDob = @p_dDob, -- date
+                       dbo.tblPatient.iTitleId = @p_iTitleId, -- int
+                       dbo.tblPatient.iGenderId = @p_iGenderId, -- int
+                       dbo.tblPatient.iCountryId = @p_iCountryId, -- int
+                       dbo.tblPatient.iBloodGroup = @p_iBloodGroup, -- int
+                       dbo.tblPatient.vContactNo = @p_vContactNo, -- nvarchar
+                       dbo.tblPatient.vHouseNo = @p_vHouseNo, -- nvarchar
+                       dbo.tblPatient.vStreetNo = @p_vStreetNo, -- nvarchar
+                       dbo.tblPatient.vArea = @p_vArea, -- nvarchar
+                       dbo.tblPatient.vEmergencyName = @p_vEmergencyName, -- nvarchar
+                       dbo.tblPatient.vEmergencyContact = @p_vEmergencyContact, -- nvarchar
+                       dbo.tblPatient.vState = @p_vState, -- nvarchar
+                       dbo.tblPatient.vPostalCode = @p_vPostalCode, -- nvarchar
+                       dbo.tblPatient.bIsActive = @p_bIsActive, -- bit
+                       dbo.tblPatient.vFatherHusbandName = @p_vFatherHusbandName, -- nvarchar
+                       dbo.tblPatient.vEmail = @p_vEmail, -- nvarchar
+                       dbo.tblPatient.vPictureUrl = @p_vPictureUrl, -- nvarchar
+                       dbo.tblPatient.iEmergencyRelation = @p_iEmergencyRelation, -- int
+                       dbo.tblPatient.vCNIC = @p_vCNIC, -- nvarchar
+                       dbo.tblPatient.iUpdateUserId = @p_iCreatedUserId, -- int
+                       dbo.tblPatient.dUpdateDate = GETDATE(),
+                       dbo.tblPatient.iMaritalStatus = @p_iMaritalStatus, -- int
+                       dbo.tblPatient.iReligion = @p_iReligion, -- int
+                       dbo.tblPatient.iPreferredLanguage = @p_iPreferredLanguage, -- int
+                       dbo.tblPatient.vNationality = @p_vNationality, -- int
+                       dbo.tblPatient.vMotherMaidenName = @p_vMotherMaidenName, -- nvarchar
+                       dbo.tblPatient.iEthnicGroup = @p_iEthnicGroup, -- int
+                       dbo.tblPatient.vBirthPlace = @p_vBirthPlace; -- nvarchar
+
+         END;
+     END;
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeclineOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_DeclineOrganization]
+(
+	@p_iOrganizationId int,
+	@p_vReason varchar(MAX),
+	@p_vStatusUserId int
+	
+	
+)
+AS
+BEGIN
+
+Update tblOrganization
+set vReason = @p_vReason,
+iStatusUserId = @p_vStatusUserId,
+iStatus=2
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteEmailById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteEmailById]
+(
+	@p_EmailId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblEmail 
+	Where iEmailId = @p_EmailId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteMenuById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeleteMenuById]
+(@p_iMenuId  int
+)
+AS
+BEGIN
+Delete  from tblMenu
+Where iMenuId = @p_iMenuId;
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteModuleById]
+(
+	@p_ModuleId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblModule 
+	Where iModuleId = @p_ModuleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModulePermissionById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteModulePermissionById]
+(
+	@p_ModulePermissionId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblModulePermission 
+	Where iModulePermissionId = @p_ModulePermissionId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleRolePermissions]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[pr_DeleteModuleRolePermissions]
+@p_RoleId int
+as
+begin
+
+
+delete from  tblRoleDetail
+where  iRoleId =@p_RoleId ;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeleteOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Delete  from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationModules]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[pr_DeleteOrganizationModules]
+@p_OrganizationId int
+as
+begin
+
+DELETE w
+FROM tblOrganizationModule w
+INNER JOIN tblModule e
+  ON w.iModuleId=e.iModuleId
+WHERE  w.iOrganizationId = @p_OrganizationId AND e.iIsCore <> 2 ;
+
+end
+
+Select * from tblOrganizationModule
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteRoleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeleteRoleById]
+(@p_Id  int
+)
+AS
+BEGIN
+Delete  from tblRole
+Where iRoleId = @p_Id;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteSmsById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteSmsById]
+(
+	@p_SmsId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblSms 
+	Where iSmsId = @p_SmsId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeletetblOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeletetblOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Delete  from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteTemplateById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteTemplateById]
+(
+	@p_TemplateId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblTemplate 
+	Where iTemplateId = @p_TemplateId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserAssignedTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[pr_DeleteUserAssignedTypes]
+@p_UserId int
+as
+begin
+
+
+	delete  from  tblAssignUserType  
+	where  iUserId  =  @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[pr_DeleteUserById]
+@p_UserId int
+as 
+begin
+
+	delete from tblAssignUserType Where  iUserId = @p_UserId;
+	delete from tblUserRole Where iUserId = @p_UserId;
+	delete from tblUser Where iUserId = @p_UserId;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_DeleteUserRoles]
+@p_UserId int
+as
+begin
+
+
+delete from tblUserRole
+where iUserId = @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserTypeById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[pr_DeleteUserTypeById]
+@p_Id int
+as 
+begin
+
+	delete top (1) from tblUserType where iUserTypeId = @p_Id;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetAllMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].[pr_GetAllMenus]
+
+AS
+BEGIN
+
+
+	Select * from tblMenu;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetDefinedRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetDefinedRoles]
+@p_OrganizationId int
+as
+begin
+
+	select * from tblRole
+	where iOrganizationId = 0 
+	or iOrganizationId = @p_OrganizationId;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_GetEmail]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdateUserId,
+		m.iEmailId, m.tEmailBody, m.vSubject,m.vToAddress,m.vCcAddress,m.dScheduleDateTime
+		,m.dSentDatetTime,m.bIsSent,m.iOrganizationId,m.iPriority
+		 from tblEmail m
+	WHERE @p_SearchText = ''
+	OR
+	m.vSubject like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iEmailId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetEmailById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetEmailById]
+(
+	@p_EmailId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblEmail m
+	Where m.iEmailId = @p_EmailId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenuById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetMenuById]
+(
+	@p_MenuId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblMenu m
+	Where m.iMenuId = @p_MenuId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetMenus]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iMenuId
+,ut.vMenuName
+,ut.iParentMenu
+,ut.iModulePermissionId
+,ut.iModuleId
+,ut.iSortOrder
+,ut.vIconClass
+,ut.vMenuPath
+,tm.vModuleName
+,tmp.vModulePermissionCode
+,tmp.vDescription
+
+		 from tblMenu ut
+		 inner join tblModule tm
+		 on ut.iModuleId = tm.iModuleId
+		 inner join tblModulePermission tmp
+		 on ut.iModulePermissionId = tmp.iModulePermissionId
+	WHERE @p_SearchText = ''
+	OR
+	ut.vMenuName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iMenuId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_GetModule]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdatedUserId,
+		m.iModuleId, m.vModuleName, m.vModuleCode,m.iIsCore,m.dPrice
+		 from tblModule m
+	WHERE @p_SearchText = ''
+	OR
+	m.vModuleName like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iModuleId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModuleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetModuleById]
+(
+	@p_ModuleId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblModule m
+	Where m.iModuleId = @p_ModuleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_GetModulePermission]
+(
+ @p_SearchText varchar(100),
+ @p_Offset int,
+ @p_PageSize int
+)
+AS
+BEGIN
+
+
+ select COUNT(*) OVER () as TotalCount,  mp.dCreatedDate,m.vModuleName, mp.dUpdatedDate, mp.iCreatedUserId, mp.iUpdatedUserId,
+  mp.iModulePermissionId, mp.vModulePermissionCode, mp.vDescription
+   from tblModulePermission mp
+   inner join tblModule m
+   on m.iModuleId = mp.iModuleId
+ WHERE @p_SearchText = ''
+ OR
+ mp.vModulePermissionCode like CONCAT('%', @p_SearchText, '%')
+
+ order by mp.iModulePermissionId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionAssignedToRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_GetModulePermissionAssignedToRole]
+@p_RoleId int
+AS
+BEGIN
+
+	SELECT TUR.vModulePermissionId
+	 FROM dbo.tblRoleDetail TUR	
+	 WHERE TUR.iRoleId = @p_RoleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetModulePermissionById]
+(
+	@p_ModulePermissionId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblModulePermission m
+	Where m.iModulePermissionId = @p_ModulePermissionId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulesAssignedToOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetModulesAssignedToOrganization]
+@p_OrganizationId int
+AS
+BEGIN
+
+	SELECT TUR.iModuleId
+	 FROM dbo.tblOrganizationModule TUR	
+	 WHERE TUR.iOrganizationId = @p_OrganizationId;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOldPasswordExistsCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_GetOldPasswordExistsCount]
+@p_UserId int,
+@p_OldPassword nvarchar(20)
+as
+begin
+Select count(*) from tblUser
+Where iUserId = @p_UserId and vPassword = @p_OldPassword;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetOrganizationEmailCount]
+@p_Email varchar(70),
+@p_OrganizationId int =null
+as
+begin
+if @p_OrganizationId=null or @p_OrganizationId=0
+Begin
+select count(*) from tblOrganization where vEmail = @p_Email
+end
+ELSE IF @p_OrganizationId  >0
+BEGIN
+select count(*) from tblOrganization where vEmail = @p_Email and iOrganizationId<>@p_OrganizationId;
+END
+
+;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetOrganizations]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iOrganizationId
+,ut.vOrganizationName
+,ut.vOrganizationShortName
+,ut.vAddress
+,ut.vPhoneNo
+,ut.iCountryId
+,ut.iCityId
+,ut.dActivationDate
+,ut.dExpiryDate
+,ut.dRegistrationDate
+,ut.bIsActive
+,ut.iCreatedUserId
+,ut.dCreatedDate
+,ut.iUpdatedUserId
+,ut.dUpdatedDate
+,ut.vContactPersonName
+,ut.vContactPersonPhoneNo
+,ut.vEmail,
+ut.vDomainName
+,ut.iStatus
+,ut.iStatusUserId
+,ut.vReason
+,ut.iTimeZoneId
+,ut.iLanguageId
+,ut.bFirstTimeLogin
+		 from tblOrganization ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vOrganizationName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iOrganizationId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetPatientById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+	 CREATE PROCEDURE [dbo].[pr_GetPatientById] @p_PatId INT
+AS
+     BEGIN
+         SELECT TOP 1 tp.Id,
+                      tp.vFirstName,
+                      tp.vMiddleName,
+                      tp.vLastName,
+                      tp.dDob,
+                      tp.iTitleId,
+                      tp.iGenderId,
+                      tp.iCountryId,
+                      tp.iBloodGroup,
+                      tp.vMrno,
+                      tp.vContactNo,
+                      tp.vHouseNo,
+                      tp.vStreetNo,
+                      tp.vArea,
+                      tp.vEmergencyName,
+                      tp.vEmergencyContact,
+                      tp.vState,
+                      tp.vPostalCode,
+                      tp.iUserId,
+                      tp.vUserAccessCode,
+                      tp.bIsActive,
+                      tp.vFatherHusbandName,
+                      tp.vEmail,
+                      tp.vPictureUrl,
+                      tp.vSignatureUrl,
+                      tp.iEmergencyRelation,
+                      tp.vCNIC,
+                      tp.iCreatedUserId,
+                      tp.dCreatedDate,
+                      tp.iUpdateUserId,
+                      tp.dUpdateDate,
+                    
+                      tp.iMaritalStatus,
+                      tp.iReligion,
+                      tp.iPreferredLanguage,
+                      tp.vNationality,
+                      tp.vMotherMaidenName,
+                      tp.iEthnicGroup,
+                      tp.vBirthPlace
+         FROM dbo.tblPatient tp
+         WHERE tp.Id = @p_PatId;
+     END;
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetPatients]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetPatients]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount, tp.Id, tp.vFirstName, tp.vMiddleName, tp.vLastName, tp.dDob, tp.iTitleId, tp.iGenderId, tp.iCountryId, tp.iBloodGroup, tp.vMrno, tp.vContactNo, tp.vHouseNo, tp.vStreetNo, tp.vArea, tp.vEmergencyName, tp.vEmergencyContact, tp.vState, tp.vPostalCode, tp.iUserId, tp.vUserAccessCode, tp.bIsActive, tp.vFatherHusbandName, tp.vEmail, tp.vPictureUrl, tp.vSignatureUrl, tp.iEmergencyRelation, tp.vCNIC, tp.iCreatedUserId, tp.dCreatedDate, tp.iUpdateUserId, tp.dUpdateDate,tp.iMaritalStatus, tp.iReligion, tp.iPreferredLanguage, tp.vNationality, tp.vMotherMaidenName, tp.iEthnicGroup, tp.vBirthPlace
+	FROM dbo.tblPatient tp
+
+	WHERE @p_SearchText = ''
+	OR
+	tp.vFirstName like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vLastName like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vMrno like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vContactNo like CONCAT('%', @p_SearchText, '%')
+
+	order by tp.Id OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoleById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetRoleById]
+(
+	@p_RoleId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblRole r
+	Where r.iRoleId = @p_RoleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoles]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetRoles]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.dCreatedDate, ut.dUpdatedDate, ut.iCreatedUserId, ut.iOrganizationId, ut.iUpdatedUserId, ut.iUpdatedUserId,
+		ut.iRoleId, ut.vRoleName,ut.vRoleDescription
+		 from tblRole ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vRoleName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iRoleId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRolesAssignedToUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetRolesAssignedToUser]
+@p_UserId int
+AS
+BEGIN
+
+	SELECT TUR.iRoleId
+	 FROM dbo.tblUserRole TUR	
+	 WHERE TUR.iUserId = @p_UserId;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetSms]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdatedUserId,
+		m.iSmsId, m.tSmsBody, m.vSubject,m.vToAddress,m.vCcAddress,m.dScheduleDateTime
+		,m.dSentDatetTime,m.bIsSent,m.iOrganizationId,m.iPriority
+		 from tblSms m
+	WHERE @p_SearchText = ''
+	OR
+	m.vSubject like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iSmsId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetSmsById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_GetSmsById]
+(
+	@p_SmsId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblSms m
+	Where m.iSmsId = @p_SmsId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetTemplate]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdatedUserId,
+		m.iTemplateId, m.vTemplateName, m.vTemplateType,m.tTemplateBody,m.iOrganizationId
+		 from tblTemplate m
+	WHERE @p_SearchText = ''
+	OR
+	m.vTemplateName like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iTemplateId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTemplateById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetTemplateById]
+(
+	@p_TemplateId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblTemplate m
+	Where m.iTemplateId = @p_TemplateId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTypesAssignedToUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetTypesAssignedToUser]
+@p_UserId int
+AS
+BEGIN
+
+SELECT TAUT.iUserTypeId
+ FROM dbo.tblAssignUserType TAUT
+ WHERE TAUT.iUserId = @p_UserId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetUserById]
+@p_UserId int
+as
+begin
+
+select top 1 *  from  tblUser
+where iUserId = @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserMenus]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetUserMenus]
+(
+	@p_UserId int,
+	@p_OrganizationId int
+)
+as
+begin
+
+SELECT
+	MAX(mnu.iMenuId) iMenuId
+	,MAX(mnu.vMenuName) vMenuName
+	,MAX(mnu.vMenuPath) vMenuPath
+	,MAX(isnull(mnu.iParentMenu,0)) iParentMenu
+	,MAX(mnu.iModulePermissionId) iModulePermissionId,
+	Max(mnu.vIconClass) vIconClass,
+	Max(mnu.iSortOrder) iSortOrder
+
+FROM tblMenu mnu
+LEFT JOIN tblMenu mnu2
+	ON mnu.iMenuId = mnu2.iParentMenu
+INNER JOIN tblModule module
+	ON mnu.iModuleId = module.iModuleId
+INNER JOIN tblOrganizationModule orgmodule
+	ON module.iModuleId = orgmodule.iModuleId
+INNER JOIN tblModulePermission perm
+	ON module.iModuleId = perm.iModuleId
+INNER JOIN tblRoleDetail rdetail
+	ON perm.iModulePermissionId = rdetail.vModulePermissionId
+	AND (mnu.iModulePermissionId = 0
+	OR mnu.iModulePermissionId = rdetail.vModulePermissionId)
+INNER JOIN tblRole rol
+	ON rol.iRoleId = rdetail.iRoleId
+INNER JOIN tblUserRole urole
+	ON rol.iRoleId = urole.iRoleId
+
+WHERE urole.iUserId = @p_UserId
+AND orgmodule.iOrganizationId = @p_OrganizationId
+GROUP BY mnu.iMenuId
+ORDER BY Max(mnu.iSortOrder);
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetUsernameEmailCount]
+@p_Username varchar(30),
+@p_Email varchar(70),
+@p_UserId int
+as
+begin
+if @p_UserId=null or @p_UserId=0
+Begin
+select count(*) from tblUser where vEmail = @p_Email
+or vUserName = @p_Username;
+end
+ELSE IF @p_UserId  >0
+BEGIN
+select count(*) from tblUser where (vEmail = @p_Email
+or vUserName = @p_Username) and iUserId<>@p_UserId;
+END
+
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserRights]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetUserRights]
+@p_UserId int
+AS
+BEGIN
+
+    SELECT tmp.vModulePermissionCode FROM dbo.tblUserRole tur
+    INNER JOIN dbo.tblRole tr ON tur.iRoleId = tr.iRoleId
+    INNER JOIN dbo.tblRoleDetail trd ON tr.iRoleId = trd.iRoleId
+    INNER JOIN dbo.tblModulePermission tmp ON trd.vModulePermissionId = tmp.iModulePermissionId
+
+    WHERE tur.iUserId = @p_UserId;
+
+end 
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsers]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[pr_GetUsers]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int,
+	@p_OrganizationId int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount, *
+	from tblUser usr
+	WHERE (@p_SearchText = ''
+	OR
+	 usr.vEmail like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vFirstName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vLastName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vUserName like CONCAT('%', @p_SearchText, '%')
+	 )
+	 	 and usr.iOrganizationId = @p_OrganizationId
+
+	order by usr.iUserId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypeById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[pr_GetUserTypeById]
+(
+	@p_UserTypeId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblUserType ut
+	Where ut.iUserTypeId = @p_UserTypeId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetUserTypes]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.dCreatedDate, ut.dUpdatedDate, ut.iCreatedUserId, ut.iOrganizationId, ut.iUpdatedUserId, ut.iUpdatedUserId,
+		ut.iUserTypeId, ut.vUserTypeName
+		 from tblUserType ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vUserTypeName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iUserTypeId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_NewUserForApproveOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_NewUserForApproveOrganization]
+@p_OrganizationId int,
+@p_UserPassword nvarchar(max),
+@p_CreatedUserId int
+as
+begin
+DECLARE @UserId int
+Insert into tblUser(vUserName,vEmail,vFirstName,vPassword,iCreatedUserId,dCreatedDate,bIsActive,iOrganizationId,bIsFirstTimeLogin)
+Select tOrg.vEmail,tOrg.vEmail,tOrg.vEmail,@p_UserPassword,@p_CreatedUserId,SYSDATETIME(),1,tOrg.iOrganizationId,1 from tblOrganization tOrg
+Where tOrg.iOrganizationId=@p_OrganizationId;
+
+SELECT @UserId = SCOPE_IDENTITY();
+
+Insert into tblUserRole(iRoleId,iUserId,iCreatedUserId,dCreatedDate)
+Select tRole.iRoleId,@UserId,@p_CreatedUserId,SYSDATETIME() from tblRole tRole
+Where tRole.iOrganizationId = @p_OrganizationId;
+
+Insert into tblAssignUserType(iUserTypeId,iOrganizationId,iUserId,iCreatedUserId,dCreatedDate)
+Select iUserTypeId,@p_OrganizationId,@UserId,@p_CreatedUserId,SYSDATETIME() from tblUserType
+Where vUserTypeName ='Admin';
+
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_OrganizationAssignedModuleForRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_OrganizationAssignedModuleForRole]
+(@p_iOrganizationId int,
+@p_ModuleId int
+
+)
+AS
+BEGIN
+Select tom.iOrganizationId,tom.iModuleId,tm.vModuleName
+,tmp.iModulePermissionId,tmp.vModulePermissionCode,tmp.vDescription
+ from tblOrganizationModule tom
+inner join tblModule tm
+on tm.iModuleId = tom.iModuleId
+inner join tblModulePermission tmp
+on tmp.iModuleId = tom.iModuleId
+Where tom.iOrganizationId = @p_iOrganizationId and tom.iModuleId=@p_ModuleId;
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveEmail]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SaveEmail]
+(
+	@p_EmailId int
+	,@p_EmailSubject nvarchar(max)= null
+	,@p_EmailBody text= null
+	,@p_EmailPriority int= null
+,@p_OrganizationId int= null
+,@p_ToAddress nvarchar(max) = null
+,@p_CcAddress nvarchar(max)= null
+,@p_CreatedUserId int= null
+,@p_ScheduleDateTime datetime= null
+,@p_Prirority int = null
+
+)
+AS
+BEGIN
+INSERT INTO tblEmail (dScheduleDateTime
+,bIsSent
+,vToAddress
+,vCcAddress
+,vSubject
+,tEmailBody
+
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iPriority
+) values (@p_ScheduleDateTime 
+,0 
+,@p_ToAddress 
+,@p_CcAddress 
+,@p_EmailSubject 
+,@p_EmailBody 
+
+,@p_OrganizationId 
+,@p_CreatedUserId 
+,SYSDATETIME()
+,@p_Prirority
+ );
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create Procedure [dbo].[pr_SaveMenu]
+(@p_iMenuId int
+,@p_vMenuName nvarchar(max)
+,@p_vMenuPath nvarchar(max)
+,@p_iParentMenu int
+,@p_iSortOrder int
+,@p_iModuleId int
+,@p_iModulePermissionId int
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vIconClass nvarchar(max) )
+AS
+BEGIN
+IF @p_iMenuId = 0
+
+BEGIN
+INSERT INTO tblMenu (vMenuName
+,vMenuPath
+,iParentMenu
+,iSortOrder
+,iModuleId
+,iModulePermissionId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vIconClass) values (@p_vMenuName 
+,@p_vMenuPath 
+,@p_iParentMenu 
+,@p_iSortOrder 
+,@p_iModuleId 
+,@p_iModulePermissionId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vIconClass );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iMenuId  >0
+BEGIN
+Update tblMenu
+
+SET vMenuName=@p_vMenuName
+,vMenuPath=@p_vMenuPath
+,iParentMenu=@p_iParentMenu
+,iSortOrder=@p_iSortOrder
+,iModuleId=@p_iModuleId
+,iModulePermissionId=@p_iModulePermissionId
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vIconClass=@p_vIconClass
+Where iMenuId = @p_iMenuId;
+Select @p_iMenuId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SaveModule]
+(
+	@p_ModuleId int,
+	@p_ModuleName varchar(100),
+	@p_ModuleCode varchar(50),
+	@p_IsCore int,
+	@p_Price decimal,
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModuleId =0) 
+begin
+insert into tblModule(vModuleName,vModuleCode,iCreatedUserId,dCreatedDate,iIsCore,dPrice)
+values (@p_ModuleName,@p_ModuleCode,@p_CreatedUserId,SYSDATETIME(),@p_IsCore,@p_Price)
+end 
+else
+begin
+Update top (1) tblModule
+set vModuleName = @p_ModuleName,
+iUpdatedUserId  = @p_CreatedUserId,
+vModuleCode = @p_ModuleCode,
+dUpdatedDate = SYSDATETIME(),
+iIsCore = @p_IsCore,
+dPrice = @p_Price
+Where iModuleId = @p_ModuleId
+end
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModulePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_SaveModulePermission]
+(
+@p_ModulePermissionId int,
+	@p_ModuleId int,	
+	@p_ModulePermissionCode varchar(50),
+	@p_Desription varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModulePermissionId =0) 
+begin
+insert into tblModulePermission(iModuleId,vModulePermissionCode,vDescription,iCreatedUserId,dCreatedDate)
+values (@p_ModuleId,@p_ModulePermissionCode,@p_Desription,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblModulePermission
+set vModulePermissionCode = @p_ModulePermissionCode,
+vDescription = @p_Desription,
+iModuleId=@p_ModuleId,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iModulePermissionId = @p_ModulePermissionId
+end
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModuleRolePermission]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_SaveModuleRolePermission]
+@p_ModuleId int,
+@p_RoleId int,
+@p_ModulePermissionId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblRoleDetail
+	(iModuleId, vModulePermissionId, iCreatedUserId, iRoleId,dCreatedDate)
+	values
+	(@p_ModuleId, @p_ModulePermissionId, @p_CreatedUserId, @p_RoleId,SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SaveOrganization]
+(@p_iOrganizationId int=null
+,@p_vOrganizationName nvarchar(max) =null
+,@p_vOrganizationShortName nvarchar(max)=null
+,@p_vAddress nvarchar(max)=null
+,@p_vPhoneNo nvarchar(max)=null
+,@p_iCountryId int=null
+,@p_iCityId int=null
+,@p_dActivationDate datetime=null
+,@p_dExpiryDate datetime=null
+,@p_dRegistrationDate datetime=null
+,@p_bIsActive bit=null
+,@p_iCreatedUserId int=null
+,@p_dCreatedDate datetime=null
+,@p_iUpdatedUserId int=null
+,@p_dUpdatedDate datetime=null
+,@p_vContactPersonName nvarchar(max)=null
+,@p_vContactPersonPhoneNo nvarchar(max)=null
+,@p_vEmail nvarchar(max)=null
+,@p_vDomainName nvarchar(max) =null
+,@p_vOganizationLogo nvarchar(max)=null
+,@p_iLanguageId int  =null
+,@p_iTimeZoneId int = null
+,@p_iOrganizationStatusId int = null
+,@p_vReason nvarchar(max) = null
+,@p_bFirstTimeLogin bit = null)
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName
+,iLanguageId
+,iTimeZoneId
+,iStatus
+,vReason
+,bFirstTimeLogin) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName
+,@p_iLanguageId
+,@p_iTimeZoneId
+,@p_iOrganizationStatusId
+,@p_vReason
+,@p_bFirstTimeLogin );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+,iLanguageId=@p_iLanguageId
+, iTimeZoneId = @p_iTimeZoneId
+, vOrganizationLogo = @p_vOganizationLogo
+,iStatus = @p_iOrganizationStatusId
+,vReason = @p_vReason
+Where iOrganizationId = @p_iOrganizationId;
+Select @p_iOrganizationId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationCoreModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_SaveOrganizationCoreModule]
+@p_OrganizationId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblOrganizationModule
+	(iModuleId, iOrganizationId, iCreatedUserId, dCreatedDate)
+	Select iModuleId,@p_OrganizationId,@p_CreatedUserId,SYSDATETIME() from tblModule
+	Where iIsCore=1;
+	
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationModule]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_SaveOrganizationModule]
+@p_ModuleId int,
+@p_OrganizationId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblOrganizationModule
+	(iModuleId, iOrganizationId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_ModuleId, @p_OrganizationId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SaveRole]
+(@p_iOrganizationId int,
+  @p_iRoleId int
+,@p_vRoleName nvarchar(max)
+,@p_vRoleDescription nvarchar(max)
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+)
+AS
+BEGIN
+IF @p_iRoleId = 0
+
+BEGIN
+INSERT INTO tblRole(vRoleName
+,vRoleDescription
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+) values (@p_vRoleName 
+
+,@p_vRoleDescription 
+,@p_iOrganizationId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+
+
+);
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iRoleId  >0
+BEGIN
+Update tblRole
+
+SET vRoleName=@p_vRoleName
+,vRoleDescription=@p_vRoleDescription
+
+Where iRoleId = @p_iRoleId;
+Select @p_iRoleId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveSms]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SaveSms]
+(
+	@p_SmsId int
+	,@p_SmsSubject nvarchar(max)= null
+	,@p_SmsBody text= null
+	,@p_SmsPriority int= null
+,@p_OrganizationId int= null
+,@p_ToAddress nvarchar(max)= null
+,@p_CcAddress nvarchar(max)= null
+,@p_CreatedUserId int= null
+,@p_ScheduleDateTime datetime= null
+,@p_Prirority int = null
+
+)
+AS
+BEGIN
+INSERT INTO tblSms (dScheduleDateTime
+,bIsSent
+,vToAddress
+,vCcAddress
+,vSubject
+,tSmsBody
+
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iPriority
+) values (@p_ScheduleDateTime 
+,0 
+,@p_ToAddress 
+,@p_CcAddress 
+,@p_SmsSubject 
+,@p_SmsBody 
+
+,@p_OrganizationId 
+,@p_CreatedUserId 
+,SYSDATETIME()
+,@p_Prirority 
+ );
+END
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblMenu]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SavetblMenu]
+(@p_iMenuId int
+,@p_vMenuName nvarchar(max)
+,@p_vMenuPath nvarchar(max)
+,@p_iParentMenu int
+,@p_iSortOrder int
+,@p_iModuleId int
+,@p_iModulePermissionId int
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vIconClass nvarchar(max) )
+AS
+BEGIN
+IF @p_iMenuId = 0
+
+BEGIN
+INSERT INTO tblMenu (vMenuName
+,vMenuPath
+,iParentMenu
+,iSortOrder
+,iModuleId
+,iModulePermissionId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vIconClass) values (@p_vMenuName 
+,@p_vMenuPath 
+,@p_iParentMenu 
+,@p_iSortOrder 
+,@p_iModuleId 
+,@p_iModulePermissionId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vIconClass );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iMenuId  >0
+BEGIN
+Update tblMenu
+
+SET vMenuName=@p_vMenuName
+,vMenuPath=@p_vMenuPath
+,iParentMenu=@p_iParentMenu
+,iSortOrder=@p_iSortOrder
+,iModuleId=@p_iModuleId
+,iModulePermissionId=@p_iModulePermissionId
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vIconClass=@p_vIconClass
+Where iMenuId = @p_iMenuId;
+Select @p_iMenuId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SavetblOrganization]
+(@p_iOrganizationId int
+,@p_vOrganizationName nvarchar(max)
+,@p_vOrganizationShortName nvarchar(max)
+,@p_vAddress nvarchar(max)
+,@p_vPhoneNo nvarchar(max)
+,@p_iCountryId int
+,@p_iCityId int
+,@p_dActivationDate datetime
+,@p_dExpiryDate datetime
+,@p_dRegistrationDate datetime
+,@p_bIsActive bit
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_tRecordTimeStamp timestamp
+,@p_vContactPersonName nvarchar(max)
+,@p_vContactPersonPhoneNo nvarchar(max)
+,@p_vEmail nvarchar(max)
+,@p_vDomainName nvarchar(max) )
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName );
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,dRegistrationDate=@p_dRegistrationDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+Where iOrganizationId = @p_iOrganizationId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveTemplate]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_SaveTemplate]
+(
+	@p_TemplateId int,
+	@p_TemplateName varchar(100),
+	@p_TemplateBody text,
+	@p_TemplateType varchar(200),
+	@p_OrganizationId int,
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_TemplateId =0) 
+begin
+insert into tblTemplate(vTemplateName,tTemplateBody,vTemplateType,iOrganizationId,iCreatedUserId,dCreatedDate)
+values (@p_TemplateName,@p_TemplateBody,@p_TemplateType,@p_OrganizationId,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblTemplate
+set vTemplateName = @p_TemplateName,
+iUpdatedUserId  = @p_CreatedUserId,
+tTemplateBody = @p_TemplateBody,
+dUpdatedDate = SYSDATETIME(),
+vTemplateType = @p_TemplateType,
+iOrganizationId = @p_OrganizationId
+Where iTemplateId = @p_TemplateId
+end
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUpdateUser]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_SaveUpdateUser]
+@p_iUserId int
+      ,@p_vUserName varchar(50)
+      ,@p_vEmail varchar(100)
+      ,@p_vFirstName varchar(50)
+      ,@p_vMiddleName varchar(50)=null
+      ,@p_vLastName varchar(50)
+      ,@p_iCountryId int
+      ,@p_iCityId int
+      ,@p_iTitleId int
+      ,@p_iGenderId int
+      ,@p_vPassword varchar(150)
+      ,@p_vFatherHusbandName varchar(50) =null
+      ,@p_bIsFirstTimeLogin bit
+      ,@p_vAddress varchar(150)  = null
+      ,@p_vPhoneNo varchar(50) =null
+      ,@p_vCNIC varchar(50)  =null
+      ,@p_vPassportNo varchar(50)=null
+      ,@p_vEmergencyContactNo varchar(50) =null
+      ,@p_vEmergencyContactPerson varchar(50) =  null
+      ,@p_iCreatedUserId int
+      ,@p_iUpdatedUserId int = null
+      ,@p_vDesignation varchar(100)
+      ,@p_bIsActive bit
+      ,@p_iOrganizationId int
+
+as
+begin
+
+if @p_iUserId > 0 
+begin
+
+ update top (1) tblUser
+ set vFirstName = @p_vFirstName 
+      ,vMiddleName = @p_vMiddleName 
+      ,vLastName = @p_vLastName 
+      ,iCountryId = @p_iCountryId 
+      ,iCityId = @p_iCityId
+      ,iTitleId = @p_iTitleId
+      ,iGenderId = @p_iGenderId
+      -- ,vPassword = @p_vPassword
+      ,vFatherHusbandName = @p_vFatherHusbandName
+      ,bIsFirstTimeLogin = @p_bIsFirstTimeLogin 
+      ,vAddress = @p_vAddress
+      ,vPhoneNo = @p_vPhoneNo
+      ,vCNIC = @p_vCNIC
+      ,vPassportNo = @p_vPassportNo 
+      ,vEmergencyContactNo = @p_vEmergencyContactNo
+      ,vEmergencyContactPerson = @p_vEmergencyContactPerson
+   ,vDesignation = @p_vDesignation 
+      ,bIsActive = @p_bIsActive
+      ,iOrganizationId = @p_iOrganizationId
+   ,iUpdatedUserId = @p_iUpdatedUserId
+      ,dUpdatedDate = SYSDATETIME()
+   where iUserId = @p_iUserId
+   select @p_iUserId;
+end
+else
+begin
+ insert into tblUser
+ (vUserName 
+      ,vEmail 
+      ,vFirstName 
+      ,vMiddleName 
+      ,vLastName 
+      ,iCountryId
+      ,iCityId 
+      ,iTitleId
+      ,iGenderId 
+      ,vPassword 
+      ,vFatherHusbandName 
+      ,bIsFirstTimeLogin 
+      ,vAddress 
+      ,vPhoneNo
+      ,vCNIC 
+      ,vPassportNo 
+      ,vEmergencyContactNo 
+      ,vEmergencyContactPerson 
+      ,iCreatedUserId 
+      ,dCreatedDate 
+      ,vDesignation 
+      ,bIsActive
+      ,iOrganizationId)
+ values
+ (@p_vUserName 
+      ,@p_vEmail 
+      ,@p_vFirstName 
+      ,@p_vMiddleName 
+      ,@p_vLastName 
+      ,@p_iCountryId
+      ,@p_iCityId 
+      ,@p_iTitleId
+      ,@p_iGenderId 
+      ,@p_vPassword 
+      ,@p_vFatherHusbandName 
+      ,@p_bIsFirstTimeLogin 
+      ,@p_vAddress 
+      ,@p_vPhoneNo
+      ,@p_vCNIC 
+      ,@p_vPassportNo 
+      ,@p_vEmergencyContactNo 
+      ,@p_vEmergencyContactPerson 
+      ,@p_iCreatedUserId 
+      ,SYSDATETIME() 
+      ,@p_vDesignation 
+      ,@p_bIsActive
+      ,@p_iOrganizationId)
+
+   select SCOPE_IDENTITY();
+
+end
+
+
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserAssignedTypes]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_SaveUserAssignedTypes]
+@p_UserTypeId int,
+@p_OrganizationId int,
+@p_UserId int,
+@p_CreatedUserId  int
+as
+begin
+
+	insert into tblAssignUserType
+	(iUserTypeId, iOrganizationId,  iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_UserTypeId, @p_OrganizationId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_SaveUserRole]
+@p_RoleId int,
+@p_UserId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into tblUserRole
+	(iRoleId, iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_RoleId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserType]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SaveUserType]
+(
+	@p_UserTypeId int,
+	@p_UserTypeName varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_UserTypeId =0) 
+begin
+insert into tblUserType(vUserTypeName,iCreatedUserId,dCreatedDate)
+values (@p_UserTypeName,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblUserType
+set vUserTypeName = @p_UserTypeName,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iUserTypeId = @p_UserTypeId
+end
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAllAssignUserTypeForGrid]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SelectAllAssignUserTypeForGrid]
+(@p_SearchText  varchar(400),
+ @p_Offset int, 
+ @p_PageSize int
+)
+AS
+BEGIN
+select COUNT(*) OVER () as TotalCount,iAssignUserTypeId,iUserTypeId,iOrganizationId,iUserId,iCreatedUserId,dCreatedDate,iUpdatedUserId,dUpdatedDate
+ from tblAssignUserType
+ Order by iAssignUserTypeId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+ END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAlltblOrganization]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SelectAlltblOrganization]
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName from tblOrganization;
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectOrganizationById]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SelectOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName
+,iLanguageId
+,iTimeZoneId
+,iStatus
+,vReason
+,bFirstTimeLogin from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationAndCreateAdminRole]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_UpdateOrganizationAndCreateAdminRole]
+@p_OrganizationId int,
+@p_ActivationDate datetime,
+@p_ExpiryDate datetime,
+@p_Remarks nvarchar(max),
+@p_CreatedUserId int
+as
+begin
+DECLARE @RoleId int
+   
+	update tblOrganization
+	set dActivationDate = @p_ActivationDate,
+	dExpiryDate =  @p_ExpiryDate,
+	vReason = @p_Remarks,
+	iUpdatedUserId = @p_CreatedUserId,
+	bIsActive = 1,
+	iStatus=1,
+	bFirstTimeLogin=1
+	Where iOrganizationId = @p_OrganizationId;
+
+	Insert into tblRole(vRoleName,vRoleDescription,iOrganizationId,iCreatedUserId,dCreatedDate)
+	values('Admin','Role For Clinic Admin',@p_OrganizationId,@p_CreatedUserId,SYSDATETIME());
+	SELECT @RoleId = SCOPE_IDENTITY();
+	Insert into tblRoleDetail(iRoleId,vModulePermissionId,iCreatedUserId,dCreatedDate,iModuleId)
+	Select @RoleId,tmp.iModulePermissionId,@p_CreatedUserId,SysDateTime(),tmp.iModuleId from tblOrganizationModule tom
+	inner join tblModulePermission tmp
+	on  tom.iModuleId = tmp.iModuleId
+	Where tom.iOrganizationId = @p_OrganizationId;
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationProfile]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_UpdateOrganizationProfile]
+(@p_iOrganizationId int=null
+,@p_vOrganizationName nvarchar(max) =null
+,@p_vOrganizationShortName nvarchar(max)=null
+,@p_vAddress nvarchar(max)=null
+,@p_vPhoneNo nvarchar(max)=null
+,@p_iCountryId int=null
+,@p_iCityId int=null
+,@p_vContactPersonName nvarchar(max)=null
+,@p_vContactPersonPhoneNo nvarchar(max)=null
+,@p_vDomainName nvarchar(max) =null
+,@p_vOganizationLogo nvarchar(max)=null
+,@p_iLanguageId int  =null
+,@p_iTimeZoneId int = null
+)
+AS
+BEGIN
+
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vDomainName=@p_vDomainName
+,iLanguageId=@p_iLanguageId
+, iTimeZoneId = @p_iTimeZoneId
+,bFirstTimeLogin=0
+, vOrganizationLogo = @p_vOganizationLogo
+Where iOrganizationId = @p_iOrganizationId;
+Select @p_iOrganizationId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateUserProfile]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_UpdateUserProfile]
+@p_iUserId int
+      ,@p_vFirstName varchar(50)
+      ,@p_vMiddleName varchar(50)=null
+      ,@p_vLastName varchar(50)
+      ,@p_iCountryId int
+      ,@p_iCityId int
+      ,@p_iTitleId int
+      ,@p_iGenderId int
+      ,@p_vFatherHusbandName varchar(50) =null
+      ,@p_vAddress varchar(150)  = null
+      ,@p_vPhoneNo varchar(50) =null
+      ,@p_vCNIC varchar(50)  =null
+      ,@p_vPassportNo varchar(50)=null
+      ,@p_vEmergencyContactNo varchar(50) =null
+      ,@p_vEmergencyContactPerson varchar(50) =  null
+      ,@p_vDesignation varchar(100)
+      
+
+as
+begin
+
+if @p_iUserId > 0 
+begin
+
+ update top (1) tblUser
+ set vFirstName = @p_vFirstName 
+      ,vMiddleName = @p_vMiddleName 
+      ,vLastName = @p_vLastName 
+      ,iCountryId = @p_iCountryId 
+      ,iCityId = @p_iCityId
+      ,iTitleId = @p_iTitleId
+      ,iGenderId = @p_iGenderId
+      -- ,vPassword = @p_vPassword
+      ,vFatherHusbandName = @p_vFatherHusbandName
+      ,vAddress = @p_vAddress
+      ,vPhoneNo = @p_vPhoneNo
+      ,vCNIC = @p_vCNIC
+      ,vPassportNo = @p_vPassportNo 
+      ,vEmergencyContactNo = @p_vEmergencyContactNo
+      ,vEmergencyContactPerson = @p_vEmergencyContactPerson
+   ,vDesignation = @p_vDesignation 
+      ,dUpdatedDate = SYSDATETIME()
+   where iUserId = @p_iUserId
+   select @p_iUserId;
+end
+
+
+
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ValidateLogin]    Script Date: 10/14/2017 4:24:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_ValidateLogin] 
+	@p_userName varchar(50),
+	@p_Password varchar(150)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT tu.iUserId, tu.vUserName, tu.vEmail, tu.vFirstName, tu.vMiddleName, tu.vLastName, tu.iCountryId, tu.iCityId, tu.iTitleId, tu.iGenderId, tu.vPassword, tu.vFatherHusbandName, tu.bIsFirstTimeLogin, tu.vAddress, tu.vPhoneNo, tu.vCNIC, tu.vPassportNo, tu.vEmergencyContactNo, tu.vEmergencyContactPerson, tu.iCreatedUserId, tu.dCreatedDate, tu.iUpdatedUserId, tu.dUpdatedDate, tu.tRecordTimeStamp, tu.vDesignation, tu.bIsActive, tu.iOrganizationId
+	 FROM dbo.tblUser tu
+	 WHERE tu.vPassword = @p_Password 
+	 AND (tu.vUserName = @p_userName OR tu.vEmail = @p_userName );
+	
+END
+GO

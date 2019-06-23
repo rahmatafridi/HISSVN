@@ -1,0 +1,6 @@
+﻿@{
+    ViewBag.Title = "SignUp Clinic";
+    Layout = null;
+}
+
+<h2>SignUp Clinic</h2>

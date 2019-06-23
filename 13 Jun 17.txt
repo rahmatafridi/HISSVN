@@ -1,0 +1,209 @@
+CREATE PROCEDURE pr_CreateUpdatePatient
+								@p_PatId              INT,
+                                        @p_vFirstName         VARCHAR(50),
+                                        @p_vMiddleName        VARCHAR(50),
+                                        @p_vLastName          VARCHAR(50),
+                                        @p_dDob               DATE,
+                                        @p_iTitleId           INT,
+                                        @p_iGenderId          INT,
+                                        @p_iCountryId         INT,
+                                        @p_iBloodGroup        INT,
+                                        @p_vMrno              VARCHAR(50),
+                                        @p_vContactNo         VARCHAR(50),
+                                        @p_vHouseNo           VARCHAR(50),
+                                        @p_vStreetNo          VARCHAR(50),
+                                        @p_vArea              VARCHAR(50),
+                                        @p_vEmergencyName     VARCHAR(50),
+                                        @p_vEmergencyContact  VARCHAR(50),
+                                        @p_vState             VARCHAR(50),
+                                        @p_vPostalCode        VARCHAR(50),
+                                        @p_iUserId            INT,
+                                        @p_vUserAccessCode    VARCHAR(50),
+                                        @p_bIsActive          BIT,
+                                        @p_vFatherHusbandName VARCHAR(50),
+                                        @p_vEmail             VARCHAR(75),
+                                        @p_vPictureUrl        VARCHAR(150),
+                                        @p_vSignatureUrl      VARCHAR(150),
+                                        @p_iEmergencyRelation INT,
+                                        @p_vCNIC              VARCHAR(50),
+                                        @p_iCreatedUserId     INT,
+                                        @p_iMaritalStatus     INT,
+                                        @p_iReligion          INT,
+                                        @p_iPreferredLanguage INT,
+                                        @p_vNationality       VARCHAR(50),
+                                        @p_vMotherMaidenName  VARCHAR(50),
+                                        @p_iEthnicGroup       INT,
+                                        @p_vBirthPlace        VARCHAR(50)
+AS
+     BEGIN
+         IF @p_PatId <= 0
+             BEGIN
+                 INSERT INTO dbo.tblPatient
+                 (
+        --Id - this column value is auto-generated
+                 vFirstName,
+                 vMiddleName,
+                 vLastName,
+                 dDob,
+                 iTitleId,
+                 iGenderId,
+                 iCountryId,
+                 iBloodGroup,
+                 vMrno,
+                 vContactNo,
+                 vHouseNo,
+                 vStreetNo,
+                 vArea,
+                 vEmergencyName,
+                 vEmergencyContact,
+                 vState,
+                 vPostalCode,
+                 iUserId,
+                 vUserAccessCode,
+                 bIsActive,
+                 vFatherHusbandName,
+                 vEmail,
+                 vPictureUrl,
+                 vSignatureUrl,
+                 iEmergencyRelation,
+                 vCNIC,
+                 iCreatedUserId,
+                 dCreatedDate,
+                 iMaritalStatus,
+                 iReligion,
+                 iPreferredLanguage,
+                 vNationality,
+                 vMotherMaidenName,
+                 iEthnicGroup,
+                 vBirthPlace
+                 )
+                 VALUES
+                 (
+        -- Id - bigint
+                 @p_vFirstName,
+                 @p_vMiddleName,
+                 @p_vLastName,
+                 @p_dDob,
+                 @p_iTitleId,
+                 @p_iGenderId,
+                 @p_iCountryId,
+                 @p_iBloodGroup,
+                 @p_vMrno,
+                 @p_vContactNo,
+                 @p_vHouseNo,
+                 @p_vStreetNo,
+                 @p_vArea,
+                 @p_vEmergencyName,
+                 @p_vEmergencyContact,
+                 @p_vState,
+                 @p_vPostalCode,
+                 @p_iUserId,
+                 @p_vUserAccessCode,
+                 @p_bIsActive,
+                 @p_vFatherHusbandName,
+                 @p_vEmail,
+                 @p_vPictureUrl,
+                 @p_vSignatureUrl,
+                 @p_iEmergencyRelation,
+                 @p_vCNIC,
+                 @p_iCreatedUserId,
+                 GETDATE(),
+                 @p_iMaritalStatus,
+                 @p_iReligion,
+                 @p_iPreferredLanguage,
+                 @p_vNationality,
+                 @p_vMotherMaidenName,
+                 @p_iEthnicGroup,
+                 @p_vBirthPlace
+                 );
+         END;
+             ELSE
+             BEGIN
+                 UPDATE dbo.tblPatient
+                   SET
+       --Id - this column value is auto-generated
+                       dbo.tblPatient.vFirstName = @p_vFirstName, -- nvarchar
+                       dbo.tblPatient.vMiddleName = @p_vMiddleName, -- nvarchar
+                       dbo.tblPatient.vLastName = @p_vLastName, -- nvarchar
+                       dbo.tblPatient.dDob = @p_dDob, -- date
+                       dbo.tblPatient.iTitleId = @p_iTitleId, -- int
+                       dbo.tblPatient.iGenderId = @p_iGenderId, -- int
+                       dbo.tblPatient.iCountryId = @p_iCountryId, -- int
+                       dbo.tblPatient.iBloodGroup = @p_iBloodGroup, -- int
+                       dbo.tblPatient.vContactNo = @p_vContactNo, -- nvarchar
+                       dbo.tblPatient.vHouseNo = @p_vHouseNo, -- nvarchar
+                       dbo.tblPatient.vStreetNo = @p_vStreetNo, -- nvarchar
+                       dbo.tblPatient.vArea = @p_vArea, -- nvarchar
+                       dbo.tblPatient.vEmergencyName = @p_vEmergencyName, -- nvarchar
+                       dbo.tblPatient.vEmergencyContact = @p_vEmergencyContact, -- nvarchar
+                       dbo.tblPatient.vState = @p_vState, -- nvarchar
+                       dbo.tblPatient.vPostalCode = @p_vPostalCode, -- nvarchar
+                       dbo.tblPatient.bIsActive = @p_bIsActive, -- bit
+                       dbo.tblPatient.vFatherHusbandName = @p_vFatherHusbandName, -- nvarchar
+                       dbo.tblPatient.vEmail = @p_vEmail, -- nvarchar
+                       dbo.tblPatient.vPictureUrl = @p_vPictureUrl, -- nvarchar
+                       dbo.tblPatient.iEmergencyRelation = @p_iEmergencyRelation, -- int
+                       dbo.tblPatient.vCNIC = @p_vCNIC, -- nvarchar
+                       dbo.tblPatient.iUpdateUserId = @p_iCreatedUserId, -- int
+                       dbo.tblPatient.dUpdateDate = GETDATE(),
+                       dbo.tblPatient.iMaritalStatus = @p_iMaritalStatus, -- int
+                       dbo.tblPatient.iReligion = @p_iReligion, -- int
+                       dbo.tblPatient.iPreferredLanguage = @p_iPreferredLanguage, -- int
+                       dbo.tblPatient.vNationality = @p_vNationality, -- int
+                       dbo.tblPatient.vMotherMaidenName = @p_vMotherMaidenName, -- nvarchar
+                       dbo.tblPatient.iEthnicGroup = @p_iEthnicGroup, -- int
+                       dbo.tblPatient.vBirthPlace = @p_vBirthPlace; -- nvarchar
+
+         END;
+     END;
+
+	 go
+
+
+	 CREATE PROCEDURE pr_GetPatientById @p_PatId INT
+AS
+     BEGIN
+         SELECT TOP 1 tp.Id,
+                      tp.vFirstName,
+                      tp.vMiddleName,
+                      tp.vLastName,
+                      tp.dDob,
+                      tp.iTitleId,
+                      tp.iGenderId,
+                      tp.iCountryId,
+                      tp.iBloodGroup,
+                      tp.vMrno,
+                      tp.vContactNo,
+                      tp.vHouseNo,
+                      tp.vStreetNo,
+                      tp.vArea,
+                      tp.vEmergencyName,
+                      tp.vEmergencyContact,
+                      tp.vState,
+                      tp.vPostalCode,
+                      tp.iUserId,
+                      tp.vUserAccessCode,
+                      tp.bIsActive,
+                      tp.vFatherHusbandName,
+                      tp.vEmail,
+                      tp.vPictureUrl,
+                      tp.vSignatureUrl,
+                      tp.iEmergencyRelation,
+                      tp.vCNIC,
+                      tp.iCreatedUserId,
+                      tp.dCreatedDate,
+                      tp.iUpdateUserId,
+                      tp.dUpdateDate,
+                    
+                      tp.iMaritalStatus,
+                      tp.iReligion,
+                      tp.iPreferredLanguage,
+                      tp.vNationality,
+                      tp.vMotherMaidenName,
+                      tp.iEthnicGroup,
+                      tp.vBirthPlace
+         FROM dbo.tblPatient tp
+         WHERE tp.Id = @p_PatId;
+     END;
+
+	 go

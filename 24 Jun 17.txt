@@ -1,0 +1,51 @@
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserMenus]    Script Date: 6/24/2017 3:26:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_GetUserMenus]
+(
+	@p_UserId int,
+	@p_OrganizationId int
+)
+as
+begin
+
+SELECT
+	MAX(mnu.iMenuId) iMenuId
+	,MAX(mnu.vMenuName) vMenuName
+	,MAX(mnu.vMenuPath) vMenuPath
+	,MAX(isnull(mnu.iParentMenu,0)) iParentMenu
+	,MAX(mnu.iModulePermissionId) iModulePermissionId,
+	Max(mnu.vIconClass) vIconClass,
+	Max(mnu.iSortOrder) iSortOrder
+
+FROM tblMenu mnu
+LEFT JOIN tblMenu mnu2
+	ON mnu.iMenuId = mnu2.iParentMenu
+INNER JOIN tblModule module
+	ON mnu.iModuleId = module.iModuleId
+INNER JOIN tblOrganizationModule orgmodule
+	ON module.iModuleId = orgmodule.iModuleId
+INNER JOIN tblModulePermission perm
+	ON module.iModuleId = perm.iModuleId
+INNER JOIN tblRoleDetail rdetail
+	ON perm.iModulePermissionId = rdetail.vModulePermissionId
+	AND (mnu.iModulePermissionId = 0
+	OR mnu.iModulePermissionId = rdetail.vModulePermissionId)
+INNER JOIN tblRole rol
+	ON rol.iRoleId = rdetail.iRoleId
+INNER JOIN tblUserRole urole
+	ON rol.iRoleId = urole.iRoleId
+
+WHERE urole.iUserId = @p_UserId
+AND orgmodule.iOrganizationId = @p_OrganizationId
+GROUP BY mnu.iMenuId
+ORDER BY Max(mnu.iSortOrder);
+
+END
+
+go

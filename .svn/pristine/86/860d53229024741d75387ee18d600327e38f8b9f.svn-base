@@ -1,0 +1,210 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DbHelper
+{
+    public class DbHelper
+    {
+        Database db;
+
+        public DbHelper()
+        { 
+            
+        }
+    }
+
+    public class Database
+    {
+        static SqlConnection Connection { get; set; }
+        SqlCommand Command { get; set; }
+
+
+        public Database()
+        {
+            CreateDatabase();
+        }
+        /// <summary>
+        /// Create connection with the "DefaultConnection" connection string
+        /// </summary>
+        public void CreateDatabase()
+        {
+            if (Connection == null || Connection.State != System.Data.ConnectionState.Open)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+
+                Connection = new SqlConnection(connectionString);
+                try
+                {
+                    Connection.Open();
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        public void CreateDatabase(string connectionStringName)
+        {
+            if (Connection == null || Connection.State != System.Data.ConnectionState.Open)
+            {
+                Connection = new SqlConnection(ConfigurationManager.ConnectionStrings[connectionStringName].ToString());
+
+                try
+                {
+                    Connection.Open();
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+
+        public DataSet LoadDataSetAgainstQuery(string query, System.Data.CommandType type, List<DbParameter> parameters)
+        {
+            DataSet ds = new DataSet();
+
+            try
+            {
+
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+
+
+
+
+                SqlDataAdapter da = new SqlDataAdapter(Command);
+
+                da.Fill(ds);
+
+                foreach (DbParameter param in parameters)
+                {
+                    if (param.Direction == ParameterDirection.Output)
+                    {
+                        param.Value = Command.Parameters[param.Name].Value;
+                    }
+                }
+
+                Command.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            
+
+            return ds;
+           
+        }
+
+        public int ExecuteNonQuery(string query, System.Data.CommandType type, List<DbParameter> parameters)
+        {
+            int result = 0;
+
+            try
+            {
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+
+                result = Command.ExecuteNonQuery();
+
+                Command.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            
+
+            return result;
+        }
+
+        public object ExecuteScalar(string query, System.Data.CommandType type, List<DbParameter> parameters)
+        {
+            object result = null;
+
+            try
+            {
+                Command = Connection.CreateCommand();
+
+                Command.CommandText = query;
+                Command.CommandType = type;
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    foreach (DbParameter param in parameters)
+                    {
+                        Command.Parameters.AddWithValue(param.Name, param.Value);
+                        Command.Parameters[param.Name].DbType = param.Type;
+                        Command.Parameters[param.Name].Direction = param.Direction;
+
+                    }
+                }
+
+                result = Command.ExecuteScalar();
+
+                Command.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
+            return result;
+        }
+
+
+    }
+
+    public class DbParameter
+    {
+        public string Name { get; set; }
+        public DbType Type { get; set; }
+        public ParameterDirection Direction { get; set; }
+        public int Length { get; set; }
+        public object Value { get; set; }
+    }
+
+}

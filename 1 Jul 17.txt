@@ -1,0 +1,14 @@
+use his;
+go
+create PROCEDURE pr_GetOrganizationCountByCountry
+AS
+BEGIN
+	
+	SELECT  count(*) AS OrgCount, max(tc.vCountryName) vCountryName
+	FROM tblOrganization org
+	INNER JOIN tblCountry tc 
+	ON org.iCountryId = tc.iCountryId
+
+	GROUP BY org.iCountryId;
+END
+GO

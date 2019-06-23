@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.Domain.Models.Common;
+
+namespace HIS.Domain.Models.Menu
+{
+    public class Menu : CommonFields
+    {
+        public int MenuId { get; set; }
+        public string MenuName { get; set; }
+        public string MenuLink { get; set; }
+        public int? ParentMenu { get; set; }
+        public int SortOrder { get; set; }
+        public int ModuleId { get; set; }
+        public int ModulePermissionId { get; set; }
+        public string IconClass { get; set; }
+        public string ModuleName { get; set; }
+        public string ModulePermissionCode { get; set; }
+        public string ModulePermissionDescription { get; set; }
+        public List<Menu> ChildMenu { get; set; }
+
+        public Menu()
+        {
+            ChildMenu = new List<Menu>();
+        }
+        
+        
+    }
+}

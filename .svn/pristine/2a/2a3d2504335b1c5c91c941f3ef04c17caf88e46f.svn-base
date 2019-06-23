@@ -1,0 +1,137 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.ModulePermission;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class ModulePermissionDAL : IModulePermissionDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public ModulePermissionDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion
+
+
+        #region Module Permission
+
+        public List<ModulePermission> GetModulePermission(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<ModulePermission> Menus = new List<ModulePermission>();
+            TotalRecords = 0;
+
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+            param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+            param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetModulePermission", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                Menus = ds.Tables[0].AsEnumerable().Select(a => new ModulePermission()
+                {
+                    ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"]),
+                    ModulePermissionCode = a["vModulePermissionCode"].ToString(),
+                    Desription = a["vDescription"].ToString()
+                   
+                }).ToList();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                }
+                
+            }
+
+            return Menus;
+        }
+        
+        public ModulePermission GetModulePermissionById(int id) {
+
+            ModulePermission modulePermission = new ModulePermission();
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_ModulePermissionId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetModulePermissionById", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                modulePermission = ds.Tables[0].AsEnumerable().Select(a => new ModulePermission()
+                {
+                    ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"]),
+                    ModulePermissionCode = a["vModulePermissionCode"].ToString(),
+                    Desription = a["vDescription"].ToString()
+
+                }).FirstOrDefault();
+            }
+            return modulePermission;
+
+
+        }
+
+
+
+        public bool SaveModulePermission(ModulePermission modulePermission)
+        {
+            string query = "pr_SaveModulePermission";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_ModulePermissionId", Value = modulePermission.ModulePermissionId });
+            param.Add(new DbParameter() { Name = "p_ModulePermissionCode", Value = modulePermission.ModulePermissionCode });
+            param.Add(new DbParameter() { Name = "p_Desription", Value = modulePermission.Desription });
+            param.Add(new DbParameter() { Name = "p_CreatedUserId", Value = modulePermission.CreatedUserId });
+
+            int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+
+            return result > 0;
+        }
+
+        public int DeleteModulePermissionById(int id)
+        {
+            int deleted = 0;
+
+            string query = "pr_DeleteModulePermissionById";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_Id", Value = id  });
+
+            deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            return deleted;
+        }
+
+        #endregion
+
+
+    }
+
+    public interface IModulePermissionDAL
+    {
+        #region Module Permission 
+
+        List<ModulePermission> GetModulePermission(SearchCriteria criteria, out int TotalRecords);
+        ModulePermission GetModulePermissionById(int id);
+        int DeleteModulePermissionById(int id);
+        bool SaveModulePermission(ModulePermission modulePermission);
+
+        #endregion
+    }
+}

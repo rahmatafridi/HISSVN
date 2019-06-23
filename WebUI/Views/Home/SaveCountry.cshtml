@@ -1,0 +1,40 @@
+﻿@model HIS.Domain.Models.Common.Country
+
+@{
+    ViewBag.Title = "SaveCountry";
+}
+
+<h2>SaveCountry</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Country</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CountryName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CountryName)
+            @Html.ValidationMessageFor(model => model.CountryName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CountryShortName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CountryShortName)
+            @Html.ValidationMessageFor(model => model.CountryShortName)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

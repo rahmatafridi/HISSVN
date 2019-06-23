@@ -1,0 +1,97 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Organization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class OrganizationBLL : IOrganizationBLL
+    {
+        #region Initialization
+
+        private IOrganizationDAL OrganizationDal { get; set; }
+
+        public OrganizationBLL()
+        {
+            OrganizationDal = new OrganizationDAL();
+        }
+
+        #endregion
+
+        #region Organization
+
+        public List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords)
+        {
+            return OrganizationDal.GetOrganizations(criteria, out TotalRecords);
+        }
+
+        public Organization GetOrganizationById(int id)
+        {
+            return OrganizationDal.GetOrganizationById(id);
+        }
+
+        public int DeleteOrganizationById(int id)
+        {
+            return OrganizationDal.DeleteOrganizationById(id);
+        }
+
+        public int SaveOrganization(Organization Organization)
+        {
+            return OrganizationDal.SaveOrganization(Organization);
+        }         
+
+        public bool DoesOrganizationExists(string email,int? organizationId=0)
+        {
+            return OrganizationDal.DoesOrganizationExists(email,organizationId);
+        }
+        public bool SaveOrganizationModule(Organization organization, List<int> module)
+        {
+            return OrganizationDal.SaveOrganizationModule(organization, module);
+        }
+
+        public List<int> GetOrganizationModulesAssignedIds(int organizationId)
+        {
+            return OrganizationDal.GetOrganizationModulesAssignedIds(organizationId);
+        }
+
+        public List<OrganizationModule> GetOrganizationModulePermission(int organizationId)
+        {
+            return OrganizationDal.GetOrganizationModulePermission(organizationId);
+        }
+
+        public List<OrganizationModule> GetOrganizationModulePermissionDetailForRoles(int organizationId, int moduleId)
+        {
+            return OrganizationDal.GetOrganizationModulePermissionDetailForRoles(organizationId, moduleId);
+        }
+
+        #endregion
+
+
+    }
+
+    public interface IOrganizationBLL
+    {
+        #region Organization
+
+        List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords);
+
+        Organization GetOrganizationById(int id);
+
+        int DeleteOrganizationById(int id);
+
+        int SaveOrganization(Organization Organization);
+        bool DoesOrganizationExists(string email, int? organizationId=0);
+        bool SaveOrganizationModule(Organization organization, List<int> module);
+        List<int> GetOrganizationModulesAssignedIds(int organizationId);
+        List<OrganizationModule> GetOrganizationModulePermission(int organizationId);
+        List<OrganizationModule> GetOrganizationModulePermissionDetailForRoles(int organizationId, int moduleId);
+
+        #endregion
+
+    }
+}

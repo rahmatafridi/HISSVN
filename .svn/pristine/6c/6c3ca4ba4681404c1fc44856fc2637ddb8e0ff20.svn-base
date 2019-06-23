@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using HIS.Domain.Models.Common;
+using HIS.BLL;
+using HIS.Domain.Models.Module;
+using HIS.Web.Filters;
+using HIS.Domain.Models.Template;
+
+namespace HIS.Web.Controllers
+{
+    public class TemplateController : Controller
+    {
+        #region Initialization
+
+        public ITemplateBLL _templateBll { get; set; }
+
+        public TemplateController()
+        {
+            _templateBll = new TemplateBLL();
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Template
+        [CheckUserRights]
+        public ActionResult TemplateList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Template> types = new List<Template>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+
+            int TotalRecords = 0;
+
+            types = _templateBll.GetTemplate(criteria, out TotalRecords);
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+            return View(types);
+        }
+        [CheckUserRights]
+        [HttpGet]
+        public ActionResult TemplateForm(int id = 0)
+        {
+            Template template = new Template();
+            ViewBag.TemplateTypes = _templateBll.GetTemplateTypes().AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.TypeText,
+                Value = a.TypeText.ToString()
+            }).ToList();
+
+            if (id > 0)
+            {
+                template = _templateBll.GetTemplateById(id);
+                // get previous record for editing
+            }
+
+            return View(template);
+        }
+        [CheckUserRights]
+        [HttpPost, ValidateInput(false)]
+        [ValidateAjax]
+        public ActionResult TemplateForm(Template template)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new AjaxableViewResult(template);
+            }
+            // TODO : assign user id from session to created user id..
+            template.CreatedUserId = Helper.GetLoggedInUserId();
+            bool saved = _templateBll.SaveTemplate(template);
+
+            AjaxResponse response = new AjaxResponse()
+            {
+                Type = saved ? "success" : "error",
+                Message = saved ? "Data has been processed successfully" : "Unable to process data",
+                Heading = "Template",
+                RedirectUrl = Url.Action("TemplateList", "Template")
+
+            };
+
+            return Json(response);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTemplateById(int id)
+        {
+            string message = "";
+            string mclass = "";
+            int deleted = _templateBll.DeleteTemplateById(id);
+            if (deleted > 0)
+            {
+                message = "Operation completed successfully";
+                mclass = "info";
+            }
+            else
+            {
+                message = "Unable to delete Template";
+                mclass = "error";
+            }
+
+            AjaxResponse res = new AjaxResponse()
+            {
+                Message = message,
+                Type = mclass,
+                Heading = "Template",
+                RedirectUrl = Url.Action("TemplateList", "Template")
+            };
+
+
+            return Json(res);
+        }
+
+        #endregion
+
+
+
+    }
+}

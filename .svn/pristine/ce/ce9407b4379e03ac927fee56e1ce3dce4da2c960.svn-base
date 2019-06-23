@@ -1,0 +1,139 @@
+﻿@model HIS.Domain.Models.Menu.Menu
+@{
+    ViewBag.Title = "Menu Form";
+    Layout = null;
+}
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+</section>
+<form action="@Url.Action("MenuForm","Menu")" class="form-horizontal" id="frmMenu">
+    @Html.HiddenFor(a => a.MenuId)
+    @Html.HiddenFor(a => a.CreatedDate)
+    @Html.HiddenFor(a => a.CreatedUserId)
+    @Html.HiddenFor(a => a.UpdateDate)
+    @Html.HiddenFor(a => a.UpdateUserId)
+
+    <div class="form-body" style="margin-top:32px">
+        <div class="title"><h1 class="form-section">Menu Detail</h1></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.MenuName, new { data_fieldname = "Menu Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Menu Link</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.MenuLink, new { data_fieldname = "Menu Link", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Sort Order</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.SortOrder, new { data_fieldname = "Sort Order", @class = "form-control required" })
+
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Parent Menu</label>
+                    <div class="col-md-9">
+                       @Html.DropDownListFor(a => a.ParentMenu, (List<SelectListItem>)ViewBag.ParentMenus, new { data_fieldname = "Parent Menu", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Module</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.ModuleId, (List<SelectListItem>)ViewBag.Modules, new { data_fieldname = "Modules", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Permission Code</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(a => a.ModulePermissionId, (List<SelectListItem>)ViewBag.ModulePermission,  new { data_fieldname = "Module Permission", @class = "form-control clsDatePicker" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Icon Class</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.IconClass, new { data_fieldname = "Icon Class", @class = "form-control required" })
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>             
+            <!--/span-->
+            <!--/span-->
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="button" class="btn green" onclick="SubmitForm();">Submit</button>
+                        <button type="reset" class="btn default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"> </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+      function SubmitForm() {
+        var data = Global.SubmitFormViaAjax('frmMenu');
+
+        if (data != null && parseInt(data) > 0) {
+           // SaveOrganizationModules(data);
+        }
+
+    }
+
+</script>
+
+

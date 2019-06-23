@@ -1,0 +1,2385 @@
+																			   USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ValidateLogin]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_ValidateLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelecttblOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SelecttblOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SelectOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAlltblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SelectAlltblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserType]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserAssignedTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUserAssignedTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUpdateUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveUpdateUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SavetblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SavetblMenu]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveOrganizationModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModuleRolePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModuleRolePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModulePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_SaveMenu]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_OrganizationAssignedModuleForRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_OrganizationAssignedModuleForRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypeById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserTypeById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsers]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUsers]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserRights]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserRights]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUsernameEmailCount]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetUserById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTypesAssignedToUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetTypesAssignedToUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRolesAssignedToUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRolesAssignedToUser]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetRoleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetOrganizations]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetOrganizationEmailCount]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulesAssignedToOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulesAssignedToOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermissionById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionAssignedToRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermissionAssignedToRole]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModulePermission]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModuleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModuleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetModule]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenuById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetMenuById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetDefinedRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetDefinedRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetAllMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_GetAllMenus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserTypeById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserTypeById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserRoles]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserAssignedTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteUserAssignedTypes]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeletetblOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeletetblOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteRoleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteRoleById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationModules]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteOrganizationModules]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteOrganizationById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleRolePermissions]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModuleRolePermissions]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModulePermissionById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModulePermissionById]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP PROCEDURE [dbo].[pr_DeleteModuleById]
+GO
+ALTER TABLE [dbo].[tblUserType] DROP CONSTRAINT [FK_tblUserType_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUserRole] DROP CONSTRAINT [FK_tblUserRole_tblUser]
+GO
+ALTER TABLE [dbo].[tblUserRole] DROP CONSTRAINT [FK_tblUserRole_tblRole]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblTitle]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblGender]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblCountry]
+GO
+ALTER TABLE [dbo].[tblUser] DROP CONSTRAINT [FK_tblUser_tblCity]
+GO
+ALTER TABLE [dbo].[tblRoleDetail] DROP CONSTRAINT [FK_tblRoleDetail_tblRole]
+GO
+ALTER TABLE [dbo].[tblRoleDetail] DROP CONSTRAINT [FK_tblRoleDetail_tblModulePermission]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] DROP CONSTRAINT [FK_tblOrganizationModule_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] DROP CONSTRAINT [FK_tblOrganizationModule_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganization] DROP CONSTRAINT [FK_tblOrganization_tblCountry]
+GO
+ALTER TABLE [dbo].[tblOrganization] DROP CONSTRAINT [FK_tblOrganization_tblCity]
+GO
+ALTER TABLE [dbo].[tblModulePermission] DROP CONSTRAINT [FK_tblModulePermission_tblModule]
+GO
+ALTER TABLE [dbo].[tblMenu] DROP CONSTRAINT [FK_tblMenu_tblModule]
+GO
+ALTER TABLE [dbo].[tblCity] DROP CONSTRAINT [FK_tblCity_tblCountry]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblUserType]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblUser]
+GO
+ALTER TABLE [dbo].[tblAssignUserType] DROP CONSTRAINT [FK_tblAssignUserType_tblOrganization]
+GO
+/****** Object:  Table [dbo].[tblUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblUserType]
+GO
+/****** Object:  Table [dbo].[tblUserRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblUserRole]
+GO
+/****** Object:  Table [dbo].[tblUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblUser]
+GO
+/****** Object:  Table [dbo].[tblTitle]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblTitle]
+GO
+/****** Object:  Table [dbo].[tblTemplate]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblTemplate]
+GO
+/****** Object:  Table [dbo].[tblRoleDetail]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblRoleDetail]
+GO
+/****** Object:  Table [dbo].[tblRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblRole]
+GO
+/****** Object:  Table [dbo].[tblOrganizationModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblOrganizationModule]
+GO
+/****** Object:  Table [dbo].[tblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblOrganization]
+GO
+/****** Object:  Table [dbo].[tblModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblModulePermission]
+GO
+/****** Object:  Table [dbo].[tblModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblModule]
+GO
+/****** Object:  Table [dbo].[tblMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblMenu]
+GO
+/****** Object:  Table [dbo].[tblGender]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblGender]
+GO
+/****** Object:  Table [dbo].[tblEmail]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblEmail]
+GO
+/****** Object:  Table [dbo].[tblCountry]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblCountry]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblCity]
+GO
+/****** Object:  Table [dbo].[tblAssignUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+DROP TABLE [dbo].[tblAssignUserType]
+GO
+/****** Object:  Table [dbo].[tblAssignUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblAssignUserType](
+	[iAssignUserTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[iUserTypeId] [int] NULL,
+	[iOrganizationId] [int] NULL,
+	[iUserId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblAssignUserType] PRIMARY KEY CLUSTERED 
+(
+	[iAssignUserTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCity](
+	[iCityId] [int] IDENTITY(1,1) NOT NULL,
+	[vCityName] [nvarchar](100) NULL,
+	[iCountryId] [int] NOT NULL,
+	[vCityShortName] [nvarchar](100) NULL,
+ CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED 
+(
+	[iCityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCountry]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCountry](
+	[iCountryId] [int] IDENTITY(1,1) NOT NULL,
+	[vCountryName] [nvarchar](100) NULL,
+	[vCountryShortName] [nvarchar](10) NULL,
+ CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+(
+	[iCountryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblEmail]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblEmail](
+	[iEmailId] [int] IDENTITY(1,1) NOT NULL,
+	[dScheduleDateTime] [datetime] NULL,
+	[bIsSent] [bit] NULL,
+	[vToAddress] [nvarchar](500) NULL,
+	[vCcAddress] [nvarchar](500) NULL,
+	[vSubject] [nvarchar](100) NULL,
+	[tEmailBody] [text] NULL,
+	[dSentDatetTime] [datetime] NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NULL,
+	[dCreatedDate] [datetime] NULL,
+	[iUpdateUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblEmail] PRIMARY KEY CLUSTERED 
+(
+	[iEmailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblGender]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblGender](
+	[iGenderId] [int] IDENTITY(1,1) NOT NULL,
+	[vGenderName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblGender] PRIMARY KEY CLUSTERED 
+(
+	[iGenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblMenu](
+	[iMenuId] [int] IDENTITY(1,1) NOT NULL,
+	[vMenuName] [nvarchar](100) NOT NULL,
+	[vMenuPath] [nvarchar](250) NOT NULL,
+	[iParentMenu] [int] NULL,
+	[iSortOrder] [int] NOT NULL,
+	[iModuleId] [int] NOT NULL,
+	[iModulePermissionId] [int] NOT NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vIconClass] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblMenu] PRIMARY KEY CLUSTERED 
+(
+	[iMenuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblModule](
+	[iModuleId] [int] IDENTITY(1,1) NOT NULL,
+	[vModuleName] [nvarchar](70) NULL,
+	[vModuleCode] [nvarchar](50) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblModule] PRIMARY KEY CLUSTERED 
+(
+	[iModuleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblModulePermission](
+	[iModulePermissionId] [int] IDENTITY(1,1) NOT NULL,
+	[vModulePermissionCode] [nvarchar](50) NULL,
+	[vDescription] [nvarchar](150) NULL,
+	[iModuleId] [int] NOT NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblModulePermission] PRIMARY KEY CLUSTERED 
+(
+	[iModulePermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrganization](
+	[iOrganizationId] [int] IDENTITY(1,1) NOT NULL,
+	[vOrganizationName] [nvarchar](100) NOT NULL,
+	[vOrganizationShortName] [nvarchar](30) NULL,
+	[vAddress] [nvarchar](250) NULL,
+	[vPhoneNo] [nvarchar](20) NULL,
+	[iCountryId] [int] NULL,
+	[iCityId] [int] NULL,
+	[dActivationDate] [datetime] NULL,
+	[dExpiryDate] [datetime] NULL,
+	[dRegistrationDate] [datetime] NULL,
+	[bIsActive] [bit] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vContactPersonName] [nvarchar](100) NULL,
+	[vContactPersonPhoneNo] [nvarchar](20) NULL,
+	[vEmail] [nvarchar](50) NULL,
+	[vDomainName] [nvarchar](70) NULL,
+ CONSTRAINT [PK_Organization] PRIMARY KEY CLUSTERED 
+(
+	[iOrganizationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrganizationModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrganizationModule](
+	[iOrganizationModuleId] [int] IDENTITY(1,1) NOT NULL,
+	[iOrganizationId] [int] NULL,
+	[iModuleId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblOrganizationModule] PRIMARY KEY CLUSTERED 
+(
+	[iOrganizationModuleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblRole](
+	[iRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[vRoleName] [nvarchar](50) NULL,
+	[vRoleDescription] [nvarchar](150) NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblRole] PRIMARY KEY CLUSTERED 
+(
+	[iRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblRoleDetail]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblRoleDetail](
+	[iRoleDetailId] [int] IDENTITY(1,1) NOT NULL,
+	[iRoleId] [int] NULL,
+	[vModulePermissionId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[iModuleId] [int] NULL,
+ CONSTRAINT [PK_tblRoleDetail] PRIMARY KEY CLUSTERED 
+(
+	[iRoleDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblTemplate]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblTemplate](
+	[iTemplateId] [int] IDENTITY(1,1) NOT NULL,
+	[vTemplateName] [nvarchar](50) NULL,
+	[vTemplateType] [nvarchar](20) NULL,
+	[tTemplateBody] [text] NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NULL,
+	[dCreatedDate] [datetime] NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NULL,
+ CONSTRAINT [PK_tblTemplate] PRIMARY KEY CLUSTERED 
+(
+	[iTemplateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblTitle]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblTitle](
+	[iTitleId] [int] IDENTITY(1,1) NOT NULL,
+	[vTitleName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tblTitle] PRIMARY KEY CLUSTERED 
+(
+	[iTitleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUser](
+	[iUserId] [int] IDENTITY(1,1) NOT NULL,
+	[vUserName] [nvarchar](50) NULL,
+	[vEmail] [nvarchar](50) NULL,
+	[vFirstName] [nvarchar](50) NULL,
+	[vMiddleName] [nvarchar](50) NULL,
+	[vLastName] [nvarchar](50) NULL,
+	[iCountryId] [int] NULL,
+	[iCityId] [int] NULL,
+	[iTitleId] [int] NULL,
+	[iGenderId] [int] NULL,
+	[vPassword] [nvarchar](50) NULL,
+	[vFatherHusbandName] [nvarchar](100) NULL,
+	[bIsFirstTimeLogin] [bit] NULL,
+	[vAddress] [nvarchar](150) NULL,
+	[vPhoneNo] [nvarchar](20) NULL,
+	[vCNIC] [nvarchar](50) NULL,
+	[vPassportNo] [nvarchar](50) NULL,
+	[vEmergencyContactNo] [nvarchar](20) NULL,
+	[vEmergencyContactPerson] [nvarchar](50) NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+	[vDesignation] [nvarchar](20) NULL,
+	[bIsActive] [bit] NULL,
+	[iOrganizationId] [int] NULL,
+ CONSTRAINT [PK_tblUser] PRIMARY KEY CLUSTERED 
+(
+	[iUserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUserRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserRole](
+	[iUserRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[iRoleId] [int] NULL,
+	[iUserId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblUserRole] PRIMARY KEY CLUSTERED 
+(
+	[iUserRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUserType](
+	[iUserTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[vUserTypeName] [nvarchar](50) NULL,
+	[iOrganizationId] [int] NULL,
+	[iCreatedUserId] [int] NOT NULL,
+	[dCreatedDate] [datetime] NOT NULL,
+	[iUpdatedUserId] [int] NULL,
+	[dUpdatedDate] [datetime] NULL,
+	[tRecordTimeStamp] [timestamp] NOT NULL,
+ CONSTRAINT [PK_tblUserType] PRIMARY KEY CLUSTERED 
+(
+	[iUserTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[tblAssignUserType] ON 
+
+INSERT [dbo].[tblAssignUserType] ([iAssignUserTypeId], [iUserTypeId], [iOrganizationId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (3, 12, 6, 8, 0, CAST(N'2017-07-06T00:00:00.000' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblAssignUserType] OFF
+SET IDENTITY_INSERT [dbo].[tblCity] ON 
+
+INSERT [dbo].[tblCity] ([iCityId], [vCityName], [iCountryId], [vCityShortName]) VALUES (1, N'Lahore', 1, N'LHR')
+SET IDENTITY_INSERT [dbo].[tblCity] OFF
+SET IDENTITY_INSERT [dbo].[tblCountry] ON 
+
+INSERT [dbo].[tblCountry] ([iCountryId], [vCountryName], [vCountryShortName]) VALUES (1, N'Pakistan', N'PK')
+SET IDENTITY_INSERT [dbo].[tblCountry] OFF
+SET IDENTITY_INSERT [dbo].[tblGender] ON 
+
+INSERT [dbo].[tblGender] ([iGenderId], [vGenderName]) VALUES (1, N'Male')
+INSERT [dbo].[tblGender] ([iGenderId], [vGenderName]) VALUES (2, N'Female')
+SET IDENTITY_INSERT [dbo].[tblGender] OFF
+SET IDENTITY_INSERT [dbo].[tblMenu] ON 
+
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (1, N'User Management', N'/User/Index', 0, 1, 7, 17, 8, CAST(N'2017-06-07T20:03:52.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (2, N'UserType', N'/UserType/Index', 1, 1, 8, 19, 8, CAST(N'2017-06-07T20:04:50.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (3, N'UserType List', N'/User/UserTypeList', 2, 1, 8, 19, 8, CAST(N'2017-06-07T20:05:55.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (4, N'Module', N'/Module/Index', 1, 1, 6, 13, 8, CAST(N'2017-06-07T20:07:07.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (5, N'Module List', N'/Module/ModuleList', 4, 1, 6, 13, 8, CAST(N'2017-06-07T20:10:25.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (6, N'Module Permission', N'/Module/ModulePermissionList', 4, 2, 9, 15, 8, CAST(N'2017-06-07T20:09:09.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (7, N'Organization', N'/Organization/OrganizationList', 1, 1, 4, 9, 8, CAST(N'2017-06-07T20:24:38.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (8, N'Organization List', N'/Organization/OrganizationList', 7, 1, 4, 9, 8, CAST(N'2017-06-07T20:25:13.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (9, N'User', N'/User/Index', 1, 2, 7, 17, 8, CAST(N'2017-06-07T20:25:59.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (10, N'Role', N'/Role/RoleList', 1, 5, 5, 11, 8, CAST(N'2017-06-07T20:26:43.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (11, N'Role List', N'/Role/RoleList', 10, 1, 5, 11, 8, CAST(N'2017-06-07T20:27:25.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (12, N'Menu', N'/Menu/MenuList', 1, 6, 10, 21, 8, CAST(N'2017-06-07T20:28:03.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (13, N'Menu List', N'/Menu/MenuList', 12, 7, 10, 21, 8, CAST(N'2017-06-07T20:29:00.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+INSERT [dbo].[tblMenu] ([iMenuId], [vMenuName], [vMenuPath], [iParentMenu], [iSortOrder], [iModuleId], [iModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vIconClass]) VALUES (14, N'User List', N'/User/UserList', 9, 8, 7, 17, 8, CAST(N'2017-06-07T20:30:05.000' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime), N'fa fa-list')
+SET IDENTITY_INSERT [dbo].[tblMenu] OFF
+SET IDENTITY_INSERT [dbo].[tblModule] ON 
+
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (4, N'Organization', N'Org', 0, CAST(N'2017-06-07T14:37:58.207' AS DateTime), 0, CAST(N'2017-06-07T14:42:00.677' AS DateTime))
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (5, N'Role', N'Role', 0, CAST(N'2017-06-07T14:42:36.613' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (6, N'Module', N'Module', 0, CAST(N'2017-06-07T14:43:24.853' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (7, N'User', N'User', 0, CAST(N'2017-06-07T14:43:43.953' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (8, N'UserType', N'UserType', 0, CAST(N'2017-06-07T14:44:01.997' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (9, N'Module Permission', N'Module Permission', 0, CAST(N'2017-06-07T14:44:55.650' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModule] ([iModuleId], [vModuleName], [vModuleCode], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (10, N'Menu', N'Menu', 0, CAST(N'2017-06-07T14:46:58.680' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblModule] OFF
+SET IDENTITY_INSERT [dbo].[tblModulePermission] ON 
+
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (9, N'OrganizationList', N'Permission For Organization List', 4, 0, CAST(N'2017-06-07T17:07:08.510' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (10, N'OrganizationForm', N'Permission For Organization Form', 4, 0, CAST(N'2017-06-07T17:46:25.243' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (11, N'RoleList', N'Permission For Role List', 5, 0, CAST(N'2017-06-07T17:46:55.247' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'RoleForm', N'Permission For Role Form', 5, 0, CAST(N'2017-06-07T17:47:17.833' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (13, N'ModuleList', N'Permission For Module List', 6, 0, CAST(N'2017-06-07T17:47:41.607' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (14, N'ModuleForm', N'Permission For Module Form', 6, 0, CAST(N'2017-06-07T17:47:59.847' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (15, N'ModulePermissionList', N'Permission For Module Permission List', 9, 0, CAST(N'2017-06-07T17:48:28.823' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (16, N'ModulePermissionForm', N'Permission For Module Permission Form', 9, 0, CAST(N'2017-06-07T17:48:53.427' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (17, N'UserList', N'Permission For User List', 7, 0, CAST(N'2017-06-07T17:49:18.320' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (18, N'UserForm', N'Permission For User Form', 7, 0, CAST(N'2017-06-07T17:49:38.967' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (19, N'UserTypeList', N'Permission For User Type List', 8, 0, CAST(N'2017-06-07T17:50:03.203' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (20, N'UserTypeForm', N'Permission For User Type Form', 8, 0, CAST(N'2017-06-07T17:50:34.087' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (21, N'MenuList', N'Permission For Menu List', 10, 0, CAST(N'2017-06-07T17:50:54.093' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblModulePermission] ([iModulePermissionId], [vModulePermissionCode], [vDescription], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (22, N'MenuForm', N'Permission For Menu Form', 10, 0, CAST(N'2017-06-07T17:51:10.243' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblModulePermission] OFF
+SET IDENTITY_INSERT [dbo].[tblOrganization] ON 
+
+INSERT [dbo].[tblOrganization] ([iOrganizationId], [vOrganizationName], [vOrganizationShortName], [vAddress], [vPhoneNo], [iCountryId], [iCityId], [dActivationDate], [dExpiryDate], [dRegistrationDate], [bIsActive], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vContactPersonName], [vContactPersonPhoneNo], [vEmail], [vDomainName]) VALUES (6, N'LogicSpirit', N'Logic', N'Lahore Pakistan', N'03224341025', 1, 1, CAST(N'2017-06-01T00:00:00.000' AS DateTime), CAST(N'2020-11-25T00:00:00.000' AS DateTime), CAST(N'2017-06-07T18:22:09.290' AS DateTime), 1, 0, CAST(N'2017-06-07T18:22:09.290' AS DateTime), 0, CAST(N'2017-06-07T18:22:09.290' AS DateTime), N'Abdul Ali Farooqi', N'03219992979', N'taurus.ammar@gmail.com', N'www.logicspirit.com')
+SET IDENTITY_INSERT [dbo].[tblOrganization] OFF
+SET IDENTITY_INSERT [dbo].[tblOrganizationModule] ON 
+
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, 6, 4, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (13, 6, 5, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (14, 6, 6, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (15, 6, 7, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (16, 6, 8, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (17, 6, 9, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblOrganizationModule] ([iOrganizationModuleId], [iOrganizationId], [iModuleId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (18, 6, 10, 0, CAST(N'2017-06-07T18:22:09.357' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblOrganizationModule] OFF
+SET IDENTITY_INSERT [dbo].[tblRole] ON 
+
+INSERT [dbo].[tblRole] ([iRoleId], [vRoleName], [vRoleDescription], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'Admin', N'Admin Role', 6, 0, CAST(N'2017-06-07T18:36:20.987' AS DateTime), 0, CAST(N'1754-01-01T00:00:00.000' AS DateTime))
+SET IDENTITY_INSERT [dbo].[tblRole] OFF
+SET IDENTITY_INSERT [dbo].[tblRoleDetail] ON 
+
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (30, 12, 9, 0, CAST(N'2017-06-07T18:36:35.083' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (31, 12, 10, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 4)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (32, 12, 11, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (33, 12, 12, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 5)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (34, 12, 13, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 6)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (35, 12, 14, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 6)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (36, 12, 17, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (37, 12, 18, 0, CAST(N'2017-06-07T18:36:35.087' AS DateTime), NULL, NULL, 7)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (38, 12, 19, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 8)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (39, 12, 20, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 8)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (40, 12, 15, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 9)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (41, 12, 16, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 9)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (42, 12, 21, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 10)
+INSERT [dbo].[tblRoleDetail] ([iRoleDetailId], [iRoleId], [vModulePermissionId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [iModuleId]) VALUES (43, 12, 22, 0, CAST(N'2017-06-07T18:36:35.090' AS DateTime), NULL, NULL, 10)
+SET IDENTITY_INSERT [dbo].[tblRoleDetail] OFF
+SET IDENTITY_INSERT [dbo].[tblTitle] ON 
+
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (1, N'Mr.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (2, N'Ms.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (3, N'Mrs.')
+INSERT [dbo].[tblTitle] ([iTitleId], [vTitleName]) VALUES (4, N'Dr.')
+SET IDENTITY_INSERT [dbo].[tblTitle] OFF
+SET IDENTITY_INSERT [dbo].[tblUser] ON 
+
+INSERT [dbo].[tblUser] ([iUserId], [vUserName], [vEmail], [vFirstName], [vMiddleName], [vLastName], [iCountryId], [iCityId], [iTitleId], [iGenderId], [vPassword], [vFatherHusbandName], [bIsFirstTimeLogin], [vAddress], [vPhoneNo], [vCNIC], [vPassportNo], [vEmergencyContactNo], [vEmergencyContactPerson], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate], [vDesignation], [bIsActive], [iOrganizationId]) VALUES (8, N'ammarmuhiuddin', N'taurus.ammar@gmail.com', N'Ammar', NULL, N'Muhi ud din', 1, 1, 1, 1, N'123', NULL, 0, N'lahore', N'03224341025', NULL, NULL, N'03224341025', N'Ammar', 0, CAST(N'2017-06-07T18:57:34.467' AS DateTime), NULL, NULL, N'Software', 1, 6)
+SET IDENTITY_INSERT [dbo].[tblUser] OFF
+SET IDENTITY_INSERT [dbo].[tblUserRole] ON 
+
+INSERT [dbo].[tblUserRole] ([iUserRoleId], [iRoleId], [iUserId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (5, 12, 8, 0, CAST(N'2017-06-07T18:57:37.637' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblUserRole] OFF
+SET IDENTITY_INSERT [dbo].[tblUserType] ON 
+
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (9, N'Consultant', NULL, 0, CAST(N'2017-06-07T18:17:12.793' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (10, N'Both', NULL, 0, CAST(N'2017-06-07T18:17:20.750' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (11, N'Other', NULL, 0, CAST(N'2017-06-07T18:17:29.303' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (12, N'Admin', NULL, 0, CAST(N'2017-06-07T18:17:37.553' AS DateTime), NULL, NULL)
+INSERT [dbo].[tblUserType] ([iUserTypeId], [vUserTypeName], [iOrganizationId], [iCreatedUserId], [dCreatedDate], [iUpdatedUserId], [dUpdatedDate]) VALUES (13, N'Patient', NULL, 0, CAST(N'2017-06-07T18:18:58.607' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[tblUserType] OFF
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblUser] FOREIGN KEY([iUserId])
+REFERENCES [dbo].[tblUser] ([iUserId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblUser]
+GO
+ALTER TABLE [dbo].[tblAssignUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblAssignUserType_tblUserType] FOREIGN KEY([iUserTypeId])
+REFERENCES [dbo].[tblUserType] ([iUserTypeId])
+GO
+ALTER TABLE [dbo].[tblAssignUserType] CHECK CONSTRAINT [FK_tblAssignUserType_tblUserType]
+GO
+ALTER TABLE [dbo].[tblCity]  WITH CHECK ADD  CONSTRAINT [FK_tblCity_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblCity] CHECK CONSTRAINT [FK_tblCity_tblCountry]
+GO
+ALTER TABLE [dbo].[tblMenu]  WITH CHECK ADD  CONSTRAINT [FK_tblMenu_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblMenu] CHECK CONSTRAINT [FK_tblMenu_tblModule]
+GO
+ALTER TABLE [dbo].[tblModulePermission]  WITH CHECK ADD  CONSTRAINT [FK_tblModulePermission_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblModulePermission] CHECK CONSTRAINT [FK_tblModulePermission_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganization]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganization_tblCity] FOREIGN KEY([iCityId])
+REFERENCES [dbo].[tblCity] ([iCityId])
+GO
+ALTER TABLE [dbo].[tblOrganization] CHECK CONSTRAINT [FK_tblOrganization_tblCity]
+GO
+ALTER TABLE [dbo].[tblOrganization]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganization_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblOrganization] CHECK CONSTRAINT [FK_tblOrganization_tblCountry]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganizationModule_tblModule] FOREIGN KEY([iModuleId])
+REFERENCES [dbo].[tblModule] ([iModuleId])
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] CHECK CONSTRAINT [FK_tblOrganizationModule_tblModule]
+GO
+ALTER TABLE [dbo].[tblOrganizationModule]  WITH CHECK ADD  CONSTRAINT [FK_tblOrganizationModule_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblOrganizationModule] CHECK CONSTRAINT [FK_tblOrganizationModule_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblRoleDetail]  WITH CHECK ADD  CONSTRAINT [FK_tblRoleDetail_tblModulePermission] FOREIGN KEY([vModulePermissionId])
+REFERENCES [dbo].[tblModulePermission] ([iModulePermissionId])
+GO
+ALTER TABLE [dbo].[tblRoleDetail] CHECK CONSTRAINT [FK_tblRoleDetail_tblModulePermission]
+GO
+ALTER TABLE [dbo].[tblRoleDetail]  WITH CHECK ADD  CONSTRAINT [FK_tblRoleDetail_tblRole] FOREIGN KEY([iRoleId])
+REFERENCES [dbo].[tblRole] ([iRoleId])
+GO
+ALTER TABLE [dbo].[tblRoleDetail] CHECK CONSTRAINT [FK_tblRoleDetail_tblRole]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblCity] FOREIGN KEY([iCityId])
+REFERENCES [dbo].[tblCity] ([iCityId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblCity]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblCountry] FOREIGN KEY([iCountryId])
+REFERENCES [dbo].[tblCountry] ([iCountryId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblCountry]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblGender] FOREIGN KEY([iGenderId])
+REFERENCES [dbo].[tblGender] ([iGenderId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblGender]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblOrganization]
+GO
+ALTER TABLE [dbo].[tblUser]  WITH CHECK ADD  CONSTRAINT [FK_tblUser_tblTitle] FOREIGN KEY([iTitleId])
+REFERENCES [dbo].[tblTitle] ([iTitleId])
+GO
+ALTER TABLE [dbo].[tblUser] CHECK CONSTRAINT [FK_tblUser_tblTitle]
+GO
+ALTER TABLE [dbo].[tblUserRole]  WITH CHECK ADD  CONSTRAINT [FK_tblUserRole_tblRole] FOREIGN KEY([iRoleId])
+REFERENCES [dbo].[tblRole] ([iRoleId])
+GO
+ALTER TABLE [dbo].[tblUserRole] CHECK CONSTRAINT [FK_tblUserRole_tblRole]
+GO
+ALTER TABLE [dbo].[tblUserRole]  WITH CHECK ADD  CONSTRAINT [FK_tblUserRole_tblUser] FOREIGN KEY([iUserId])
+REFERENCES [dbo].[tblUser] ([iUserId])
+GO
+ALTER TABLE [dbo].[tblUserRole] CHECK CONSTRAINT [FK_tblUserRole_tblUser]
+GO
+ALTER TABLE [dbo].[tblUserType]  WITH CHECK ADD  CONSTRAINT [FK_tblUserType_tblOrganization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+GO
+ALTER TABLE [dbo].[tblUserType] CHECK CONSTRAINT [FK_tblUserType_tblOrganization]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteModuleById]
+(
+	@p_ModuleId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblModule 
+	Where iModuleId = @p_ModuleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModulePermissionById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeleteModulePermissionById]
+(
+	@p_ModulePermissionId int
+	
+)
+AS
+BEGIN
+
+
+	delete from tblModulePermission 
+	Where iModulePermissionId = @p_ModulePermissionId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteModuleRolePermissions]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[pr_DeleteModuleRolePermissions]
+@p_RoleId int
+as
+begin
+
+
+delete from  tblRoleDetail
+where  iRoleId =@p_RoleId ;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeleteOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Delete  from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationModules]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[pr_DeleteOrganizationModules]
+@p_OrganizationId int
+as
+begin
+
+
+delete from  tblOrganizationModule
+where  iOrganizationId = @p_OrganizationId;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteRoleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeleteRoleById]
+(@p_Id  int
+)
+AS
+BEGIN
+Delete  from tblRole
+Where iRoleId = @p_Id;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeletetblOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_DeletetblOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Delete  from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserAssignedTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[pr_DeleteUserAssignedTypes]
+@p_UserId int
+as
+begin
+
+
+	delete  from  tblAssignUserType  
+	where  iUserId  =  @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_DeleteUserRoles]
+@p_UserId int
+as
+begin
+
+
+delete from tblUserRole
+where iUserId = @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteUserTypeById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[pr_DeleteUserTypeById]
+@p_Id int
+as 
+begin
+
+	delete top (1) from tblUserType where iUserTypeId = @p_Id;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetAllMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].[pr_GetAllMenus]
+
+AS
+BEGIN
+
+
+	Select * from tblMenu;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetDefinedRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetDefinedRoles]
+@p_OrganizationId int
+as
+begin
+
+	select * from tblRole
+	where iOrganizationId = 0 
+	or iOrganizationId = @p_OrganizationId;
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenuById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetMenuById]
+(
+	@p_MenuId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblMenu m
+	Where m.iMenuId = @p_MenuId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetMenus]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iMenuId
+,ut.vMenuName
+,ut.iParentMenu
+,ut.iModulePermissionId
+,ut.iModuleId
+,ut.iSortOrder
+,ut.vIconClass
+,ut.vMenuPath
+,tm.vModuleName
+,tmp.vModulePermissionCode
+,tmp.vDescription
+
+		 from tblMenu ut
+		 inner join tblModule tm
+		 on ut.iModuleId = tm.iModuleId
+		 inner join tblModulePermission tmp
+		 on ut.iModulePermissionId = tmp.iModulePermissionId
+	WHERE @p_SearchText = ''
+	OR
+	ut.vMenuName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iMenuId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[pr_GetModule]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  m.dCreatedDate, m.dUpdatedDate, m.iCreatedUserId, m.iUpdatedUserId,
+		m.iModuleId, m.vModuleName, m.vModuleCode
+		 from tblModule m
+	WHERE @p_SearchText = ''
+	OR
+	m.vModuleName like CONCAT('%', @p_SearchText, '%')
+
+	order by m.iModuleId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModuleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetModuleById]
+(
+	@p_ModuleId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblModule m
+	Where m.iModuleId = @p_ModuleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_GetModulePermission]
+(
+ @p_SearchText varchar(100),
+ @p_Offset int,
+ @p_PageSize int
+)
+AS
+BEGIN
+
+
+ select COUNT(*) OVER () as TotalCount,  mp.dCreatedDate,m.vModuleName, mp.dUpdatedDate, mp.iCreatedUserId, mp.iUpdatedUserId,
+  mp.iModulePermissionId, mp.vModulePermissionCode, mp.vDescription
+   from tblModulePermission mp
+   inner join tblModule m
+   on m.iModuleId = mp.iModuleId
+ WHERE @p_SearchText = ''
+ OR
+ mp.vModulePermissionCode like CONCAT('%', @p_SearchText, '%')
+
+ order by mp.iModulePermissionId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionAssignedToRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_GetModulePermissionAssignedToRole]
+@p_RoleId int
+AS
+BEGIN
+
+	SELECT TUR.vModulePermissionId
+	 FROM dbo.tblRoleDetail TUR	
+	 WHERE TUR.iRoleId = @p_RoleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulePermissionById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetModulePermissionById]
+(
+	@p_ModulePermissionId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblModulePermission m
+	Where m.iModulePermissionId = @p_ModulePermissionId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetModulesAssignedToOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetModulesAssignedToOrganization]
+@p_OrganizationId int
+AS
+BEGIN
+
+	SELECT TUR.iModuleId
+	 FROM dbo.tblOrganizationModule TUR	
+	 WHERE TUR.iOrganizationId = @p_OrganizationId;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_GetOrganizationEmailCount]
+@p_Email varchar(70)
+as
+begin
+
+select count(*) from tblOrganization where vEmail = @p_Email
+;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetOrganizations]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iOrganizationId
+,ut.vOrganizationName
+,ut.vOrganizationShortName
+,ut.vAddress
+,ut.vPhoneNo
+,ut.iCountryId
+,ut.iCityId
+,ut.dActivationDate
+,ut.dExpiryDate
+,ut.dRegistrationDate
+,ut.bIsActive
+,ut.iCreatedUserId
+,ut.dCreatedDate
+,ut.iUpdatedUserId
+,ut.dUpdatedDate
+,ut.vContactPersonName
+,ut.vContactPersonPhoneNo
+,ut.vEmail,
+ut.vDomainName
+		 from tblOrganization ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vOrganizationName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iOrganizationId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoleById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_GetRoleById]
+(
+	@p_RoleId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblRole r
+	Where r.iRoleId = @p_RoleId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRoles]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetRoles]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.dCreatedDate, ut.dUpdatedDate, ut.iCreatedUserId, ut.iOrganizationId, ut.iUpdatedUserId, ut.iUpdatedUserId,
+		ut.iRoleId, ut.vRoleName,ut.vRoleDescription
+		 from tblRole ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vRoleName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iRoleId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetRolesAssignedToUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetRolesAssignedToUser]
+@p_UserId int
+AS
+BEGIN
+
+	SELECT TUR.iRoleId
+	 FROM dbo.tblUserRole TUR	
+	 WHERE TUR.iUserId = @p_UserId;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetTypesAssignedToUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetTypesAssignedToUser]
+@p_UserId int
+AS
+BEGIN
+
+SELECT TAUT.iUserTypeId
+ FROM dbo.tblAssignUserType TAUT
+ WHERE TAUT.iUserId = @p_UserId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetUserById]
+@p_UserId int
+as
+begin
+
+select top 1 *  from  tblUser
+where iUserId = @p_UserId;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserMenus]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_GetUserMenus]
+(
+	@p_UserId int,
+	@p_OrganizationId int
+)
+as
+begin
+
+SELECT
+	MAX(mnu.iMenuId) iMenuId
+	,MAX(mnu.vMenuName) vMenuName
+	,MAX(mnu.vMenuPath) vMenuPath
+	,MAX(isnull(mnu.iParentMenu,0)) iParentMenu
+	,MAX(mnu.iModulePermissionId) iModulePermissionId,
+	Max(mnu.vIconClass) vIconClass
+
+FROM tblMenu mnu
+LEFT JOIN tblMenu mnu2
+	ON mnu.iMenuId = mnu2.iParentMenu
+INNER JOIN tblModule module
+	ON mnu.iModuleId = module.iModuleId
+INNER JOIN tblOrganizationModule orgmodule
+	ON module.iModuleId = orgmodule.iModuleId
+INNER JOIN tblModulePermission perm
+	ON module.iModuleId = perm.iModuleId
+INNER JOIN tblRoleDetail rdetail
+	ON perm.iModulePermissionId = rdetail.vModulePermissionId
+	AND (mnu.iModulePermissionId = 0
+	OR mnu.iModulePermissionId = rdetail.vModulePermissionId)
+INNER JOIN tblRole rol
+	ON rol.iRoleId = rdetail.iRoleId
+INNER JOIN tblUserRole urole
+	ON rol.iRoleId = urole.iRoleId
+
+WHERE urole.iUserId = @p_UserId
+AND orgmodule.iOrganizationId = @p_OrganizationId
+GROUP BY mnu.iMenuId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_GetUsernameEmailCount]
+@p_Username varchar(30),
+@p_Email varchar(70)
+as
+begin
+
+select count(*) from tblUser where vEmail = @p_Email
+or vUserName = @p_Username;
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserRights]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetUserRights]
+@p_UserId int
+AS
+BEGIN
+
+    SELECT tmp.vModulePermissionCode FROM dbo.tblUserRole tur
+    INNER JOIN dbo.tblRole tr ON tur.iRoleId = tr.iRoleId
+    INNER JOIN dbo.tblRoleDetail trd ON tr.iRoleId = trd.iRoleId
+    INNER JOIN dbo.tblModulePermission tmp ON trd.vModulePermissionId = tmp.iModulePermissionId
+
+    WHERE tur.iUserId = @p_UserId;
+
+end 
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsers]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[pr_GetUsers]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int,
+	@p_OrganizationId int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount, *
+	from tblUser usr
+	WHERE (@p_SearchText = ''
+	OR
+	 usr.vEmail like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vFirstName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vLastName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vUserName like CONCAT('%', @p_SearchText, '%')
+	 )
+	 	 and usr.iOrganizationId = @p_OrganizationId
+
+	order by usr.iUserId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypeById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[pr_GetUserTypeById]
+(
+	@p_UserTypeId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblUserType ut
+	Where ut.iUserTypeId = @p_UserTypeId;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetUserTypes]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.dCreatedDate, ut.dUpdatedDate, ut.iCreatedUserId, ut.iOrganizationId, ut.iUpdatedUserId, ut.iUpdatedUserId,
+		ut.iUserTypeId, ut.vUserTypeName
+		 from tblUserType ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vUserTypeName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iUserTypeId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_OrganizationAssignedModuleForRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_OrganizationAssignedModuleForRole]
+(@p_iOrganizationId int,
+@p_ModuleId int
+
+)
+AS
+BEGIN
+Select tom.iOrganizationId,tom.iModuleId,tm.vModuleName
+,tmp.iModulePermissionId,tmp.vModulePermissionCode,tmp.vDescription
+ from tblOrganizationModule tom
+inner join tblModule tm
+on tm.iModuleId = tom.iModuleId
+inner join tblModulePermission tmp
+on tmp.iModuleId = tom.iModuleId
+Where tom.iOrganizationId = @p_iOrganizationId and tom.iModuleId=@p_ModuleId;
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create Procedure [dbo].[pr_SaveMenu]
+(@p_iMenuId int
+,@p_vMenuName nvarchar(max)
+,@p_vMenuPath nvarchar(max)
+,@p_iParentMenu int
+,@p_iSortOrder int
+,@p_iModuleId int
+,@p_iModulePermissionId int
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vIconClass nvarchar(max) )
+AS
+BEGIN
+IF @p_iMenuId = 0
+
+BEGIN
+INSERT INTO tblMenu (vMenuName
+,vMenuPath
+,iParentMenu
+,iSortOrder
+,iModuleId
+,iModulePermissionId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vIconClass) values (@p_vMenuName 
+,@p_vMenuPath 
+,@p_iParentMenu 
+,@p_iSortOrder 
+,@p_iModuleId 
+,@p_iModulePermissionId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vIconClass );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iMenuId  >0
+BEGIN
+Update tblMenu
+
+SET vMenuName=@p_vMenuName
+,vMenuPath=@p_vMenuPath
+,iParentMenu=@p_iParentMenu
+,iSortOrder=@p_iSortOrder
+,iModuleId=@p_iModuleId
+,iModulePermissionId=@p_iModulePermissionId
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vIconClass=@p_vIconClass
+Where iMenuId = @p_iMenuId;
+Select @p_iMenuId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[pr_SaveModule]
+(
+	@p_ModuleId int,
+	@p_ModuleName varchar(100),
+	@p_ModuleCode varchar(50),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModuleId =0) 
+begin
+insert into tblModule(vModuleName,vModuleCode,iCreatedUserId,dCreatedDate)
+values (@p_ModuleName,@p_ModuleCode,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblModule
+set vModuleName = @p_ModuleName,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iModuleId = @p_ModuleId
+end
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModulePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_SaveModulePermission]
+(
+@p_ModulePermissionId int,
+	@p_ModuleId int,	
+	@p_ModulePermissionCode varchar(50),
+	@p_Desription varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModulePermissionId =0) 
+begin
+insert into tblModulePermission(iModuleId,vModulePermissionCode,vDescription,iCreatedUserId,dCreatedDate)
+values (@p_ModuleId,@p_ModulePermissionCode,@p_Desription,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblModulePermission
+set vModulePermissionCode = @p_ModulePermissionCode,
+vDescription = @p_Desription,
+iModuleId=@p_ModuleId,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iModulePermissionId = @p_ModulePermissionId
+end
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModuleRolePermission]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_SaveModuleRolePermission]
+@p_ModuleId int,
+@p_RoleId int,
+@p_ModulePermissionId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblRoleDetail
+	(iModuleId, vModulePermissionId, iCreatedUserId, iRoleId,dCreatedDate)
+	values
+	(@p_ModuleId, @p_ModulePermissionId, @p_CreatedUserId, @p_RoleId,SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SaveOrganization]
+(@p_iOrganizationId int
+,@p_vOrganizationName nvarchar(max)
+,@p_vOrganizationShortName nvarchar(max)
+,@p_vAddress nvarchar(max)
+,@p_vPhoneNo nvarchar(max)
+,@p_iCountryId int
+,@p_iCityId int
+,@p_dActivationDate datetime
+,@p_dExpiryDate datetime
+,@p_dRegistrationDate datetime
+,@p_bIsActive bit
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vContactPersonName nvarchar(max)
+,@p_vContactPersonPhoneNo nvarchar(max)
+,@p_vEmail nvarchar(max)
+,@p_vDomainName nvarchar(max) )
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+Where iOrganizationId = @p_iOrganizationId;
+Select @p_iOrganizationId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganizationModule]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_SaveOrganizationModule]
+@p_ModuleId int,
+@p_OrganizationId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblOrganizationModule
+	(iModuleId, iOrganizationId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_ModuleId, @p_OrganizationId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SaveRole]
+(@p_iOrganizationId int,
+  @p_iRoleId int
+,@p_vRoleName nvarchar(max)
+,@p_vRoleDescription nvarchar(max)
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+)
+AS
+BEGIN
+IF @p_iRoleId = 0
+
+BEGIN
+INSERT INTO tblRole(vRoleName
+,vRoleDescription
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+) values (@p_vRoleName 
+
+,@p_vRoleDescription 
+,@p_iOrganizationId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+
+
+);
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iRoleId  >0
+BEGIN
+Update tblRole
+
+SET vRoleName=@p_vRoleName
+,vRoleDescription=@p_vRoleDescription
+
+Where iRoleId = @p_iRoleId;
+Select @p_iRoleId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblMenu]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SavetblMenu]
+(@p_iMenuId int
+,@p_vMenuName nvarchar(max)
+,@p_vMenuPath nvarchar(max)
+,@p_iParentMenu int
+,@p_iSortOrder int
+,@p_iModuleId int
+,@p_iModulePermissionId int
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vIconClass nvarchar(max) )
+AS
+BEGIN
+IF @p_iMenuId = 0
+
+BEGIN
+INSERT INTO tblMenu (vMenuName
+,vMenuPath
+,iParentMenu
+,iSortOrder
+,iModuleId
+,iModulePermissionId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vIconClass) values (@p_vMenuName 
+,@p_vMenuPath 
+,@p_iParentMenu 
+,@p_iSortOrder 
+,@p_iModuleId 
+,@p_iModulePermissionId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vIconClass );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iMenuId  >0
+BEGIN
+Update tblMenu
+
+SET vMenuName=@p_vMenuName
+,vMenuPath=@p_vMenuPath
+,iParentMenu=@p_iParentMenu
+,iSortOrder=@p_iSortOrder
+,iModuleId=@p_iModuleId
+,iModulePermissionId=@p_iModulePermissionId
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vIconClass=@p_vIconClass
+Where iMenuId = @p_iMenuId;
+Select @p_iMenuId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SavetblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SavetblOrganization]
+(@p_iOrganizationId int
+,@p_vOrganizationName nvarchar(max)
+,@p_vOrganizationShortName nvarchar(max)
+,@p_vAddress nvarchar(max)
+,@p_vPhoneNo nvarchar(max)
+,@p_iCountryId int
+,@p_iCityId int
+,@p_dActivationDate datetime
+,@p_dExpiryDate datetime
+,@p_dRegistrationDate datetime
+,@p_bIsActive bit
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_tRecordTimeStamp timestamp
+,@p_vContactPersonName nvarchar(max)
+,@p_vContactPersonPhoneNo nvarchar(max)
+,@p_vEmail nvarchar(max)
+,@p_vDomainName nvarchar(max) )
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName );
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,dRegistrationDate=@p_dRegistrationDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+Where iOrganizationId = @p_iOrganizationId;
+END
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUpdateUser]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_SaveUpdateUser]
+@p_iUserId int
+      ,@p_vUserName varchar(50)
+      ,@p_vEmail varchar(100)
+      ,@p_vFirstName varchar(50)
+      ,@p_vMiddleName varchar(50)=null
+      ,@p_vLastName varchar(50)
+      ,@p_iCountryId int
+      ,@p_iCityId int
+      ,@p_iTitleId int
+      ,@p_iGenderId int
+      ,@p_vPassword varchar(150)
+      ,@p_vFatherHusbandName varchar(50) =null
+      ,@p_bIsFirstTimeLogin bit
+      ,@p_vAddress varchar(150)  = null
+      ,@p_vPhoneNo varchar(50) =null
+      ,@p_vCNIC varchar(50)  =null
+      ,@p_vPassportNo varchar(50)=null
+      ,@p_vEmergencyContactNo varchar(50) =null
+      ,@p_vEmergencyContactPerson varchar(50) =  null
+      ,@p_iCreatedUserId int
+      ,@p_iUpdatedUserId int = null
+      ,@p_vDesignation varchar(50)
+      ,@p_bIsActive bit
+      ,@p_iOrganizationId int
+
+as
+begin
+
+if @p_iUserId > 0 
+begin
+
+ update top (1) tblUser
+ set vFirstName = @p_vFirstName 
+      ,vMiddleName = @p_vMiddleName 
+      ,vLastName = @p_vLastName 
+      ,iCountryId = @p_iCountryId 
+      ,iCityId = @p_iCityId
+      ,iTitleId = @p_iTitleId
+      ,iGenderId = @p_iGenderId
+      ,vPassword = @p_vPassword
+      ,vFatherHusbandName = @p_vFatherHusbandName
+      ,bIsFirstTimeLogin = @p_bIsFirstTimeLogin 
+      ,vAddress = @p_vAddress
+      ,vPhoneNo = @p_vPhoneNo
+      ,vCNIC = @p_vCNIC
+      ,vPassportNo = @p_vPassportNo 
+      ,vEmergencyContactNo = @p_vEmergencyContactNo
+      ,vEmergencyContactPerson = @p_vEmergencyContactPerson
+	  ,vDesignation = @p_vDesignation 
+      ,bIsActive = @p_bIsActive
+      ,iOrganizationId = @p_iOrganizationId
+	  ,iUpdatedUserId = @p_iUpdatedUserId
+      ,dUpdatedDate = SYSDATETIME()
+	  where iUserId = @p_iUserId
+	  select @p_iUserId;
+end
+else
+begin
+ insert into tblUser
+ (vUserName 
+      ,vEmail 
+      ,vFirstName 
+      ,vMiddleName 
+      ,vLastName 
+      ,iCountryId
+      ,iCityId 
+      ,iTitleId
+      ,iGenderId 
+      ,vPassword 
+      ,vFatherHusbandName 
+      ,bIsFirstTimeLogin 
+      ,vAddress 
+      ,vPhoneNo
+      ,vCNIC 
+      ,vPassportNo 
+      ,vEmergencyContactNo 
+      ,vEmergencyContactPerson 
+      ,iCreatedUserId 
+      ,dCreatedDate 
+      ,vDesignation 
+      ,bIsActive
+      ,iOrganizationId)
+ values
+ (@p_vUserName 
+      ,@p_vEmail 
+      ,@p_vFirstName 
+      ,@p_vMiddleName 
+      ,@p_vLastName 
+      ,@p_iCountryId
+      ,@p_iCityId 
+      ,@p_iTitleId
+      ,@p_iGenderId 
+      ,@p_vPassword 
+      ,@p_vFatherHusbandName 
+      ,@p_bIsFirstTimeLogin 
+      ,@p_vAddress 
+      ,@p_vPhoneNo
+      ,@p_vCNIC 
+      ,@p_vPassportNo 
+      ,@p_vEmergencyContactNo 
+      ,@p_vEmergencyContactPerson 
+      ,@p_iCreatedUserId 
+      ,SYSDATETIME() 
+      ,@p_vDesignation 
+      ,@p_bIsActive
+      ,@p_iOrganizationId)
+
+	  select SCOPE_IDENTITY();
+
+end
+
+
+
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserAssignedTypes]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_SaveUserAssignedTypes]
+@p_UserTypeId int,
+@p_OrganizationId int,
+@p_UserId int,
+@p_CreatedUserId  int
+as
+begin
+
+	insert into tblAssignUserType
+	(iUserTypeId, iOrganizationId,  iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_UserTypeId, @p_OrganizationId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserRole]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[pr_SaveUserRole]
+@p_RoleId int,
+@p_UserId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into tblUserRole
+	(iRoleId, iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_RoleId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUserType]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SaveUserType]
+(
+	@p_UserTypeId int,
+	@p_UserTypeName varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_UserTypeId =0) 
+begin
+insert into tblUserType(vUserTypeName,iCreatedUserId,dCreatedDate)
+values (@p_UserTypeName,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblUserType
+set vUserTypeName = @p_UserTypeName,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iUserTypeId = @p_UserTypeId
+end
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectAlltblOrganization]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SelectAlltblOrganization]
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName from tblOrganization;
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SelectOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelecttblOrganizationById]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[pr_SelecttblOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_ValidateLogin]    Script Date: 6/7/2017 9:49:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_ValidateLogin] 
+	@p_userName varchar(50),
+	@p_Password varchar(150)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT tu.iUserId, tu.vUserName, tu.vEmail, tu.vFirstName, tu.vMiddleName, tu.vLastName, tu.iCountryId, tu.iCityId, tu.iTitleId, tu.iGenderId, tu.vPassword, tu.vFatherHusbandName, tu.bIsFirstTimeLogin, tu.vAddress, tu.vPhoneNo, tu.vCNIC, tu.vPassportNo, tu.vEmergencyContactNo, tu.vEmergencyContactPerson, tu.iCreatedUserId, tu.dCreatedDate, tu.iUpdatedUserId, tu.dUpdatedDate, tu.tRecordTimeStamp, tu.vDesignation, tu.bIsActive, tu.iOrganizationId
+	 FROM dbo.tblUser tu
+	 WHERE tu.vPassword = @p_Password 
+	 AND (tu.vUserName = @p_userName OR tu.vEmail = @p_userName );
+	
+END
+GO

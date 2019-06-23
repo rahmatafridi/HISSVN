@@ -1,0 +1,87 @@
+﻿@model HIS.Domain.Models.Template.Template
+@{
+    ViewBag.Title = "Template";
+    Layout = null;
+}
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+    <link href="@Url.Content("~/Content/assets/global/plugins/bootstrap-summernote/summernote.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Content/assets/global/plugins/bootstrap-summernote/summernote.js")"></script>
+</section>
+
+        <form action="@Url.Action("TemplateForm","Template")" class="form-horizontal" id="frmTemplate">
+            @Html.HiddenFor(a => a.TemplateId)
+            @Html.HiddenFor(a => a.OrganizationId)
+            @Html.HiddenFor(a => a.CreatedDate)
+            @Html.HiddenFor(a => a.CreatedUserId)
+            @Html.HiddenFor(a => a.UpdateDate)
+            @Html.HiddenFor(a => a.UpdateUserId)
+
+            <div class="form-body" style="margin-top:32px">
+                <div class="title"><h1 class="form-section">Template Detail</h1></div>  
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Name</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(a => a.TemplateName, new { data_fieldname = "Template Name", @class = "form-control required", title = "Template Name is required" })
+
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Template Type</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(a => a.TemplateType, (List<SelectListItem>)ViewBag.TemplateTypes, new { data_fieldname = "TemplateType", @class = "form-control" })
+
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            
+                            <div class="col-md-12">
+                                @*@Html.TextBoxFor(a => a.TemplateBody, new { data_fieldname = "Template Name", @class = "form-control required", title = "Template Name is required" })*@
+                                     @*<div class="summernote" name="TemplateBody"></div>*@
+                                <textarea class="summernote" name="TemplateBody">@Model.TemplateBody</textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <!--/row-->
+
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="button" class="btn green" onclick="Global.SubmitFormViaAjax('frmTemplate')">Submit</button>
+                                <button type="reset" class="btn default">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6"> </div>
+                </div>
+            </div>
+        </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {           
+        $('.summernote').summernote();
+    });
+</script>

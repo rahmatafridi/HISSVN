@@ -1,0 +1,17 @@
+CREATE PROCEDURE pr_ValidateLogin 
+	@p_userName varchar(50),
+	@p_Password varchar(150)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT tu.iUserId, tu.vUserName, tu.vEmail, tu.vFirstName, tu.vMiddleName, tu.vLastName, tu.iCountryId, tu.iCityId, tu.iTitleId, tu.iGenderId, tu.vPassword, tu.vFatherHusbandName, tu.bIsFirstTimeLogin, tu.vAddress, tu.vPhoneNo, tu.vCNIC, tu.vPassportNo, tu.vEmergencyContactNo, tu.vEmergencyContactPerson, tu.iCreatedUserId, tu.dCreatedDate, tu.iUpdatedUserId, tu.dUpdatedDate, tu.tRecordTimeStamp, tu.vDesignation, tu.bIsActive, tu.iOrganizationId
+	 FROM dbo.tblUser tu
+	 WHERE tu.vPassword = @p_Password 
+	 AND (tu.vUserName = @p_userName OR tu.vEmail = @p_userName );
+	
+END
+GO

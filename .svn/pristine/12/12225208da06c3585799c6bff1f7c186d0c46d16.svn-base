@@ -1,0 +1,138 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class UserBll : IUserBll
+    {
+        #region Initialization
+
+        private IUserDAL UserDal { get; set; }
+
+        public UserBll()
+        {
+            UserDal = new UserDAL();
+        }
+
+        #endregion
+
+        #region UserType
+
+        public List<UserType> GetUserTypes(SearchCriteria criteria, out int TotalRecords)
+        {
+            return UserDal.GetUserTypes(criteria, out TotalRecords);
+        }
+
+        public UserType GetUserTypeById(int id)
+        {
+            return UserDal.GetUserTypeById(id);
+        }
+
+        public int DeleteUserTypeById(int id)
+        {
+            return UserDal.DeleteUserTypeById(id);
+        }
+
+        public bool SaveUserType(UserType userType)
+        {
+            return UserDal.SaveUserType(userType);
+        }
+
+        public bool SaveUserAssignedTypes(int userId,int? organizationId, List<int> types)
+        {
+            return UserDal.SaveUserAssignedTypes(userId, types,organizationId.Value);
+        }
+
+        public List<int> GetUserAssignedTypeIds(int userId)
+        {
+            return UserDal.GetUserAssignedTypeIds(userId);
+        }
+
+        #endregion
+
+        #region User
+
+        public int SaveUser(User user)
+        {
+            return UserDal.SaveUser(user);
+        }
+
+        public List<User> GetUsers(SearchCriteria criteria, out int TotalRecords, int OrganizationId)
+        {
+            return UserDal.GetUsers(criteria, out TotalRecords, OrganizationId);
+        }
+
+        public bool DoesUsernameOrEmailExists(string username, string email,int? userId)
+        {
+            return UserDal.DoesUsernameOrEmailExists(username, email,userId);
+        }
+
+        public User GetUserById(int id)
+        {
+            return UserDal.GetUserById(id);
+        }
+
+        public bool SaveUserData(User user, List<int> iRoleId, List<int> UserTypeId)
+        {
+            return UserDal.SaveUserData(user, iRoleId, UserTypeId);
+        }
+
+
+        #endregion
+
+        #region Login
+
+        public User LoginUser(string userName, string password)
+        {
+            return UserDal.LoginUser(userName, password);
+        }
+
+        public List<string> GetUserRights(int userId)
+        {
+            return UserDal.GetUserRights(userId);
+        }
+
+        #endregion
+
+    }
+
+    public interface IUserBll
+    {
+        #region UserType
+
+        List<UserType> GetUserTypes(SearchCriteria criteria, out int TotalRecords);
+
+        UserType GetUserTypeById(int id);
+
+        int DeleteUserTypeById(int id);
+
+        bool SaveUserType(UserType userType);
+
+        List<int> GetUserAssignedTypeIds(int userId);
+
+        #endregion
+
+        #region User
+
+        int SaveUser(User user);
+        List<User> GetUsers(SearchCriteria criteria, out int TotalRecords, int OrganizationId);
+        bool DoesUsernameOrEmailExists(string username, string email, int? userId);
+        bool SaveUserAssignedTypes(int userId, int? organizationId, List<int> types);
+        User GetUserById(int id);
+        bool SaveUserData(User user, List<int> iRoleId, List<int> UserTypeId);
+
+        #endregion
+
+        #region Login
+        User LoginUser(string userName, string password);
+        List<string> GetUserRights(int userId);
+        #endregion
+
+    }
+}

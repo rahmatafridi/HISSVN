@@ -1,0 +1,247 @@
+USE [HIS]
+GO
+
+/****** Object:  Table [dbo].[tblLocationType]    Script Date: 10/14/2017 11:56:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblLocationType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LocationType] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_tblLocationType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--  
+
+USE [HIS]
+GO
+
+/****** Object:  Table [dbo].[tblOrganizationLocations]    Script Date: 10/14/2017 11:55:26 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblOrganizationLocations](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[vLocationName] [nvarchar](75) NOT NULL,
+	[iLocationType] [int] NOT NULL,
+	[iOrganizationId] [int] NOT NULL,
+	[tTimeStamp] [timestamp] NOT NULL,
+	[dInsertDate] [datetime] NOT NULL,
+	[iInsertUserId] [int] NOT NULL,
+ CONSTRAINT [PK_tblOrganizationLocations] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblOrganizationLocations]  WITH CHECK ADD  CONSTRAINT [FK_Location_LocationType] FOREIGN KEY([iLocationType])
+REFERENCES [dbo].[tblLocationType] ([Id])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[tblOrganizationLocations] CHECK CONSTRAINT [FK_Location_LocationType]
+GO
+
+ALTER TABLE [dbo].[tblOrganizationLocations]  WITH CHECK ADD  CONSTRAINT [FK_Location_Organization] FOREIGN KEY([iOrganizationId])
+REFERENCES [dbo].[tblOrganization] ([iOrganizationId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[tblOrganizationLocations] CHECK CONSTRAINT [FK_Location_Organization]
+GO
+
+
+--
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE pr_GetOrganizationLocations
+@p_OrganizationId int,
+@p_SearchText varchar(75),
+@p_Offset int,
+@p_PageSize int
+AS
+BEGIN
+	SELECT COUNT(*) OVER () as TotalCount,  tol.* FROM dbo.tblOrganizationLocations tol
+	WHERE tol.iOrganizationId = @p_OrganizationId
+	AND (@p_SearchText='' OR tol.vLocationName LIKE concat('%',@p_SearchText ,'%'))
+	ORDER BY tol.Id
+	OFFSET @p_Offset ROWS FETCH NEXT @p_PageSize ROWS ONLY	;
+END
+GO
+
+
+--
+
+
+CREATE PROCEDURE pr_InsertUpdateOrganizationLocation
+	(
+	   @p_LocationId int,
+		@p_vLocationName [nvarchar](75),
+		@p_iLocationType [int],
+		@p_iOrganizationId [int],
+		@p_iInsertUserId [int]
+	)
+AS
+	SET NOCOUNT ON
+	SET XACT_ABORT ON
+	
+	BEGIN
+
+
+	BEGIN TRANSACTION
+
+	IF @p_LocationId <=0
+	
+
+	INSERT INTO dbo.tblOrganizationLocations
+	(
+		vLocationName, iLocationType, iOrganizationId,  dInsertDate, iInsertUserId
+	)
+	VALUES
+	(
+		@p_vLocationName,
+		@p_iLocationType,
+		@p_iOrganizationId,
+		getdate(),
+		@p_iInsertUserId
+
+	)
+
+	else
+
+		UPDATE  top(1) tblOrganizationLocations
+		SET  vLocationName = @p_vLocationName, 
+		iLocationType = @p_iLocationType
+		WHERE Id = @p_LocationId;
+
+
+	COMMIT
+	END
+GO
+
+-- 
+
+CREATE PROCEDURE pr_LoadLocationTypes
+
+as
+BEGIN
+
+SELECT tlt.* FROM dbo.tblLocationType tlt
+ORDER BY tlt.Id;
+
+end
+
+--
+
+CREATE PROCEDURE [pr_GetOrganizationLocationById]
+@p_OrganizationId int,
+@p_LocationId int
+AS
+BEGIN
+	SELECT TOP 1 tol.* 
+	FROM dbo.tblOrganizationLocations tol
+	WHERE tol.iOrganizationId = @p_OrganizationId
+	AND tol.Id = @p_LocationId;
+END
+
+--
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationLocations]    Script Date: 10/15/2017 10:12:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[pr_GetOrganizationLocations]
+@p_OrganizationId int,
+@p_SearchText varchar(75),
+@p_Offset int,
+@p_PageSize int
+AS
+BEGIN
+	SELECT COUNT(*) OVER () as TotalCount,  tol.Id, tol.vLocationName, tol.iLocationType, tol.iOrganizationId, tol.tTimeStamp, tol.dInsertDate, 
+	tol.iInsertUserId , tlt.LocationType AS LocaionTypeName
+	FROM dbo.tblOrganizationLocations tol
+	INNER JOIN dbo.tblLocationType tlt 
+	ON tol.iLocationType = tlt.Id
+	WHERE tol.iOrganizationId = @p_OrganizationId
+	AND (@p_SearchText='' OR tol.vLocationName LIKE concat('%',@p_SearchText ,'%'))
+	ORDER BY tol.Id
+	OFFSET @p_Offset ROWS FETCH NEXT @p_PageSize ROWS ONLY	;
+END
+--
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_InsertUpdateOrganizationLocation]    Script Date: 10/15/2017 11:15:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[pr_InsertUpdateOrganizationLocation]
+	(
+	   @p_LocationId int,
+		@p_vLocationName [nvarchar](75),
+		@p_iLocationType [int],
+		@p_iOrganizationId [int],
+		@p_iInsertUserId [int]
+	)
+AS
+	SET NOCOUNT off
+	SET XACT_ABORT ON
+	
+	BEGIN
+
+
+	BEGIN TRANSACTION
+
+	IF @p_LocationId <=0
+	
+
+	INSERT INTO dbo.tblOrganizationLocations
+	(
+		vLocationName, iLocationType, iOrganizationId,  dInsertDate, iInsertUserId
+	)
+	VALUES
+	(
+		@p_vLocationName,
+		@p_iLocationType,
+		@p_iOrganizationId,
+		getdate(),
+		@p_iInsertUserId
+
+	)
+
+	else
+
+		UPDATE  top(1) tblOrganizationLocations
+		SET  vLocationName = @p_vLocationName, 
+		iLocationType = @p_iLocationType
+		WHERE Id = @p_LocationId;
+
+
+	COMMIT
+	END

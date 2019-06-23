@@ -1,0 +1,5 @@
+﻿@{
+    ViewBag.Title = "AddUserType";
+}
+
+<h2>AddUserType</h2>

@@ -1,0 +1,92 @@
+﻿@model HIS.Domain.Models.Patient.Patient
+@{
+    ViewBag.Title = "PatientForm";
+    ViewBag.PageTitle = "Patient Particulars";
+}
+}
+
+<form method="post">
+
+
+
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Patient
+            </div>
+            @*<div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                </div>*@
+        </div>
+        <div class="portlet-body">
+            <div class="panel-group accordion" id="accordion1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accBasicInfo" aria-expanded="false"> Basic Info </a>
+                        </h4>
+                    </div>
+                    <div id="accBasicInfo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">First Name</label>
+                                            @Html.TextBoxFor(a=>a.FirstName,new {@class="form-control"  })
+                                            <span class="help-block"> This is inline help </span>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Middle Name</label>
+                                            @Html.TextBoxFor(a => a.MiddleName, new { @class = "form-control" })
+                                            <span class="help-block"> This is inline help </span>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Last Name</label>
+                                            @Html.TextBoxFor(a => a.LastName, new { @class = "form-control" })
+                                            <span class="help-block"> This is inline help </span>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Middle Name</label>
+                                            @Html.TextBoxFor(a => a.MiddleName, new { @class = "form-control" })
+                                            <span class="help-block"> This is inline help </span>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                               
+                                @*<h3 class="form-section">Address</h3>*@
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions right">
+        <button type="button" class="btn default">Cancel</button>
+        <button type="submit" class="btn blue">
+            <i class="fa fa-check"></i> Save
+        </button>
+    </div>
+</form>

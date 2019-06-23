@@ -1,0 +1,53 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class UserBll : IUserBll
+    {
+        #region Initialization
+
+        private IUserDAL UserDal { get; set; }
+
+        public UserBll()
+        {
+            UserDal = new UserDAL();
+        }
+
+        #endregion
+
+        #region UserType
+
+        public List<UserType> GetUserTypes(SearchCriteria criteria, out int TotalRecords)
+        {
+            return UserDal.GetUserTypes(criteria, out TotalRecords);
+        }
+
+        public UserType GetUserTypeById(int id)
+        {
+            return UserDal.GetUserTypeById(id);
+        }
+
+        #endregion
+
+
+    }
+
+    public interface IUserBll
+    {
+        #region UserType
+
+        List<UserType> GetUserTypes(SearchCriteria criteria, out int TotalRecords);
+
+        UserType GetUserTypeById(int id);
+
+        #endregion
+
+    }
+}

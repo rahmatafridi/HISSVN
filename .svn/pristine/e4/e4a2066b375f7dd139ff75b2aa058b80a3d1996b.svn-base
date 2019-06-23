@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.DAL.DAL;
+using HIS.Domain.Models;
+
+namespace HIS.BLL.BLL
+{
+    public class CommonBll:ICommonBll
+    {
+        private ICommonDal CommonDal { get; set; }
+        public CommonBll()
+        {
+            CommonDal = new CommonDal();
+        }
+
+
+        public int InsertTitle(string title)
+        {
+            return CommonDal.InsertTitle(title);
+        }
+
+        public List<string> GetTitles()
+        {
+            return CommonDal.GetTitles();
+        }
+
+
+        public List<Scout> GetScouts(string searchText,int offset, int pageSize, out int TotalRecords)
+        {
+            return CommonDal.GetScouts(searchText,offset, pageSize, out TotalRecords);
+        }
+    }
+
+    public interface ICommonBll
+    {
+        int InsertTitle(string title);
+        List<string> GetTitles();
+        List<Scout> GetScouts(string searchText, int offset, int pageSize, out int TotalRecords);
+    }
+}

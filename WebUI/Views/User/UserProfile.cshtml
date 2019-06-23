@@ -1,0 +1,282 @@
+﻿@model HIS.Domain.Models.User.User
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = null;
+}
+
+@*<link href="~/Content/FileAPI/main.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" />
+<script src="~/Content/FileAPI/FileAPI.min.js"></script>
+<script src="~/Content/FileAPI/jquery.fileapi.js"></script>
+<script src="~/Content/FileAPI/FileAPI.exif.js"></script>
+<script src="~/Content/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
+<script src="~/Content/FileAPI/jquery.modal.js"></script>
+<script src="~/Content/assets/global/plugins/select2/js/select2.min.js"></script>
+<script src="~/Content/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="~/Content/assets/pages/scripts/form-wizard.min.js"></script>*@
+
+
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+</section>
+
+
+
+
+    <div>
+        <div class="modal-dialog modal-lg" id="modalpop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Profile</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form action="@Url.Action("UserProfile","User")" class="form-horizontal" id="frmUser">
+                        @Html.HiddenFor(a => a.UserId)
+
+
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height:500px;">
+                            <div class="scroller" style="height: auto; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
+
+
+                                <div class="colo-md-4">
+                                    <div id="Userpic" class="userpic">
+                                        <div class="js-preview userpic__preview"> </div>
+
+                                        <div class="btn btn-success js-fileapi-wrapper">
+                                            <div class="js-browse">
+                                                <span class="btn-txt">Choose</span>
+                                                <input type="file" name="filedata">
+                                            </div>
+                                            <div class="js-upload" style="display: none;">
+                                                <div class="progress progress-success"><div class="js-progress bar"></div></div>
+                                                <span class="btn-txt">Uploading</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="popup" class="popup" style="display: none;">
+                                        <div class="popup__body"><div class="js-img"></div></div>
+                                        <div style="margin: 0 0 5px; text-align: center;">
+                                            <div class="js-upload btn btn_browse btn_browse_small">Upload</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                   
+
+                                   <br />
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">User Name</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.UserName, new { data_fieldname = "User Name", @class = "form-control required" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Email</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.Email, new { data_fieldname = "Email", @class = "form-control required email", title = "Email is required", @readonly = "readonly" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">First Name</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.FirstName, new { data_fieldname = "First Name", @class = "form-control required", title = "First Name is required" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Last Name</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.LastName, new { data_fieldname = "Last Name", @class = "form-control required", title = "Last Name is required" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Phone</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.PhoneNo, new { data_fieldname = "Phone", @class = "form-control" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Father/Husband Name</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.FatherHusbandName, new { data_fieldname = "Father/Husband Name", @class = "form-control" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Emergency No</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.EmergencyContactNumber, new { data_fieldname = "Emergency No", @class = "form-control" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">CNIC</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(a => a.CNIC, new { data_fieldname = "CNIC", @class = "form-control required", title = "CNIC is required" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Address</label>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(a => a.Address, new { data_fieldname = "Address", @class = "form-control" })
+
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn green" onclick="SubmitForm();">Submit</button>
+                                    <button type="reset" class="btn default">Cancel</button>
+                                </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+
+     
+        function SubmitForm() {
+            SaveImage();
+            var userFormData = $("#frmUser").serialize();
+            debugger
+                $.ajax({
+                    url: '@Url.Action("UserProfile", "User")',
+                    type: "POST",
+                    dataType: "json",
+                    data: userFormData,
+                    async: true,
+                    success: function (response) {
+                        alert("Profile is Update");
+                    }
+                });
+            
+        }
+        
+        function SaveImage()
+        {
+            url: '@Url.Action("SaveImageFile", "User")'
+        }
+        $(document).ready(function () {
+            $('.form-wizard').bootstrapWizard();
+        });
+        jQuery(function ($) {
+            debugger
+            $('#userpic').fileapi({
+                url: '@Url.Action("SaveImageFile", "User")',
+                accept: 'image/*',
+                imageSize: { minWidth: 200, minHeight: 200 },
+                elements: {
+                    active: { show: '.js-upload', hide: '.js-browse' },
+                    preview: {
+                        el: '.js-preview',
+                        width: 200,
+                        height: 200
+                    },
+                    progress: '.js-progress'
+                },
+                onSelect: function (evt, ui) {
+                    var file = ui.files[0];
+                    if (!FileAPI.support.transform) {
+                        alert('Your browser does not support Flash :(');
+                    } else if (file) {
+                        $('#popup').modal({
+                            closeOnEsc: true,
+                            closeOnOverlayClick: false,
+                            onOpen: function (overlay) {
+                                $(overlay).on('click', '.js-upload', function () {
+                                    $.modal().close();
+                                    $('#userpic').fileapi('upload');
+                                });
+                                $('.js-img', overlay).cropper({
+                                    file: file,
+                                    bgColor: '#fff',
+                                    
+                                    aspectRatio: 1 / 1,
+                                    allowSelect: false,
+                                    allowResize: false,
+                                    maxSize: [$(window).width() - 200, $(window).height() - 200],
+                                    minSize: [200, 200],
+                                    selection: '90%',
+                                    strict: true,
+                                    background: false,
+                                    guides: false,
+                                    highlight: false,
+                                    dragCrop: true,
+                                    movable: false,
+                                    resizable: false,
+                                    mouseWheelZoom: false,
+                                    touchDragZomm: false,
+                                    autoCropArea: true,
+                                    built: function () {
+                                    
+                                        $('.js-img', overlay).cropper('setCanvasData', 0, 0, 1920, 1080);
+                                        $('.js-img', overlay).cropper('setCropBoxData', 0, 0, 675, 1080);
+
+                                    },
+                                    onSelect: function (coords) {
+                                        $('#Userpic').fileapi('crop', file, coords);
+                                    }
+                                });
+                            }
+                        }).open();
+                    }
+                }
+            });
+        });
+
+
+   </script>

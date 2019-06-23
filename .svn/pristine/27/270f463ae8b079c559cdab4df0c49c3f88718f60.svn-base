@@ -1,0 +1,144 @@
+@model List<HIS.Domain.Models.Organization.Organization>
+@{
+    ViewBag.Title = "Pending Clinic List";
+
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * TotalRecords) / PageSize));
+
+}
+
+<div class="portlet box blue-hoki bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-purple-soft"></i>
+           Rejected Clinic List
+        </div>         
+    </div>
+    <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true"> List </a>
+            </li>            
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_1_1">
+
+                <div class="row">
+                    <div class="col-xs-10 col-sm-4">
+                        <input class="form-control" id="SearchText" onkeyup="SearchRejectedOrganizations();" placeholder="Enter text to search" />
+                    </div>
+                    <div class="col-xs-2 col-sm-1">
+                        <button type="button" onclick="SearchFromServer();" class="btn btn-block dark btn-outline sbold uppercase"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="table-responsive">
+                            @if (Model == null || Model.Count < 1)
+                            {
+                                <h2>No Data found</h2>
+                            }
+                            else
+                            {
+                                <table class="table table-bordered table-striped table-condensed table-hover table-light" id="OrganizationList">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>                                            
+                                            <th>Email</th>
+                                            <th>Contact Person</th>
+                                            <th>Activation Date</th>
+                                            <th>Expiry Date</th>
+                                            <th>Registration Date</th>
+                                            <th>Active</th>
+                                            <th>Reject Reason</th>                                          
+                                        </tr>
+
+                                    </thead>
+
+                                    @foreach (HIS.Domain.Models.Organization.Organization sc in Model)
+                                    {
+                                        <tr class="DataRow">
+                                            <td>@sc.vOrganizationName</td>                                            
+                                            <td>@sc.vEmail</td>
+                                            <td>@sc.vContactPersonName</td>
+                                            <td>@sc.dActivationDate.Value.ToShortDateString()</td>
+                                            <td>@sc.dExpiryDate.Value.ToShortDateString()</td>
+                                            <td>@sc.dRegistrationDate.Value.ToShortDateString()</td>
+                                            <td>@sc.bIsActive</td>
+                                            <td>@sc.Remarks</td>
+                                           
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    @Html.Action("PagingFooter", "Common", new { pageSize = PageSize, totalRecords = TotalRecords, url = Url.Action("RejectedOrganizationList", "Organization").ToString() })
+
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="clearfix margin-bottom-20"> </div>
+    </div>
+</div>
+
+
+
+<div class="spacer5"></div>
+
+
+
+<script type="text/javascript">
+    function SearchRejectedOrganizations() {
+        var text = $.trim($("#SearchText").val().toLowerCase());
+
+        if (text == "") {
+            $(".DataRow").show();
+        }
+        else {
+            $(".DataRow").each(function () {
+                var organizationName = $(this).find("td:nth-child(1)").html().toLowerCase();
+                var email = $(this).find("td:nth-child(2)").html().toLowerCase();
+                var active = $(this).find("td:nth-child(3)").html().toLowerCase();
+
+                if (organizationName.indexOf(text) < 0 && email.indexOf(text) < 0 && active.indexOf(text) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        }
+
+    }
+
+    function SearchFromServer() {
+        window.location = "@Url.Action("PendingOrganizationList", "Organization")/?searchText=" + document.getElementById("SearchText").value;
+    }
+
+    document.getElementById("SearchText").addEventListener("keypress", function (e) {
+
+
+        if (e.keyCode == 13) {
+            SearchFromServer();
+        }
+    }); 
+
+</script>

@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.Domain.Models.Menu;
+using HIS.DAL.DbHelper;
+using System.Data;
+
+namespace HIS.DAL
+{
+    public class MenuDAL : IMenuDAL
+    {
+        Database db;
+
+        public MenuDAL()
+        {
+            db = new Database();
+        }
+
+        public List<Menu> GetUserMenus(int userId, int organizationId)
+        {
+            List<Menu> Menus = new List<Menu>();
+
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_UserId", Direction = ParameterDirection.Input, Value = userId });
+            param.Add(new DbParameter() { Name = "p_OrganizationId", Direction = ParameterDirection.Input, Value = organizationId }); ;
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetUserMenus", CommandType.StoredProcedure, param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                Menus = ds.Tables[0].AsEnumerable().Where(a => Convert.ToInt32(a["iParentMenu"]) == 0).Select(b => 
+                    new Menu { 
+                        MenuId = Convert.ToInt32(b["iMenuId"]) ,
+                        MenuName = b["vMenuName"].ToString(),
+                        MenuLink = b["vMenuPath"].ToString(),
+                        ModulePermissionId = Convert.ToInt32(b["iModulePermissionId"])
+                    }).ToList();
+
+
+                foreach (Menu mnu in Menus)
+                {
+                    mnu.ChildMenu = ds.Tables[0].AsEnumerable().Where(a => Convert.ToInt32(a["iParentMenu"]) == mnu.MenuId).Select(b =>
+                    new Menu
+                    {
+                        MenuId = Convert.ToInt32(b["iMenuId"]),
+                        MenuName = b["vMenuName"].ToString(),
+                        MenuLink = b["vMenuPath"].ToString(),
+                        ModulePermissionId = Convert.ToInt32(b["iModulePermissionId"])
+                    }).ToList();
+                }
+            
+            }
+
+            Menus.RemoveAll(a=> a.ChildMenu.Count < 1);
+
+            
+
+            return Menus;
+        }
+    }
+
+    public interface IMenuDAL
+    {
+        List<Menu> GetUserMenus(int userId, int organizationId);
+
+    }
+}

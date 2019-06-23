@@ -1,0 +1,41 @@
+﻿using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace HIS.Web.Models
+{
+    public class Helper
+    {
+        public static int GetLoggedInUserOrganization()
+        {
+            int orgid = -1;
+
+            if (HttpContext.Current.Session != null)
+            {
+                if (HttpContext.Current.Session["User"] != null)
+                {
+                    orgid = (HttpContext.Current.Session["User"] as User).OrganizationId;
+                }
+            }
+
+            return orgid;
+        }
+
+        public static int GetLoggedInUserId()
+        {
+            int orgid = 0;
+
+            if (HttpContext.Current.Session != null)
+            {
+                if (HttpContext.Current.Session["User"] != null)
+                {
+                    orgid = (HttpContext.Current.Session["User"] as User).UserId;
+                }
+            }
+
+            return orgid;
+        }
+    }
+}

@@ -1,0 +1,94 @@
+﻿using HIS.BLL;
+using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace HIS.Web.Controllers
+{
+    public class LoginController : Controller
+    {
+        #region Intialization
+        public IUserBll _user { get; }
+
+
+        public LoginController()
+        {
+            _user = new UserBll();
+        }
+        #endregion
+
+        #region Login/LogOut
+
+        public ActionResult Index(string msg)
+        {
+            ViewBag.Message = msg;
+
+            return View();
+        }
+
+        public ActionResult LoginUser(string username, string password)
+        {
+
+            User user = new User();
+            user = _user.LoginUser(username, password);
+            user = user ?? new User();
+
+
+            if (user.UserId > 0 && user.IsActive)
+            {
+                Session["User"] = user;
+                Session["UserRights"] = _user.GetUserRights(user.UserId);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string msg = "";
+
+                if (user.UserId > 0 && !user.IsActive)
+                {
+                    msg = "User doesnt seem to be active at the moment";
+                }
+                else
+                {
+                    msg = "Invalid credentials";
+                }
+
+                return RedirectToAction("Index", new { msg = msg });
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Sign Up
+        public ActionResult SignUp(int? type)
+        {
+            if (type == 1)
+            {
+                return View("SignUpClinic");
+            }
+            else if (type == 2)
+            {
+                return View("SignUpConsultant");
+            }
+            else if (type == 3)
+            {
+                return View("SignUpPatient");
+            }
+            return View();
+        }
+        #endregion
+
+    }
+}

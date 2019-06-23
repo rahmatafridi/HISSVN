@@ -1,0 +1,391 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Organization;
+using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class OrganizationDAL : IOrganizationDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public OrganizationDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion       
+
+        #region Organization
+
+        public List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<Organization> Organizations = new List<Organization>();
+            try
+            {
+
+                TotalRecords = 0;
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+                param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetOrganizations", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    Organizations = ds.Tables[0].AsEnumerable().Select(a => new Organization()
+                    {
+                        iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+                        vOrganizationName = Convert.ToString(a["vOrganizationName"].ToString()),
+                        vOrganizationShortName = Convert.ToString(a["vOrganizationShortName"].ToString()),
+                        vAddress = Convert.ToString(a["vAddress"].ToString()),
+                        vPhoneNo = Convert.ToString(a["vPhoneNo"].ToString()),
+                        iCountryId = Convert.ToInt32(a["iCountryId"].ToString()),
+                        iCityId = Convert.ToInt32(a["iCityId"].ToString()),
+                        dActivationDate = Convert.ToDateTime(a["dActivationDate"].ToString()),
+                        dExpiryDate = Convert.ToDateTime(a["dExpiryDate"].ToString()),
+                        dRegistrationDate = Convert.ToDateTime(a["dRegistrationDate"].ToString()),
+                        bIsActive = Convert.ToBoolean(a["bIsActive"].ToString()),
+                        vContactPersonName = Convert.ToString(a["vContactPersonName"].ToString()),
+                        vContactPersonPhoneNo = Convert.ToString(a["vContactPersonPhoneNo"].ToString()),
+                        vEmail = Convert.ToString(a["vEmail"].ToString()),
+                        vDomainName = Convert.ToString(a["vDomainName"].ToString()),
+
+                    }).ToList();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Organizations;
+        }
+
+        public Organization GetOrganizationById(int id)
+        {
+
+            Organization organization = new Organization();
+            try
+            {
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_iOrganizationId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_SelectOrganizationById", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    organization = ds.Tables[0].AsEnumerable().Select(a => new Organization()
+                    {
+                        iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+                        vOrganizationName = Convert.ToString(a["vOrganizationName"].ToString()),
+                        vOrganizationShortName = Convert.ToString(a["vOrganizationShortName"].ToString()),
+                        vAddress = Convert.ToString(a["vAddress"].ToString()),
+                        vPhoneNo = Convert.ToString(a["vPhoneNo"].ToString()),
+                        iCountryId = Convert.ToInt32(a["iCountryId"].ToString()),
+                        iCityId = Convert.ToInt32(a["iCityId"].ToString()),
+                        dActivationDate = Convert.ToDateTime(a["dActivationDate"].ToString()),
+                        dExpiryDate = Convert.ToDateTime(a["dExpiryDate"].ToString()),
+                        dRegistrationDate = Convert.ToDateTime(a["dRegistrationDate"].ToString()),
+                        bIsActive = Convert.ToBoolean(a["bIsActive"].ToString()),
+                        vContactPersonName = Convert.ToString(a["vContactPersonName"].ToString()),
+                        vContactPersonPhoneNo = Convert.ToString(a["vContactPersonPhoneNo"].ToString()),
+                        vEmail = Convert.ToString(a["vEmail"].ToString()),
+                        vDomainName = Convert.ToString(a["vDomainName"].ToString())
+
+                    }).FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return organization;
+
+
+        }
+
+        public int SaveOrganization(Organization organization)
+        {
+            int saved = 0;
+            try
+            {
+                string query = "pr_SaveOrganization";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "@p_iOrganizationId", Type = DbType.Int32, Value = organization.iOrganizationId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vOrganizationName", Type = DbType.String, Value = organization.vOrganizationName, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vOrganizationShortName", Type = DbType.String, Value = organization.vOrganizationShortName, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vAddress", Type = DbType.String, Value = organization.vAddress, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vPhoneNo", Type = DbType.String, Value = organization.vPhoneNo, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iCountryId", Type = DbType.Int32, Value = organization.iCountryId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iCityId", Type = DbType.Int32, Value = organization.iCityId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dActivationDate", Type = DbType.DateTime, Value = organization.dActivationDate, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dExpiryDate", Type = DbType.DateTime, Value = organization.dExpiryDate, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dRegistrationDate", Type = DbType.DateTime, Value = System.DateTime.Now, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_bIsActive", Type = DbType.Boolean, Value = organization.bIsActive, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iCreatedUserId", Type = DbType.Int32, Value = organization.CreatedUserId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dCreatedDate", Type = DbType.DateTime, Value = System.DateTime.Now, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iUpdatedUserId", Type = DbType.Int32, Value = organization.UpdateUserId == null ? 0 : organization.UpdateUserId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dUpdatedDate", Type = DbType.DateTime, Value = System.DateTime.Now, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vContactPersonName", Type = DbType.String, Value = organization.vContactPersonName, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vContactPersonPhoneNo", Type = DbType.String, Value = organization.vContactPersonPhoneNo, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vEmail", Type = DbType.String, Value = organization.vEmail, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vDomainName", Type = DbType.String, Value = organization.vDomainName, Length = 1000, Direction = ParameterDirection.Input });
+
+                saved = Convert.ToInt32(db.ExecuteScalar(query, CommandType.StoredProcedure, ref param));
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return saved;
+        }
+
+        public int DeleteOrganizationById(int id)
+        {
+            try
+            {
+                bool delete = DeleteOrganizationModules(id);
+                int deleted = 0;
+                if (delete)
+                {
+                    string query = "pr_DeleteOrganizationById";
+                    List<DbParameter> param = new List<DbParameter>();
+                    param.Add(new DbParameter() { Name = "p_iOrganizationId", Value = id });
+
+                    deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+                }
+                return deleted;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public bool DoesOrganizationExists(string email)
+        {
+            bool exists = false;
+
+            try
+            {
+
+                string query = "pr_GetOrganizationEmailCount";
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_Email", Value = email });
+
+                int saved = Convert.ToInt32(db.ExecuteScalar(query, CommandType.StoredProcedure, ref param));
+
+                if (saved > 0)
+                {
+                    exists = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return exists;
+
+        }
+
+        public bool SaveOrganizationModule(int organizationId, List<Module> module)
+        {
+            bool saved = false;
+            try
+            {
+                DeleteOrganizationModules(organizationId);
+
+                string query = "pr_SaveOrganizationModule";
+
+                foreach (Module rol in module)
+                {
+                    List<DbParameter> param = new List<DbParameter>();
+                    param.Add(new DbParameter() { Name = "p_ModuleId", Value = rol.ModuleId });
+                    param.Add(new DbParameter() { Name = "p_OrganizationId", Value = organizationId });
+                    param.Add(new DbParameter() { Name = "p_CreatedUserId", Value = rol.CreatedUserId });
+
+                    saved = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param) > 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return saved;
+        }
+
+        private bool DeleteOrganizationModules(int organizationId)
+        {
+            try
+            {
+                string query = "pr_DeleteOrganizationModules";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_OrganizationId", Value = organizationId });
+
+                int deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+                return deleted > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public List<int> GetOrganizationModulesAssignedIds(int organizationId)
+        {
+            List<int> ids = new List<int>();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_OrganizationId", Direction = ParameterDirection.Input, Value = organizationId, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetModulesAssignedToOrganization", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    ids = ds.Tables[0].AsEnumerable().Select(a => Convert.ToInt32(a[0])).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return ids;
+        }
+        public List<OrganizationModule> GetOrganizationModulePermission(int organizationId)
+        {
+            try
+            {
+                List<OrganizationModule> organizationModule = new List<OrganizationModule>();
+                List<OrganizationModule> organizationModuleDetailList = new List<OrganizationModule>();
+                List<int> organizationModuleId = GetOrganizationModulesAssignedIds(organizationId);
+                foreach (int item in organizationModuleId)
+                {
+                    OrganizationModule OrganizationModuleChild = new OrganizationModule();
+                    OrganizationModuleChild.OrganizationModuleDetailList = new List<OrganizationModule>();
+                    organizationModule = GetOrganizationModulePermissionDetailForRoles(organizationId, item);
+                    OrganizationModuleChild.ModuleId = item;
+                    OrganizationModuleChild.ModuleName = organizationModule[0].ModuleName;
+                    OrganizationModuleChild.OrganizationId = organizationId;
+                    OrganizationModuleChild.OrganizationModuleDetailList = organizationModule;
+                    organizationModuleDetailList.Add(OrganizationModuleChild);
+                }
+                return organizationModuleDetailList;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public List<OrganizationModule> GetOrganizationModulePermissionDetailForRoles(int organizationId, int moduleId)
+        {
+            List<OrganizationModule> organizationModule = new List<OrganizationModule>();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_iOrganizationId", Direction = ParameterDirection.Input, Value = organizationId, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_ModuleId", Direction = ParameterDirection.Input, Value = moduleId, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_OrganizationAssignedModuleForRole", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    organizationModule = ds.Tables[0].AsEnumerable().Select(a => new OrganizationModule()
+                    {
+                        OrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+                        ModuleId = Convert.ToInt32(a["iModuleId"].ToString()),
+                        ModuleName = a["vModuleName"].ToString(),
+                        ModulePermissionDescription = a["vDescription"].ToString(),
+                        ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"].ToString()),
+                        ModulePermissionCode = a["vModulePermissionCode"].ToString()
+
+                    }).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return organizationModule;
+        }
+
+        #endregion         
+
+    }
+
+    public interface IOrganizationDAL
+    {
+        #region Organization
+
+        List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords);
+        Organization GetOrganizationById(int id);
+        int DeleteOrganizationById(int id);
+        int SaveOrganization(Organization organization);
+        bool DoesOrganizationExists(string email);
+        bool SaveOrganizationModule(int organizationId, List<Module> module);
+        List<int> GetOrganizationModulesAssignedIds(int organizationId);
+        List<OrganizationModule> GetOrganizationModulePermissionDetailForRoles(int organizationId, int moduleId);
+        List<OrganizationModule> GetOrganizationModulePermission(int organizationId);
+
+        #endregion
+    }
+}

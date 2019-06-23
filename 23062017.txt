@@ -1,0 +1,86 @@
+ALTER TABLE tblOrganization
+ADD iStatusUserId int;
+		  go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 6/23/2017 5:10:45 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_DeclineOrganization]
+(
+	@p_iOrganizationId int,
+	@p_vReason varchar(MAX),
+	@p_vStatusUserId int
+	
+	
+)
+AS
+BEGIN
+
+Update tblOrganization
+set vReason = @p_vReason,
+iStatusUserId = @p_vStatusUserId,
+iStatus=2
+Where iOrganizationId = @p_iOrganizationId;
+END
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 6/23/2017 5:28:42 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[pr_GetOrganizations]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iOrganizationId
+,ut.vOrganizationName
+,ut.vOrganizationShortName
+,ut.vAddress
+,ut.vPhoneNo
+,ut.iCountryId
+,ut.iCityId
+,ut.dActivationDate
+,ut.dExpiryDate
+,ut.dRegistrationDate
+,ut.bIsActive
+,ut.iCreatedUserId
+,ut.dCreatedDate
+,ut.iUpdatedUserId
+,ut.dUpdatedDate
+,ut.vContactPersonName
+,ut.vContactPersonPhoneNo
+,ut.vEmail,
+ut.vDomainName
+,ut.iStatus
+,ut.iStatusUserId
+,ut.vReason
+,ut.iTimeZoneId
+,ut.iLanguageId
+		 from tblOrganization ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vOrganizationName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iOrganizationId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+
+
+
+
+
+
+

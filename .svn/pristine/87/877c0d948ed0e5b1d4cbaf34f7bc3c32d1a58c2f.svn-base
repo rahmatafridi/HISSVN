@@ -1,0 +1,36 @@
+USE [HIS]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_GetPatients]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount, tp.Id, tp.vFirstName, tp.vMiddleName, tp.vLastName, tp.dDob, tp.iTitleId, tp.iGenderId, tp.iCountryId, tp.iBloodGroup, tp.vMrno, tp.vContactNo, tp.vHouseNo, tp.vStreetNo, tp.vArea, tp.vEmergencyName, tp.vEmergencyContact, tp.vState, tp.vPostalCode, tp.iUserId, tp.vUserAccessCode, tp.bIsActive, tp.vFatherHusbandName, tp.vEmail, tp.vPictureUrl, tp.vSignatureUrl, tp.iEmergencyRelation, tp.vCNIC, tp.iCreatedUserId, tp.dCreatedDate, tp.iUpdateUserId, tp.dUpdateDate,tp.iMaritalStatus, tp.iReligion, tp.iPreferredLanguage, tp.vNationality, tp.vMotherMaidenName, tp.iEthnicGroup, tp.vBirthPlace
+	FROM dbo.tblPatient tp
+
+	WHERE @p_SearchText = ''
+	OR
+	tp.vFirstName like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vLastName like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vMrno like CONCAT('%', @p_SearchText, '%')
+	OR
+	tp.vContactNo like CONCAT('%', @p_SearchText, '%')
+
+	order by tp.Id OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+go
+

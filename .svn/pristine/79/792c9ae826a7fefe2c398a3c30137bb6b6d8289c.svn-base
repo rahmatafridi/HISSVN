@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.DAL.DbHelper;
+using HIS.Domain.Models;
+
+
+namespace HIS.DAL.DAL
+{
+    public class CommonDal : ICommonDal
+    {
+        Database db;
+
+        public CommonDal()
+        {
+            db = new Database();
+        }
+
+        public int InsertTitle(string title)
+        {
+            int result = 0;
+
+            string query = "sp_InsertTitle";
+
+            List<DbParameter> par = new List<DbParameter>();
+            par.Add(new DbParameter() { Name="p_TitleName", Value = title, Direction = System.Data.ParameterDirection.Input });
+
+            result = db.ExecuteNonQuery(query, System.Data.CommandType.StoredProcedure, par);
+
+
+            return result;
+        }
+
+        public List<string> GetTitles()
+        {
+            List<string> titles = new List<string>();
+
+            DataSet ds = new DataSet();
+
+            ds = db.LoadDataSetAgainstQuery("SELECT OID, TITLE FROM title", CommandType.Text, null);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach(DataRow row in ds.Tables[0].Rows)
+                {
+                    titles.Add(row["title"].ToString());
+                }
+            }
+
+            return titles;
+
+        }
+
+
+        public List<Scout> GetScouts(string searchText, int offset, int pageSize, out int totalCount)
+        {
+            List<Scout> Scouts = new List<Scout>();
+
+
+            string query = "sp_GetScouts";
+
+            List<DbParameter> Pars = new List<DbParameter>();
+            Pars.Add(new DbParameter() { Name="p_Offset", Value = offset });
+            Pars.Add(new DbParameter() { Name = "p_PageSize", Value = pageSize });
+            Pars.Add(new DbParameter() { Name = "p_SearchText", Value = searchText });
+
+            totalCount = 0;
+            DataSet ds = db.LoadDataSetAgainstQuery(query, CommandType.StoredProcedure, Pars);
+
+            if (ds!= null && ds.Tables.Count > 0)
+            {
+                Scouts = (from res in ds.Tables[0].AsEnumerable()
+                          select new Scout()
+                          {
+                              Id = Convert.ToInt32(res["Oid"]),
+                              Name = res["ScoutFirstName"].ToString(),
+
+                          }).ToList();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    totalCount = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);    
+                }
+            }
+
+            return Scouts;
+        }
+    }
+
+    public interface ICommonDal
+    {
+        int InsertTitle(string title);
+        List<string> GetTitles();
+        List<Scout> GetScouts(string searchText, int Offset, int PageSize, out int totalCount);
+
+    }
+}

@@ -1,0 +1,131 @@
+GO
+Create Procedure [dbo].[pr_SaveRole]
+(@p_iOrganizationId int,
+  @p_iRoleId int
+,@p_vRoleName nvarchar(max)
+,@p_vRoleDescription nvarchar(max)
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+)
+AS
+BEGIN
+IF @p_iRoleId = 0
+
+BEGIN
+INSERT INTO tblRole(vRoleName
+,vRoleDescription
+,iOrganizationId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+) values (@p_vRoleName 
+
+,@p_vRoleDescription 
+,@p_iOrganizationId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+
+
+);
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iRoleId  >0
+BEGIN
+Update tblRole
+
+SET vRoleName=@p_vRoleName
+,vRoleDescription=@p_vRoleDescription
+
+Where iRoleId = @p_iRoleId;
+Select @p_iRoleId;
+END
+END
+
+GO
+Create PROCEDURE [dbo].[pr_GetRoleById]
+(
+	@p_RoleId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblRole r
+	Where r.iRoleId = @p_RoleId;
+
+END
+
+GO
+alter Procedure [dbo].[pr_OrganizationAssignedModuleForRole]
+(@p_iOrganizationId int,
+@p_ModuleId int
+
+)
+AS
+BEGIN
+Select tom.iOrganizationId,tom.iModuleId,tm.vModuleName
+,tmp.iModulePermissionId,tmp.vModulePermissionCode,tmp.vDescription
+ from tblOrganizationModule tom
+inner join tblModule tm
+on tm.iModuleId = tom.iModuleId
+inner join tblModulePermission tmp
+on tmp.iModuleId = tom.iModuleId
+Where tom.iOrganizationId = @p_iOrganizationId and tom.iModuleId=@p_ModuleId;
+END
+GO
+Create procedure [dbo].[pr_DeleteModuleRolePermissions]
+@p_RoleId int
+as
+begin
+
+
+delete from  tblRoleDetail
+where  iRoleId =@p_RoleId ;
+
+end
+
+GO
+
+create procedure [dbo].[pr_SaveModuleRolePermission]
+@p_ModuleId int,
+@p_RoleId int,
+@p_ModulePermissionId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into  tblRoleDetail
+	(iModuleId, vModulePermissionId, iCreatedUserId, iRoleId,dCreatedDate)
+	values
+	(@p_ModuleId, @p_ModulePermissionId, @p_CreatedUserId, @p_RoleId,SYSDATETIME());
+
+end
+
+					 GO
+
+Create procedure [dbo].[pr_GetModulePermissionAssignedToRole]
+@p_RoleId int
+AS
+BEGIN
+
+	SELECT TUR.vModulePermissionId
+	 FROM dbo.tblRoleDetail TUR	
+	 WHERE TUR.iRoleId = @p_RoleId;
+
+END
+
+GO
+Create Procedure [dbo].[pr_DeleteRoleById]
+(@p_Id  int
+)
+AS
+BEGIN
+Delete  from tblRole
+Where iRoleId = @p_Id;
+END

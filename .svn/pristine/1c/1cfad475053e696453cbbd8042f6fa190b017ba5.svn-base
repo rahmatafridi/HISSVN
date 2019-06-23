@@ -1,0 +1,145 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using HIS.Domain.Models.Common;
+using HIS.BLL;
+using HIS.Domain.Models.Organization;
+using HIS.BLL.BLL;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Role;
+using HIS.Web.Filters;
+
+namespace HIS.Web.Controllers
+{
+    public class RoleController : Controller
+    {
+        #region Initialization
+
+        public IRoleBLL _roleBll { get; set; }
+        public ICommonBll _commonBll { get; set; }
+        public IModuleBll _moduleBll { get; set; }
+        public IOrganizationBLL _organizationBll { get; set; }
+
+        public RoleController()
+        {
+            _roleBll = new RoleBLL();
+            _commonBll = new CommonBll();
+            _moduleBll = new ModuleBLL();
+            _organizationBll = new OrganizationBLL();
+        }
+
+        #endregion
+
+
+        #region Role
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [CheckUserRights]
+        public ActionResult RoleList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Role> roles = new List<Role>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+
+            int TotalRecords = 0;
+
+            roles = _roleBll.GetRoles(criteria, out TotalRecords);
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+            return View(roles);
+        }
+
+        [CheckUserRights]
+        public ActionResult RoleForm(int id = 0)
+        {
+            Role role = new Role();
+
+
+            ViewBag.AssignedModules = _organizationBll.GetOrganizationModulePermission(Helper.GetLoggedInUserOrganization());
+            ViewBag.AssignedModulePermission = _roleBll.GetRoleModulesAssignedPermissionIds(id);
+            if (id > 0)
+            {
+                role = _roleBll.GetRoleById(id);
+                // get saved data
+            }
+
+            return View(role);
+        }
+        [HttpPost]
+        [ValidateAjax]
+        [CheckUserRights]
+        public ActionResult RoleForm(int roleId,string roleName, string roleDescription, List<Module> modules)
+        {
+            Role role = new Role();
+            role.iRoleId = roleId;
+            role.vRoleName = roleName;
+            role.vRoleDescription = roleDescription;
+            // sir why do we need country and city for user.. ;(
+            role.CreatedUserId = Helper.GetLoggedInUserId();
+            role.iOrganizationId = Helper.GetLoggedInUserOrganization();
+            AjaxResponse res = new AjaxResponse();
+
+
+            bool saved = _roleBll.SaveRoleData(role, modules);
+
+            res = new AjaxResponse()
+            {
+                Message = saved ? "Role Save successfully" : "Unable to save role",
+                Type = saved ? "success" : "error",
+                Heading = "Role",
+                RedirectUrl = Url.Action("RoleList", "Role")
+            };
+
+
+
+            return Json(res);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRoleById(int id)
+        {
+            string message = "";
+            string mclass = "";
+            int deleted = _roleBll.DeleteRoleById(id);
+            if (deleted > 0)
+            {
+                message = "Operation completed successfully";
+                mclass = "info";
+            }
+            else
+            {
+                message = "Unable to delete Role";
+                mclass = "error";
+            }
+
+            AjaxResponse res = new AjaxResponse()
+            {
+                Message = message,
+                Type = mclass,
+                Heading = "Role"
+            };
+
+
+            return Json(res);
+        }
+        #endregion
+
+
+    }
+}

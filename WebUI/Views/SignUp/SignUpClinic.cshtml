@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "SignUp Clinic";
+    Layout = "~/Views/Shared/_LayoutNoMenu.cshtml";
+}
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+</section>
+<form action="@Url.Action("SignUpClinic","SignUp")" id="frmSignUpClinic">
+    <div class="col-md-6 ">
+        <div class="portlet box blue" style="background:white">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Clinic SignUp
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+
+
+                <div class="form-body">
+                    @*<div class="form-group">
+                            <label class="control-label">Clinic Name</label>
+                            <input type="text" class="form-control" placeholder="Clinic Name">
+                            <span class="help-block">
+
+                            </span>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="control-label">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <input id="ClinicEmailAddress" type="email" class="form-control required email" placeholder="Email Address" name="ClinicEmailAddress" title="Email Address is required">
+                            <span class="help-block">
+
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- END FORM-->
+            </div>
+            <div class="panel-group accordion scrollable" id="accordion" style="margin-bottom: 50px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color:white;background:#3598dc">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#ModulesDiv" aria-expanded="false" style="font-family:-webkit-body;"> <i class="fa fa-gift"> </i> Available Modules</a>
+                        </h3>
+                    </div>
+                    <div id="ModulesDiv" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="icheck-inline">
+                                @foreach (HIS.Domain.Models.Module.Module module in ViewBag.Modules)
+                                {
+                                    <input type="checkbox" class="chkModule icheck" data-checkbox="icheckbox_square-blue" id="module_@module.ModuleId" name="organizationModule" data-id="@module.ModuleId" />
+                                    <label for="module_@module.ModuleId" title="@module.ModuleName">@(module.ModuleName + " ") <span style="visibility:hidden">ddd</span></label>   <br />
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-actions right">
+                <button type="button" class="btn green" onclick="SignUpClinicForm();">Sign Up</button>
+                <button type="button" class="btn default">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+     function SignUpClinicForm()
+     {
+        
+         var organizationSignUpData = $("#frmSignUpClinic").serialize();
+         var  moduleCounter = 0;
+         $(".chkModule:checked").each(function () {
+             organizationSignUpData += '&' + $.param({ 'ModuleIds': $(this).data("id") });
+             moduleCounter = moduleCounter + 1;
+         });
+        var result = $("#frmSignUpClinic").valid();
+        if (!result) {
+            // do nothing
+        }
+        else {
+            if (moduleCounter > 0) {
+                $.ajax({
+                    url: '@Url.Action("SignUpClinic", "SignUp")',
+                    type: "POST",
+                    dataType: "json",
+                    data: organizationSignUpData,
+                    async: true,                   
+                    success: function (msg) {
+                        Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                        data = msg.Data;
+                        if (msg.RedirectUrl != "" && msg.RedirectUrl != null) {
+                            Global.RedirectToUrl(msg.RedirectUrl);
+                        }
+                    },
+                    error: function () {
+                        Global.ShowAlertMessage("An error occured while assigning roles", "error", "Error");
+                    }
+
+                });
+            } else {
+                Global.ShowAlertMessage("Must Select any module", "error", "Error");
+            }
+        }
+    }
+</script>

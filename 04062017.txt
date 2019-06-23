@@ -1,0 +1,63 @@
+GO
+create Procedure pr_SaveMenu
+(@p_iMenuId int
+,@p_vMenuName nvarchar(max)
+,@p_vMenuPath nvarchar(max)
+,@p_iParentMenu int
+,@p_iSortOrder int
+,@p_iModuleId int
+,@p_iModulePermissionId int
+,@p_iCreatedUserId int
+,@p_dCreatedDate datetime
+,@p_iUpdatedUserId int
+,@p_dUpdatedDate datetime
+,@p_vIconClass nvarchar(max) )
+AS
+BEGIN
+IF @p_iMenuId = 0
+
+BEGIN
+INSERT INTO tblMenu (vMenuName
+,vMenuPath
+,iParentMenu
+,iSortOrder
+,iModuleId
+,iModulePermissionId
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vIconClass) values (@p_vMenuName 
+,@p_vMenuPath 
+,@p_iParentMenu 
+,@p_iSortOrder 
+,@p_iModuleId 
+,@p_iModulePermissionId 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vIconClass );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iMenuId  >0
+BEGIN
+Update tblMenu
+
+SET vMenuName=@p_vMenuName
+,vMenuPath=@p_vMenuPath
+,iParentMenu=@p_iParentMenu
+,iSortOrder=@p_iSortOrder
+,iModuleId=@p_iModuleId
+,iModulePermissionId=@p_iModulePermissionId
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vIconClass=@p_vIconClass
+Where iMenuId = @p_iMenuId;
+Select @p_iMenuId;
+END
+END
+
+go

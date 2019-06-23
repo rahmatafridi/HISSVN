@@ -1,0 +1,158 @@
+﻿using HIS.BLL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Organization;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace HIS.Web.Controllers
+{
+    public class LoginController : Controller
+    {
+        #region Intialization
+        public IUserBll _user { get; }
+        public IModuleBll _moduleBll { get; set; }
+        public IOrganizationBLL _organizationBll { get; set; }
+        public LoginController()
+        {
+            _user = new UserBll();
+            _moduleBll = new ModuleBLL();
+            _organizationBll = new OrganizationBLL();
+        }
+        #endregion
+
+        #region Login/LogOut
+
+        public ActionResult Index(string msg)
+        {
+            ViewBag.Message = msg;
+
+            return View();
+        }
+
+        public ActionResult LoginUser(string username, string password)
+        {
+
+            User user = new User();
+            user = _user.LoginUser(username, password);
+            user = user ?? new User();
+
+
+            if (user.UserId > 0 && user.IsActive)
+            {
+                Session["User"] = user;
+                Session["UserRights"] = _user.GetUserRights(user.UserId);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string msg = "";
+
+                if (user.UserId > 0 && !user.IsActive)
+                {
+                    msg = "User doesnt seem to be active at the moment";
+                }
+                else
+                {
+                    msg = "Invalid credentials";
+                }
+
+                return RedirectToAction("Index", new { msg = msg });
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Sign Up
+        public ActionResult SignUp(int? type)
+        {
+            if (type == 1)
+            {                              
+              
+                int total = 0;
+                ViewBag.Modules = _moduleBll.GetModule(new SearchCriteria() { Offset = 0, PageSize = 500, SearchText = "" }, out total)
+                    .Where(a => a.OrganizationId == 0).ToList();
+                return View("SignUpClinic");
+            }
+            else if (type == 2)
+            {
+                return View("SignUpConsultant");
+            }
+            else if (type == 3)
+            {
+                return View("SignUpPatient");
+            }
+            return View();
+        }
+        #endregion
+
+        #region SignUp Clinic
+
+        public ActionResult SignUpClinic(string emailAddress, List<Module> modules)
+        {
+          
+            Organization organization = new Organization(); 
+
+            foreach (Module rol in modules)
+            {
+                rol.CreatedUserId = 1;
+            }
+            AjaxResponse res = new AjaxResponse();
+
+
+            if (_organizationBll.DoesOrganizationExists(emailAddress,1))
+            {
+                res = new AjaxResponse()
+                {
+                    Message = "Email already in Use",
+                    Type = "warning",
+                    Heading = "Clinic",
+                };
+            }
+            else
+            {
+
+                int id = _organizationBll.SaveOrganization(organization);
+
+                res = new AjaxResponse()
+                {
+                    Message = id > 0 ? "Organization Data saved" : "Unable to save user data",
+                    Type = id > 0 ? "success" : "error",
+                    Heading = "Organization",
+                    Data = id
+                };
+            }
+
+
+            return Json(res);
+
+            //saved = _organizationBll.SaveOrganizationModule(organizationId, modules);
+
+            //AjaxResponse res = new AjaxResponse()
+            //{
+            //    Message = saved ? "Modules assigned successfully" : "Unable to assign modules",
+            //    Type = saved ? "success" : "error",
+            //    Heading = "Modules"
+            //};
+
+            //return Json(res);
+        }
+
+        #endregion
+
+    }
+}

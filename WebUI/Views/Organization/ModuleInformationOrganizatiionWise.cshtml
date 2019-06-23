@@ -1,0 +1,40 @@
+﻿@model List<HIS.Domain.Models.Organization.OrgStatChart>
+
+@{
+    ViewBag.Title = "Module Information Organization Wise";
+    //Layout = null;
+}
+<section>
+    @Styles.Render("~/bundles/FormDesign")
+</section>
+
+<div class="OpdDataDiv">
+        <table id="testTable" class="table tblclass">
+            <tr>
+                <th>Organization Name</th>
+                <th>Module Name</th>
+            </tr>
+            @foreach (var item1 in Model)
+            {
+                <tr>
+                    <td class="orderDate">@item1.Country</td>
+                    <td class="type">@item1.vModuleName</td>
+                </tr>
+            }
+        </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

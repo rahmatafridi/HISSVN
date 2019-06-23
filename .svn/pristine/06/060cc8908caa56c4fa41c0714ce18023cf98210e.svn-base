@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.Domain.Models.Menu;
+using HIS.DAL;
+
+namespace HIS.BLL.BLL
+{
+    public class MenuBll : IMenuBll
+    {
+        private IMenuDAL MenuDal { get; set; }
+        
+        public MenuBll()
+        {
+            MenuDal = new MenuDAL();
+        }
+
+
+
+        public List<Menu> GetUserMenus(int userId, int organizationId)
+        {
+            return MenuDal.GetUserMenus(userId, organizationId);
+        }
+    }
+
+    public interface IMenuBll
+    {
+        List<Menu> GetUserMenus(int userId, int organizationId);
+    }
+}

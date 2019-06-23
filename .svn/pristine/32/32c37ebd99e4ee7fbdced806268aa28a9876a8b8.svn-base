@@ -1,0 +1,178 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Patient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class PatientDAL : IPatientDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public PatientDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion
+
+
+        #region Patient
+
+        public List<Patient> GetPatients(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<Patient> roles = new List<Patient>();
+            try
+            {
+                TotalRecords = 0;
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+                param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetRoles", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    roles = ds.Tables[0].AsEnumerable().Select(a => new Patient()
+                    {
+                        
+
+                    }).ToList();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return roles;
+        }
+
+        public Patient GetPatientById(int id)
+        {
+
+            Patient Role = new Patient();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_PatId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetPatientById", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    Role = ds.Tables[0].AsEnumerable().Select(a => new Patient()
+                    {
+                        Id = Convert.ToInt32(a["Id"]),
+                        FirstName = a["vFirstName"].ToString(),
+                        LastName = a["vLastName"].ToString(),
+                        MiddleName = a["vMiddleName"].ToString(),
+                        DateOfBirth = Convert.ToDateTime(a["dDob"]),
+                        TitleId = Convert.ToInt32(a["iTitleId"]),
+                        GenderId = Convert.ToInt32(a["iGenderId"]),
+                        CountryId = Convert.ToInt32(a["iCountryId"]),
+                        BloodGroupId = Convert.ToInt32(a["iBloodGroup"]),
+                        Mrno = a["vMrno"].ToString(),
+                        ContactNumber = a["vContactNo"].ToString(),
+                        HouseNo = a["vHouseNo"].ToString(),
+                        StreetNo = a["vStreetNo"].ToString(),
+                        Area = a["vArea"].ToString(),
+                        EmergencyName = a["vEmergencyName"].ToString(),
+                        EmergencyContact = a["vEmergencyContact"].ToString(),
+                        State = a["vState"].ToString(),
+                        UserId = Convert.ToInt32(a["iUserId"]),
+                        IsActive = Convert.ToBoolean(a["bIsActive"]),
+                        FatherHusbandName = a["vFatherHusbandName"].ToString(),
+                        Email = a["vEmail"].ToString(),
+                        PictureUrl = a["vPictureUrl"].ToString(),
+                        SignatureUrl = a["vSignatureUrl"].ToString(),
+                        EmergencyRelationId = Convert.ToInt32(a["iEmergencyRelation"]),
+                        Cnic = a["vCNIC"].ToString(),
+                        CreatedDate = Convert.ToDateTime(a["dCreatedDate"]),
+                        UpdateDate  =  Convert.ToDateTime(a["dUpdateDate"]),
+                        MaritalStatus = Convert.ToInt32(a["iMaritalStatus"]),
+                        ReligionId = Convert.ToInt32(a["iReligion"]),
+                        PreferredLanguage = Convert.ToInt32(a["iPreferredLanguage"]),
+                        Nationality = a["vNationality"].ToString(),
+                        MotherMaidenName = a["vMotherMaidenName"].ToString(),
+                        EthnicGroup = Convert.ToInt32(a["iEthnicGroup"]),
+                        BirthPlace = a["vBirthPlace"].ToString()
+                        
+                    }).FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Role;
+
+
+        }
+
+        public int SavePatient(Patient patient)
+        {
+            int saved = 0;
+            try
+            {
+                string query = "pr_CreateUpdatePatient";
+                List<DbParameter> param = new List<DbParameter>();
+                //param.Add(new DbParameter() { Name = "p_iRoleId", Type = DbType.Int32, Value = Role.iRoleId, Length = 1000, Direction = ParameterDirection.Input });
+                
+
+
+                saved = Convert.ToInt32(db.ExecuteScalar(query, CommandType.StoredProcedure, ref param));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return saved;
+        }
+
+
+        #endregion
+        
+    }
+
+    public interface IPatientDAL
+    {
+        #region Patient
+
+        List<Patient> GetPatients(SearchCriteria criteria, out int TotalRecords);
+        Patient GetPatientById(int id);
+        int SavePatient(Patient patient);
+        #endregion
+
+
+    }
+}

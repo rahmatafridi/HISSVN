@@ -1,0 +1,39 @@
+create procedure pr_DeleteUserTypeById
+@p_Id int
+as 
+begin
+
+	delete top (1) from tblUserType where iUserTypeId = @p_Id;
+
+end
+
+-- 
+
+alter PROCEDURE [dbo].[pr_SaveUserType]
+(
+	@p_UserTypeId int,
+	@p_UserTypeName varchar(100),
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_UserTypeId =0) 
+begin
+insert into tblUserType(vUserTypeName,iCreatedUserId,dCreatedDate)
+values (@p_UserTypeName,@p_CreatedUserId,SYSDATETIME())
+end 
+else
+begin
+Update top (1) tblUserType
+set vUserTypeName = @p_UserTypeName,
+iUpdatedUserId  = @p_CreatedUserId,
+dUpdatedDate = SYSDATETIME()
+Where iUserTypeId = @p_UserTypeId
+end
+
+END
+GO
+
+
+--

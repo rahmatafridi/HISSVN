@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutNoMenu.cshtml";
+
+}
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+        <strong>Oops!</strong> @ViewBag.Message
+    </div>
+}
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 bs-reset mt-login-5-bsfix">
+            <div class="login-bg" style="background: none; position: relative; z-index: 0;">
+                <img class="login-logo" src="@Url.Content("~/Content/assets/pages/img/login/logo.png")"> <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 382px; width: 675px; z-index: -999998; position: absolute;"><img src="@Url.Content("~/Content/assets/pages/img/login/bg3.jpg")" class="deleteable" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 675px; height: 607.5px; max-height: none; max-width: none; z-index: -999999; left: 0px; top: -112.75px;"><img src="@Url.Content("~/Content/assets/pages/img/login/bg1.jpg")" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 675px; height: 607.5px; max-height: none; max-width: none; z-index: -999999; opacity: 0.943344; left: 0px; top: -112.75px;"></div>
+            </div>
+        </div>
+        <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+            <div class="login-content">
+                <h1>Login</h1>
+                <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                <form action="@Url.Action("LoginUser")" class="login-form" method="post" novalidate="novalidate">
+                    <div class="alert alert-danger display-hide" style="display: block;">
+                        <button class="close" data-close="alert"></button>
+                        <span>Please Enter username and password. </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group has-error" type="text" autocomplete="off" placeholder="Username/Email" name="username" required="" aria-required="true" aria-describedby="username-error">
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group has-error" type="password" autocomplete="off" placeholder="Password" name="password" required="" aria-required="true" aria-describedby="password-error">
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-sm-4">
+                                <div class="rem-password">
+                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="remember" value="1"> Remember me
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>*@
+                        <div class="col-sm-8 text-right">
+                            <div class="forgot-password">
+                                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                            </div>
+                            <button class="btn green" id="btnSignUp">Get Started</button>
+                            <button class="btn green" type="submit">Sign In</button>
+                            <div id="groupButton" class="hide">
+                                <div class="btn-group btn-group-solid">
+                                    <button type="button" class="btn yellow" onclick='window.location = "@Url.Action("SignUp","Login", new { type=1},  this.Request.Url.Scheme)";'>
+                                        <i class="fa fa-ambulance"></i> As Clinic
+                                    </button>
+
+                                    <button type="button" class="btn green" onclick='window.location = "@Url.Action("SignUp","Login", new { type=2},  this.Request.Url.Scheme)";'>
+                                        <i class="fa fa-user-md"></i> As Consultant
+                                    </button>
+                                    <button type="button" class="btn red" onclick='window.location = "@Url.Action("SignUp","Login", new { type=3},  this.Request.Url.Scheme)";'>
+                                        <i class="fa fa-user"></i> As Patient
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <!-- BEGIN FORGOT PASSWORD FORM -->
+                <form class="forget-form" action="javascript:;" method="post" style="display: none;">
+                    <h3 class="font-green">Forgot Password ?</h3>
+                    <p> Enter your e-mail address below to reset your password. </p>
+                    <div class="form-group">
+                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                        <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                    </div>
+                </form>
+                <!-- END FORGOT PASSWORD FORM -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- END : LOGIN PAGE 5-1 -->
+<!--[if lt IE 9]>
+<script src="@Url.Content("~/Content/assets/global/plugins/respond.min.js")"></script>
+<script src="@Url.Content("~/Content/assets/global/plugins/excanvas.min.js")"></script>
+<script src="@Url.Content("~/Content/assets/global/plugins/ie8.fix.min.js")"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSignUp').click(function () {
+            $('#groupButton').toggleClass('hide').toggleClass('show');
+            return false;
+        });
+    });
+</script>

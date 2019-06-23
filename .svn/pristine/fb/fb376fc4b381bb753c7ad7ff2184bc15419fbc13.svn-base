@@ -1,0 +1,118 @@
+﻿@model List<HIS.Domain.Models.Scout>
+@{
+    ViewBag.Title = "Home Page";
+
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * TotalRecords) / PageSize));
+    
+}
+
+<div class="row">
+    <div class="col-xs-10 col-sm-4">
+        <input class="form-control" id="SearchText" onkeyup="SearchUsers();" placeholder="Enter text to search" />
+    </div>
+    <div class="col-xs-2 col-sm-1">
+        <button type="button" class="btn btn-block dark btn-outline sbold uppercase"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+</div>
+
+<div class="spacer5"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>List
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    @if (Model == null || Model.Count <1)
+                    {
+                        <h2>No Data found</h2>
+                    }
+                    else
+                    {
+                         <table class="table table-bordered table-striped table-condensed table-hover table-light" id="UserList">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                            </tr>
+
+
+
+                        </thead>
+
+                        @foreach (HIS.Domain.Models.Scout sc in Model)
+                        {
+                            <tr class="DataRow">
+                                <td>@sc.Name</td>
+                                <td>28 Years</td>
+                                <td>Male</td>
+
+                            </tr>    
+                        }
+
+                    </table>         
+                    }
+
+                   
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    @Html.Action("PagingFooter", "Common", new { pageSize = PageSize, totalRecords = TotalRecords, url = Url.Action("Index", "Patient").ToString() })
+
+</div>
+
+<script type="text/javascript">
+    function SearchUsers() {
+
+    
+
+        var text = $.trim($("#SearchText").val().toLowerCase());
+
+        if (text == "") {
+            $(".DataRow").show();
+        }
+        else {
+            $(".DataRow").each(function () {
+                var name = $(this).find("td:nth-child(1)").html().toLowerCase();
+                var age = $(this).find("td:nth-child(2)").html().toLowerCase();
+                var Gender = $(this).find("td:nth-child(3)").html().toLowerCase();
+
+                if (name.indexOf(text) < 0 && age.indexOf(text) < 0 && Gender.indexOf(text) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        }
+
+    }
+
+    document.getElementById("SearchText").addEventListener("keypress", function (e) {
+        
+
+        if (e.keyCode == 13) {
+            window.location = "@Url.Action("Index","Patient")/?searchText=" + document.getElementById("SearchText").value;
+        }
+    });
+
+</script>

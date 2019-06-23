@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HIS.Domain</RootNamespace>
+    <AssemblyName>HIS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Common\CityCountry.cs" />
+    <Compile Include="Models\Common\CommonFields.cs" />
+    <Compile Include="Models\Common\Language.cs" />
+    <Compile Include="Models\Common\Gender.cs" />
+    <Compile Include="Models\Common\SearchCriteria.cs" />
+    <Compile Include="Models\Common\Title.cs" />
+    <Compile Include="Models\Email\EmailData.cs" />
+    <Compile Include="Models\Menu\Menu.cs" />
+    <Compile Include="Models\Module\ModulePermission.cs" />
+    <Compile Include="Models\Module\OrganizationModule.cs" />
+    <Compile Include="Models\Module\Module.cs" />
+    <Compile Include="Models\Organization\Organization.cs" />
+    <Compile Include="Models\Organization\OrganizationViewModel.cs" />
+    <Compile Include="Models\Organization\OrgStatChart.cs" />
+    <Compile Include="Models\Patient\Patient.cs" />
+    <Compile Include="Models\Role\Role.cs" />
+    <Compile Include="Models\Role\RoleDetail.cs" />
+    <Compile Include="Models\Scout.cs" />
+    <Compile Include="Models\SignUpClinic.cs" />
+    <Compile Include="Models\Template\Template.cs" />
+    <Compile Include="Models\User\User.cs" />
+    <Compile Include="Models\User\UserType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

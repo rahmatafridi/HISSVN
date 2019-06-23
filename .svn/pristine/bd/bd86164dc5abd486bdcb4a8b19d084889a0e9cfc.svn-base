@@ -1,0 +1,51 @@
+﻿@model HIS.Domain.Models.User.UserType
+@{
+    ViewBag.Title = "User Type";
+    Layout = null;
+}
+
+        <form action="@Url.Action("UserTypeForm","User")" class="form-horizontal" id="frmUserType">
+            @Html.HiddenFor(a => a.UserTypeId)
+            @Html.HiddenFor(a => a.OrganizationId)
+            @Html.HiddenFor(a => a.CreatedDate)
+            @Html.HiddenFor(a => a.CreatedUserId)
+            @Html.HiddenFor(a => a.UpdateDate)
+            @Html.HiddenFor(a => a.UpdateUserId)
+
+            <div class="form-body" style="margin-top:32px">
+           @* <h3 class="form-section">Add/Edit User Type</h3>*@    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">First Name</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(a => a.UserTypeName, new { data_fieldname = "User Type", @class = "form-control required" })
+
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <!--/row-->
+
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="button" class="btn green" onclick="Global.SubmitFormViaAjax('frmUserType')">Submit</button>
+                                <button type="reset" class="btn default">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6"> </div>
+                </div>
+            </div>
+        </form>
+
+
+
+

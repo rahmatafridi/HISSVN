@@ -1,0 +1,357 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Email;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Template;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class EmailDAL : IEmailDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public EmailDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion
+
+        #region Email
+
+        public List<EmailData> GetEmail(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<EmailData> Emails = new List<EmailData>();
+            try
+            {
+
+                TotalRecords = 0;
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+                param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetEmail", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    Emails = ds.Tables[0].AsEnumerable().Select(a => new EmailData()
+                    {
+                        EmailId = Convert.ToInt32(a["iEmailId"]),
+                        ScheduleDateTime = a["dScheduleDateTime"].ToString(),
+                        IsSent = Convert.ToBoolean(a["bIsSent"].ToString()),
+                        ToAddress = a["vToAddress"].ToString(),
+                        CcAddress = a["vCcAddress"].ToString(),
+                        Subject = a["vSubject"].ToString(),
+                        EmailBody = a["tEmailBody"].ToString(),
+                        dSentDatetTime = a["dSentDatetTime"].ToString(),    
+                        OrganizationId = a["iOrganizationId"] == DBNull.Value ? 0 : Convert.ToInt32(a["iOrganizationId"].ToString())      ,
+                        Priority= a["iPriority"] == DBNull.Value ? 0 : Convert.ToInt32(a["iPriority"].ToString())
+
+
+                    }).ToList();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+
+                }
+
+       }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Emails;
+        }
+
+        public EmailData GetEmailById(int id)
+        {
+
+            EmailData email = new EmailData();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_EmailId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetEmailById", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    email = ds.Tables[0].AsEnumerable().Select(a => new EmailData()
+                    {
+                        EmailId = Convert.ToInt32(a["iEmailId"]),
+                        ScheduleDateTime = a["dScheduleDateTime"].ToString(),
+                        IsSent = Convert.ToBoolean(a["bIsSent"].ToString()),
+                        ToAddress = a["vToAddress"].ToString(),
+                        CcAddress = a["vCcAddress"].ToString(),
+                        Subject = a["vSubject"].ToString(),
+                        EmailBody = a["tEmailBody"].ToString(),
+                        dSentDatetTime = a["dSentDatetTime"].ToString(),
+                        OrganizationId = a["iOrganizationId"] == DBNull.Value ? 0 : Convert.ToInt32(a["iOrganizationId"].ToString()) ,
+                        Priority = a["iPriority"] == DBNull.Value ? 0 : Convert.ToInt32(a["iPriority"].ToString())
+
+
+                    }).FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return email;
+
+
+        }
+
+        public bool SentEmail(EmailData email)
+        {
+            try
+            {
+
+                string query = "pr_SaveEmail";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_EmailId", Value = email.EmailId });
+                param.Add(new DbParameter() { Name = "p_EmailSubject", Value = email.Subject });
+                param.Add(new DbParameter() { Name = "p_EmailBody", Value = email.EmailBody });
+                param.Add(new DbParameter() { Name = "p_EmailPriority", Value = email.Priority });
+                param.Add(new DbParameter() { Name = "p_OrganizationId", Value = email.OrganizationId });
+                param.Add(new DbParameter() { Name = "p_ToAddress", Value = email.ToAddress });
+                param.Add(new DbParameter() { Name = "p_CcAddress", Value = email.CcAddress });
+                param.Add(new DbParameter() { Name = "p_CreatedUserId", Value = email.CreatedUserId });
+                param.Add(new DbParameter() { Name = "p_ScheduleDateTime", Value = email.ScheduleDateTime });
+                param.Add(new DbParameter() { Name = "p_Prirority", Value = email.Priority });
+
+
+                int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+
+                return result > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public int DeleteEmailById(int id)
+        {
+            int deleted = 0;
+            try
+            {
+
+                string query = "pr_DeleteEmailById";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "@p_EmailId", Value = id });
+
+                deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return deleted;
+        }
+
+        #endregion
+
+        #region Sms
+
+        public List<SmsData> GetSms(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<SmsData> Sms = new List<SmsData>();
+            try
+            {
+
+                TotalRecords = 0;
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+                param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetSms", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    Sms = ds.Tables[0].AsEnumerable().Select(a => new SmsData()
+                    {
+                        SmsId = Convert.ToInt32(a["iSmsId"]),
+                        ScheduleDateTime = a["dScheduleDateTime"].ToString(),
+                        IsSent = Convert.ToBoolean(a["bIsSent"].ToString()),
+                        ToAddress = a["vToAddress"].ToString(),
+                        CcAddress = a["vCcAddress"].ToString(),
+                        Subject = a["vSubject"].ToString(),
+                        SmsBody = a["tSmsBody"].ToString(),
+                        dSentDatetTime = a["dSentDatetTime"].ToString(),
+                        OrganizationId = a["iOrganizationId"] == DBNull.Value ? 0 : Convert.ToInt32(a["iOrganizationId"].ToString()),
+                        Priority = a["iPriority"] == DBNull.Value ? 0 : Convert.ToInt32(a["iPriority"].ToString())
+
+
+                    }).ToList();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Sms;
+        }
+
+        public SmsData GetSmsById(int id)
+        {
+
+            SmsData sms = new SmsData();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SmsId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetSmsById", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    sms = ds.Tables[0].AsEnumerable().Select(a => new SmsData()
+                    {
+                        SmsId = Convert.ToInt32(a["iSmsId"]),
+                        ScheduleDateTime = a["dScheduleDateTime"].ToString(),
+                        IsSent = Convert.ToBoolean(a["bIsSent"].ToString()),
+                        ToAddress = a["vToAddress"].ToString(),
+                        CcAddress = a["vCcAddress"].ToString(),
+                        Subject = a["vSubject"].ToString(),
+                        SmsBody = a["tSmsBody"].ToString(),
+                        dSentDatetTime = a["dSentDatetTime"].ToString(),
+                        OrganizationId = a["iOrganizationId"] == DBNull.Value ? 0 : Convert.ToInt32(a["iOrganizationId"].ToString()),
+                        Priority = a["iPriority"] == DBNull.Value ? 0 : Convert.ToInt32(a["iPriority"].ToString())
+
+
+                    }).FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return sms;
+
+
+        }
+
+        public bool SentSms(SmsData sms)
+        {
+            try
+            {
+
+                string query = "pr_SaveSms";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SmsId", Value = sms.SmsId });
+                param.Add(new DbParameter() { Name = "p_SmsSubject", Value = sms.Subject });
+                param.Add(new DbParameter() { Name = "p_SmsBody", Value = sms.SmsBody });
+                param.Add(new DbParameter() { Name = "p_SmsPriority", Value = sms.Priority });
+                param.Add(new DbParameter() { Name = "p_OrganizationId", Value = sms.OrganizationId });
+                param.Add(new DbParameter() { Name = "p_ToAddress", Value = sms.ToAddress });
+                param.Add(new DbParameter() { Name = "p_CcAddress", Value = sms.CcAddress });
+                param.Add(new DbParameter() { Name = "p_CreatedUserId", Value = sms.CreatedUserId });
+                param.Add(new DbParameter() { Name = "p_ScheduleDateTime", Value = sms.ScheduleDateTime });
+                param.Add(new DbParameter() { Name = "p_Prirority", Value = sms.Priority });
+
+
+                int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+
+                return result > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public int DeleteSmsById(int id)
+        {
+            int deleted = 0;
+            try
+            {
+
+                string query = "pr_DeleteSmsById";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "@p_SmsId", Value = id });
+
+                deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return deleted;
+        }
+
+        #endregion
+
+    }
+
+    public interface IEmailDAL
+    {
+        #region Email
+
+        List<EmailData> GetEmail(SearchCriteria criteria, out int TotalRecords);
+        EmailData GetEmailById(int id);
+        int DeleteEmailById(int id);
+        bool SentEmail(EmailData emailData);
+        #endregion
+
+        #region Sms
+
+        List<SmsData> GetSms(SearchCriteria criteria, out int TotalRecords);
+        SmsData GetSmsById(int id);
+        int DeleteSmsById(int id);
+        bool SentSms(SmsData SMSData);
+        #endregion
+    }
+}

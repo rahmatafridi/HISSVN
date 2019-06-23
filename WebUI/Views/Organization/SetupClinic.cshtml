@@ -1,0 +1,661 @@
+﻿ @model HIS.Domain.Models.Organization.OrganizationViewModel
+@{
+    ViewBag.Title = "SetupClinic";
+}
+
+<link href="~/Content/FileAPI/main.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" />   
+<link href="~/Content/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" />
+<script src="~/Content/FileAPI/FileAPI.min.js"></script>
+<script src="~/Content/FileAPI/jquery.fileapi.js"></script>
+<script src="~/Content/FileAPI/FileAPI.exif.js"></script>
+<script src="~/Content/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
+<script src="~/Content/FileAPI/jquery.modal.js"></script>
+<script src="~/Content/assets/global/plugins/select2/js/select2.min.js"></script>
+<script src="~/Content/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="~/Content/assets/pages/scripts/form-wizard.min.js"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> Clinic Setup - <span class="step-title">
+                        Step 1 of 4
+                    </span>
+                </div>
+                <div class="tools hidden-xs">
+                    <a href="javascript:;" class="collapse" data-original-title="" title="">
+                    </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+                    </a>
+                    <a href="javascript:;" class="reload" data-original-title="" title="">
+                    </a>
+                    <a href="javascript:;" class="remove" data-original-title="" title="">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="@Url.Action("SetUpClinic","Organization")" class="form-horizontal" id="submit_form" method="POST" novalidate="novalidate">
+                    <div class="form-wizard">
+                        <div class="form-body">
+                            <ul class="nav nav-pills nav-justified steps">
+                                <li class="active">
+                                    <a href="#tab1" data-toggle="tab" class="step" aria-expanded="true">
+                                        <span class="number">
+                                            1
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Clinic Profile Information
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            2
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Clinic Contact Information
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab3" data-toggle="tab" class="step active">
+                                        <span class="number">
+                                            3
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Clinic User Information
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab4" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            4
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Confirm
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="bar" class="progress progress-striped" role="progressbar">
+                                <div class="progress-bar progress-bar-success" style="width: 25%;">
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <input type="hidden" id="iOrganizationId",value="@Model.Organization.iOrganizationId" name="Organization.iOrganizationId"/>
+                                <input type="hidden" id="UserId" ,value="@Model.User.UserId" name="User.UserId" />
+                                <div class="alert alert-danger display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    You have some form errors. Please check below.
+                                </div>
+                                <div class="alert alert-success display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    Your form validation is successful!
+                                </div>
+                                <div class="tab-pane active" id="tab1">
+                                    <h3 class="block">Provide your clinic details</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Logo <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <div id="userpic" class="userpic">
+                                                <div class="js-preview userpic__preview"></div>
+                                                <div class="btn btn-success js-fileapi-wrapper">
+                                                    <div class="js-browse">
+                                                        <span class="btn-txt">Choose</span>
+                                                        <input type="file" name="filedata">
+                                                    </div>
+                                                    <div class="js-upload" style="display: none;">
+                                                        <div class="progress progress-success"><div class="js-progress bar"></div></div>
+                                                        <span class="btn-txt">Uploading</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="popup" class="popup" style="display: none;">
+                                                <div class="popup__body"><div class="js-img"></div></div>
+                                                <div style="margin: 0 0 5px; text-align: center;">
+                                                    <div class="js-upload btn btn_browse btn_browse_small">Upload</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Email <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="Organization.vEmail" value="@Model.Organization.vEmail" readonly="readonly">
+                                            <span class="help-block">
+                                                Provide your Email
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Clinic Name <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="Organization.vOrganizationName"  required="required">
+                                            <span class="help-block">
+                                                Provide your Clinic Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Clinic Short Name <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="Organization.vOrganizationShortName" value="@Model.Organization.vOrganizationShortName" required="required">
+                                            <span class="help-block">
+                                                Provide your Clinic Short Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Domain Name 
+                                                
+                                          
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="Organization.vDomainName" value="@Model.Organization.vDomainName" >
+                                            <span class="help-block">
+                                                Provide your Domain Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Country <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.Organization.iCountryId, (List<SelectListItem>)ViewBag.Countries, new { data_fieldname = "iCountryId", @class = "form-control"})
+                                            <span class="help-block">
+                                                Provide your Country
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            City <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.Organization.iCityId, (List<SelectListItem>)ViewBag.Cities, new { data_fieldname = "iCityId", @class = "form-control" })
+                                            <span class="help-block">
+                                                Provide your City
+                                            </span>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block">Provide your clinic contact details</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Phone Number <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="Organization.vPhoneNo" value="@Model.Organization.vPhoneNo" required="required">
+                                            <span class="help-block">
+                                                Provide your phone number.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Language <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.Organization.iLanguageId, (List<SelectListItem>)ViewBag.Languages, new { data_fieldname = "iLanguageId", @class = "form-control" })
+                                            <span class="help-block">
+                                                Provide your language
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Time Zone <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.Organization.iTimeZoneId, (List<SelectListItem>)ViewBag.TimeZones, new { data_fieldname = "iTimeZoneId", @class = "form-control" })
+                                            <span class="help-block">
+                                                Provide your language
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Address <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @*@Html.TextAreaFor(a => a.Organization.vAddress, new { data_fieldname = "vAddress", @class = "form-control required",name= "vAddress" })*@
+                                            <textarea class="form-control required" name="Organization.vAddress">@Model.Organization.vAddress</textarea>
+                                            <span class="help-block">
+                                                Provide your address.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Contact Person Name <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @*@Html.TextBoxFor(a => a.Organization.vContactPersonName, new { data_fieldname = "vContactPersonName", @class = "form-control required",name= "vContactPersonName" })*@
+                                            <input type="text" class="form-control required" name="Organization.vContactPersonName" value="@Model.Organization.vContactPersonName"/>
+                                            <span class="help-block">
+                                                Provide your Contact Person Name.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Contact Person Phone Number <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                           @*@Html.TextBoxFor(a => a.Organization.vContactPersonPhoneNo, new { data_fieldname = "vContactPersonPhoneNo", @class = "form-control required", name = "vContactPersonPhoneNo" })*@
+                                            <input type="text" class="form-control required" name="Organization.vContactPersonPhoneNo" value="@Model.Organization.vContactPersonPhoneNo" />
+                                            <span class="help-block">
+                                                Provide your Contact Person Phone Number.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <h3 class="block">Provide your user details</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Email <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control required" name="User.Email" value="@Model.User.Email" readonly="readonly">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            First Name <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control required" name="User.FirstName"  >
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Last Name <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control required" name="User.LastName" value="@Model.User.LastName">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Father/Husband Name 
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control " name="User.FatherHusbandName" value="@Model.User.FatherHusbandName">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Cnic No <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control required" name="User.CNIC" value="@Model.User.CNIC">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Title <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.User.TitleId, (List<SelectListItem>)ViewBag.Titles, new { data_fieldname = "TitleId", @class = "form-control"})
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Gender <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.User.Gender, (List<SelectListItem>)ViewBag.Genders, new { data_fieldname = "Gender", @class = "form-control" })
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Address <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @*@Html.TextAreaFor(a => a.User.Address, new { data_fieldname = "Address", @class = "form-control required", name = "Address" })*@
+                                            <textarea class="form-control required" name="User.Address" >@Model.User.Address</textarea>
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Phone Number <span class="required" aria-required="true">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control required" name="User.PhoneNo" value="@Model.User.PhoneNo">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Emergency Contact Person 
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="User.EmergencyContactPerson" value="@Model.User.EmergencyContactPerson">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Emergency Contact Person No  
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="User.EmergencyContactNumber" value="@Model.User.EmergencyContactNumber">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Designation
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="User.Designation" value="@Model.User.Designation">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab4">
+                                    <h3 class="block">Confirm your account</h3>
+                                    <h4 class="form-section">Clinic Detail</h4>                                   
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Email:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vEmail">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Clinic Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vOrganizationName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Clinic Short Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vOrganizationShortName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <h4 class="form-section">Clinic Contact Details</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Phonr Number:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vPhoneNo">
+                                            </p>
+                                        </div>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Address:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vAddress">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Contact Person Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vContactPersonName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Contact Person Phone Number:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Organization.vContactPersonPhoneNo">
+                                            </p>
+                                        </div>
+                                    </div>
+                                   
+                                    <h4 class="form-section">Clinic User Detail</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Email:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.Email">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">First Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.FirstName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Last Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.LastName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Father/Husband Name:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.FatherHusbandName">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">CNIC:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.CNIC">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Address:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.Address">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Phone No:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.PhoneNo">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Emergency Contact Person:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.EmergencyContactPerson">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Emergency Contact Number:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.EmergencyContactNumber">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Designation:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="User.Designation">
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="javascript:;" class="btn default button-previous disabled" style="display: none;">
+                                        <i class="m-icon-swapleft"></i> Back
+                                    </a>
+                                    <a href="javascript:;" class="btn blue button-next">
+                                        Continue <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                    <a href="javascript:;" class="btn green button-submit" style="display: none;">
+                                        Submit <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.form-wizard').bootstrapWizard();
+    });
+           jQuery(function($) {
+        $('#userpic').fileapi({
+            url: '@Url.Action("SaveImageFile", "Organization")',
+            accept: 'image/*',
+            imageSize: { minWidth: 200, minHeight: 200 },
+            elements: {
+                active: { show: '.js-upload', hide: '.js-browse' },
+                preview: {
+                    el: '.js-preview',
+                    width: 200,
+                    height: 200
+                },
+                progress: '.js-progress'
+            },
+            onSelect: function(evt, ui) {
+                var file = ui.files[0];
+                if (!FileAPI.support.transform) {
+                    alert('Your browser does not support Flash :(');
+                } else if (file) {
+                    $('#popup').modal({
+                        closeOnEsc: true,
+                        closeOnOverlayClick: false,
+                        onOpen: function(overlay) {
+                            $(overlay).on('click', '.js-upload', function() {
+                                $.modal().close();
+                                $('#userpic').fileapi('upload');
+                            });
+                            $('.js-img', overlay).cropper({
+                                file: file,
+                                bgColor: '#fff',
+                                //setSelect:   [50, 0, 300,300],
+                                aspectRatio: 1 / 1,
+                                allowSelect: false,
+                                allowResize: false,
+                                maxSize: [$(window).width() - 200, $(window).height() - 200],
+                                minSize: [200, 200],
+                                selection: '90%',
+                                strict: true,
+                                background: false,
+                                guides: false,
+                                highlight: false,
+                                dragCrop: true,
+                                movable: false,
+                                resizable: false,
+                                mouseWheelZoom: false,
+                                touchDragZomm: false,
+                                autoCropArea: true,
+                                built: function() {
+                                    //alert(1);
+                                    // $(this).cropper('setData', 0, 0, 675, 1080,90);
+                                    // $(this).cropper('setCropBoxData', 0, 0, 1920, 1080);
+                                    $('.js-img', overlay).cropper('setCanvasData', 0, 0, 1920, 1080);
+                                    $('.js-img', overlay).cropper('setCropBoxData', 0, 0, 675, 1080);
+
+                                },
+                                onSelect: function(coords) {
+                                    $('#userpic').fileapi('crop', file, coords);
+                                }
+                            });
+                        }
+                    }).open();
+                }
+            }
+        });
+    });
+
+</script>

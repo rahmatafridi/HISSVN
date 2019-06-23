@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Web", "WebUI\HIS.Web.csproj", "{E75856B1-6604-48B2-A779-74D2779AA933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Domain", "HIS.Domain\HIS.Domain.csproj", "{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.DAL", "HIS.Dal\HIS.DAL.csproj", "{3F44E9EC-C094-4EE3-876E-67D466BBE7C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.BLL", "HIS.BLL\HIS.BLL.csproj", "{1E01AAC9-26E2-46EF-8816-EC772BFA3609}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db Scripts", "Db Scripts", "{B38E18FB-F399-4C18-B558-3B46B13A0242}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AmmarMuhiuddin", "AmmarMuhiuddin", "{78E776D2-DBE0-40A2-AD95-1D6552CE17FD}"
+	ProjectSection(SolutionItems) = preProject
+		01062017.txt = 01062017.txt
+		02062017.txt = 02062017.txt
+		03062017.txt = 03062017.txt
+		04062017.txt = 04062017.txt
+		07062017.txt = 07062017.txt
+		29052017.txt = 29052017.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ali Minhas", "Ali Minhas", "{DBCB290D-56BD-45D4-82A4-1CC0FD0F4EDD}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\minhas\Desktop\module 30052017.txt = C:\Users\minhas\Desktop\module 30052017.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abdul Ali", "Abdul Ali", "{6517CF41-0F07-4789-8134-79350B2D5327}"
+	ProjectSection(SolutionItems) = preProject
+		01 Jun 17.txt = 01 Jun 17.txt
+		05 Jun 17.txt = 05 Jun 17.txt
+		13 Jun 17.txt = 13 Jun 17.txt
+		28 may 17.txt = 28 may 17.txt
+		30 may 17.txt = 30 may 17.txt
+		31 May 17.txt = 31 May 17.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbBackups", "DbBackups", "{8FF7F928-6D4C-4857-BC51-A3D07CBE947C}"
+	ProjectSection(SolutionItems) = preProject
+		Db(07062017).txt = Db(07062017).txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E75856B1-6604-48B2-A779-74D2779AA933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E75856B1-6604-48B2-A779-74D2779AA933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E75856B1-6604-48B2-A779-74D2779AA933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E75856B1-6604-48B2-A779-74D2779AA933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{757B0239-8F1D-4DD5-B8C0-52A3438C49B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F44E9EC-C094-4EE3-876E-67D466BBE7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F44E9EC-C094-4EE3-876E-67D466BBE7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F44E9EC-C094-4EE3-876E-67D466BBE7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F44E9EC-C094-4EE3-876E-67D466BBE7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E01AAC9-26E2-46EF-8816-EC772BFA3609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E01AAC9-26E2-46EF-8816-EC772BFA3609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E01AAC9-26E2-46EF-8816-EC772BFA3609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E01AAC9-26E2-46EF-8816-EC772BFA3609}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78E776D2-DBE0-40A2-AD95-1D6552CE17FD} = {B38E18FB-F399-4C18-B558-3B46B13A0242}
+		{DBCB290D-56BD-45D4-82A4-1CC0FD0F4EDD} = {B38E18FB-F399-4C18-B558-3B46B13A0242}
+		{6517CF41-0F07-4789-8134-79350B2D5327} = {B38E18FB-F399-4C18-B558-3B46B13A0242}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

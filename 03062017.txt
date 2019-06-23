@@ -1,0 +1,24 @@
+			  GO
+Create PROCEDURE [dbo].[pr_GetMenuById]
+(
+	@p_MenuId int
+	
+)
+AS
+BEGIN
+
+
+	Select Top 1 * from tblMenu m
+	Where m.iMenuId = @p_MenuId;
+
+END
+		go
+Create PROCEDURE [dbo].[pr_GetAllMenus]
+
+AS
+BEGIN
+
+
+	Select * from tblMenu;
+
+END

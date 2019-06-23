@@ -1,0 +1,313 @@
+@model List<HIS.Domain.Models.Organization.Organization>
+@{
+    ViewBag.Title = "Pending Clinic List";
+
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * TotalRecords) / PageSize));
+
+}
+
+<div class="portlet box blue-hoki bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-purple-soft"></i>
+           Pending Clinic List
+        </div>       
+    </div>
+    <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true"> List </a>
+            </li>
+            
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_1_1">
+
+                <div class="row">
+                    <div class="col-xs-10 col-sm-4">
+                        <input class="form-control" id="SearchText" onkeyup="SearchPendingOrganizations();" placeholder="Enter text to search" />
+                    </div>
+                    <div class="col-xs-2 col-sm-1">
+                        <button type="button" onclick="SearchFromServer();" class="btn btn-block dark btn-outline sbold uppercase"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="table-responsive">
+                            @if (Model == null || Model.Count < 1)
+                            {
+                                <h2>No Data found</h2>
+                            }
+                            else
+                            {
+                                <table class="table table-bordered table-striped table-condensed table-hover table-light" id="OrganizationList">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>                                            
+                                            <th>Email</th>
+                                            <th>Contact Person</th>
+                                            <th>Activation Date</th>
+                                            <th>Expiry Date</th>
+                                            <th>Registration Date</th>
+                                            <th>Active</th>
+                                            <th>Approve</th>
+                                            <th>Decline</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    @foreach (HIS.Domain.Models.Organization.Organization sc in Model)
+                                    {
+                                        <tr class="DataRow">
+                                            <td>@sc.vOrganizationName</td>                                            
+                                            <td>@sc.vEmail</td>
+                                            <td>@sc.vContactPersonName</td>
+                                            <td>@sc.dActivationDate.Value.ToShortDateString()</td>
+                                            <td>@sc.dExpiryDate.Value.ToShortDateString()</td>
+                                            <td>@sc.dRegistrationDate.Value.ToShortDateString()</td>
+                                            <td>@sc.bIsActive</td>
+                                            <td style="text-align:center"> <span onclick="ApproveModalDialogue(@sc.iOrganizationId)"> <i class="fa fa-check"></i></span> </td>
+                                            <td style="text-align:center"><span onclick="DeclineModalDialogue(@sc.iOrganizationId)"> <i class="fa fa-ban"></i></span></td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    @Html.Action("PagingFooter", "Common", new { pageSize = PageSize, totalRecords = TotalRecords, url = Url.Action("PendingOrganizationList", "Organization").ToString() })
+
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="clearfix margin-bottom-20"> </div>
+    </div>
+</div>
+
+
+
+<div class="spacer5"></div>
+
+<div class="container">       
+    <!-- Modal -->
+    <div class="modal fade" id="DeclineModal" role="dialog">
+        <div class="modal-dialog modal-md"style="max-width: 465px;" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Decline</h4>
+                </div>
+                <form id="frmDeclineModal">
+                    <div class="modal-body">
+                       <div class="row">
+                           <div class="col-md-12">
+                               <div class="form-group">
+                                   <input type="hidden" id="modalhdnOrganizationId"/>
+                                   <label class="control-label col-md-2">Reason: <span style="visibility:hidden">Hello</span></label>
+                                   <div class="col-md-10">
+                                       <textarea id="txtReasonArea" cols="50" rows="5" data_fieldname = "Reason" class = "form-control required" title="Reason is required"  placeholder="Reason"></textarea>
+                                       <span class="help-block"></span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn green" onclick="DeclineOrganization();">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="ApproveModal" role="dialog">
+        <div class="modal-dialog modal-md" style="max-width: 465px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Approve</h4>
+                </div>
+                <form id="frmApproveModal">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Activation Date</label>
+                                    <div class="col-md-8">
+                                       <input type="text" id="dtActivationDate" data_fieldname = "ActivationDate" class="form-control clsDatePicker required" placeholder="Activation Date"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                             </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Expiration Date</label>
+                                    <div class="col-md-8">
+                                        <input type="text" id="dtExpiryDate" data_fieldname="ExpiryDate" class="form-control clsDatePicker required" placeholder="Expiration Date" /> 
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="modalhdnOrganizationIdForApprove" />
+                                    <label class="control-label col-md-4">Remarks: <span style="visibility:hidden">Hello</span></label>
+                                    <div class="col-md-8">
+                                        <textarea id="txtRemarksArea" cols="50" rows="5" data_fieldname="Remarks" class="form-control required" title="Remarks is required" placeholder="Remarks"></textarea>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn green" onclick="ApproveOrganization();">Approve</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Global.FormDatePicker("clsDatePicker");
+    });
+    function SearchPendingOrganizations() {
+        var text = $.trim($("#SearchText").val().toLowerCase());
+
+        if (text == "") {
+            $(".DataRow").show();
+        }
+        else {
+            $(".DataRow").each(function () {
+                var organizationName = $(this).find("td:nth-child(1)").html().toLowerCase();
+                var email = $(this).find("td:nth-child(2)").html().toLowerCase();
+                var active = $(this).find("td:nth-child(3)").html().toLowerCase();
+
+                if (organizationName.indexOf(text) < 0 && email.indexOf(text) < 0 && active.indexOf(text) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        }
+
+    }
+
+    function SearchFromServer() {
+        window.location = "@Url.Action("PendingOrganizationList", "Organization")/?searchText=" + document.getElementById("SearchText").value;
+    }
+
+    document.getElementById("SearchText").addEventListener("keypress", function (e) {
+
+
+        if (e.keyCode == 13) {
+            SearchFromServer();
+        }
+    });
+
+    function DeclineModalDialogue(organizationId) {
+        $("#txtReasonArea").val('');
+        $("#txtReasonArea").closest('.form-group').removeClass('has-error');
+        $("#modalhdnOrganizationId").val(organizationId);
+        $("#DeclineModal").modal("toggle");
+    }
+    function DeclineOrganization() {         
+        var result = $("#frmDeclineModal").valid();
+        if (!result) {
+            // do nothing
+        }
+        else {
+              $.ajax({
+                        url: '@Url.Action("DeclineOrganizationForm", "Organization")',
+                        type: "POST",
+                        dataType: "json",
+                        data: { organizationId: $("#modalhdnOrganizationId").val(), reasonData: $("#txtReasonArea").val() },
+                        async: true,
+                        success: function (msg) {
+                            $("#DeclineModal").modal("toggle");
+                            Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                            data = msg.Data;
+                            if (msg.RedirectUrl != "" && msg.RedirectUrl != null) {
+                                Global.RedirectToUrl(msg.RedirectUrl);
+                            }
+                        },
+                        error: function (result) {
+                            Global.ShowValidationError("frmDeclineModal",result)
+                            Global.ShowAlertMessage("An error occured", "error", "Error");
+                        }
+
+                    });
+        }
+    }
+    function ApproveModalDialogue(organizationId) {
+        $("#txtRemarksArea").val('');
+        $("#txtRemarksArea").closest('.form-group').removeClass('has-error');
+        $("#dtExpiryDate").val('');
+        $("#dtExpiryDate").closest('.form-group').removeClass('has-error');
+        $("#dtActivationDate").val('');
+        $("#dtActivationDate").closest('.form-group').removeClass('has-error');
+        $("#modalhdnOrganizationIdForApprove").val(organizationId);
+        $("#ApproveModal").modal("toggle");
+    }
+
+     function ApproveOrganization() {
+        var result = $("#frmApproveModal").valid();
+        if (!result) {
+            // do nothing
+        }
+        else {
+              $.ajax({
+                        url: '@Url.Action("ApproveOrganizationForm", "Organization")',
+                        type: "POST",
+                        dataType: "json",
+                        data: { organizationId: $("#modalhdnOrganizationIdForApprove").val(), activationDate: $("#dtActivationDate").val(), expiryDate: $("#dtExpiryDate").val(), remarks: $("#txtRemarksArea").val() },
+                        async: true,
+                        success: function (msg) {
+                            $("#ApproveModal").modal("toggle");
+                            Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                            data = msg.Data;
+                            if (msg.RedirectUrl != "" && msg.RedirectUrl != null) {
+                                Global.RedirectToUrl(msg.RedirectUrl);
+                            }
+                        },
+                        error: function (result) {
+                            Global.ShowValidationError("frmApproveModal",result)
+                            Global.ShowAlertMessage("An error occured", "error", "Error");
+                        }
+
+                    });
+        }
+    }
+
+</script>

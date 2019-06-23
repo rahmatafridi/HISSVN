@@ -1,0 +1,149 @@
+﻿@model HIS.Domain.Models.Role.Role
+@{
+    ViewBag.Title = "Role Form";
+    Layout = null;
+}
+<style>
+    h1 {
+        border-bottom: 8px solid #57c4d0;
+        font-size: 24px;
+        display: inline-block;
+    }
+
+    .title {
+        margin-bottom: 20px;
+    }
+</style>
+<form action="@Url.Action("RoleForm","Role")" class="form-horizontal" id="frmRole">
+    @Html.HiddenFor(a => a.iOrganizationId)
+    @Html.HiddenFor(a => a.iRoleId)
+    @Html.HiddenFor(a => a.CreatedDate)
+    @Html.HiddenFor(a => a.CreatedUserId)
+    @Html.HiddenFor(a => a.UpdateDate)
+    @Html.HiddenFor(a => a.UpdateUserId)
+
+    <div class="form-body" style="margin-top:32px">
+        <div class="title"><h1 class="form-section">Role Detail</h1></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Name</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.vRoleName, new { data_fieldname = "Role Name", @class = "form-control required" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">Description</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(a => a.vRoleDescription, new { data_fieldname = "Role Description", @class = "form-control" })
+
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+
+    </div>
+    <div class="title"><h1 class="form-section">Module Permission</h1></div>
+         @foreach (HIS.Domain.Models.Module.OrganizationModule moduleDetail in ViewBag.AssignedModules)
+         {
+            <div class="panel-group accordion scrollable" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background:#57c4d0;" id="@moduleDetail.ModuleId">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#@("a"+moduleDetail.ModuleId)" aria-expanded="false" style="font-family:-webkit-body;" id="@moduleDetail.ModuleId">@moduleDetail.ModuleName</a>
+                        </h3>
+                    </div>
+                    <div id="@("a" + moduleDetail.ModuleId)" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="icheck-inline">
+                                @foreach (HIS.Domain.Models.Module.OrganizationModule  modulePermissions in moduleDetail.OrganizationModuleDetailList)
+                                {
+                                    <input type="checkbox" class="chkModulePermission icheck" data-checkbox="icheckbox_square-blue" id="modulePermission_@modulePermissions.ModulePermissionId" name="organizationModulePermission" data-id="@modulePermissions.ModulePermissionId" @((ViewBag.AssignedModulePermission as List<int> ).Contains(modulePermissions.ModulePermissionId) ? "checked=\"checked\"" : "")  />
+                                    <label for="modulePermission_@modulePermissions.ModulePermissionId" title="@modulePermissions.ModulePermissionId">@modulePermissions.ModulePermissionCode </label>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+         }
+
+   
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="button" class="btn green" onclick="SubmitForm();">Submit</button>
+                        <button type="reset" class="btn default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"> </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+   
+    function SubmitForm() {
+        var data = Global.SubmitFormViaAjax('frmRole');
+
+        if (data != null && parseInt(data) > 0) {
+           SaveRoleModules(data);
+        }
+
+    }
+
+    function SaveRoleModules(roleId)
+    {
+
+        var data = new Array();
+
+        $(".chkModulePermission:checked").each(function () {
+            var moduleIdString = $(this).parent().parent().parent().attr("id");
+            var moduleId = moduleIdString.split("a");
+
+            debugger;
+            var row = {
+                "ModulePermissionId": $(this).data("id"),
+                "ModuleId": moduleId[1]
+            };
+
+            data.push(row);
+        });
+
+
+        $.ajax({
+            url: '@Url.Action("SaveRoleModulePermission", "Role")',
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({ roleId: roleId, modules: data }),
+            async: true,
+            contentType: "application/json;",
+            success: function (msg) {
+               Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+            },
+            error: function () {
+                Global.ShowAlertMessage("An error occured while assigning roles", "error", "Error");
+            }
+
+        });
+    }
+
+</script>
+
+

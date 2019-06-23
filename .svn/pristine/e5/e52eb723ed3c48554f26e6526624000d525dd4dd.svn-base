@@ -1,0 +1,68 @@
+																USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeleteOrganizationModules]    Script Date: 6/24/2017 2:21:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[pr_DeleteOrganizationModules]
+@p_OrganizationId int
+as
+begin
+
+DELETE w
+FROM tblOrganizationModule w
+INNER JOIN tblModule e
+  ON w.iModuleId=e.iModuleId
+WHERE  w.iOrganizationId = @p_OrganizationId AND e.iIsCore <> 2 ;
+
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveModule]    Script Date: 6/24/2017 2:35:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[pr_SaveModule]
+(
+	@p_ModuleId int,
+	@p_ModuleName varchar(100),
+	@p_ModuleCode varchar(50),
+	@p_IsCore int,
+	@p_Price decimal,
+	@p_CreatedUserId int
+	
+)
+AS
+BEGIN
+if(@p_ModuleId =0) 
+begin
+insert into tblModule(vModuleName,vModuleCode,iCreatedUserId,dCreatedDate,iIsCore,dPrice)
+values (@p_ModuleName,@p_ModuleCode,@p_CreatedUserId,SYSDATETIME(),@p_IsCore,@p_Price)
+end 
+else
+begin
+Update top (1) tblModule
+set vModuleName = @p_ModuleName,
+iUpdatedUserId  = @p_CreatedUserId,
+vModuleCode = @p_ModuleCode,
+dUpdatedDate = SYSDATETIME(),
+iIsCore = @p_IsCore,
+dPrice = @p_Price
+Where iModuleId = @p_ModuleId
+end
+
+END
+
+
+
+
+
+
+
+
+
+

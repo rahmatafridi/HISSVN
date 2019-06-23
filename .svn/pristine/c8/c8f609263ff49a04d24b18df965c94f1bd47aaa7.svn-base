@@ -1,0 +1,64 @@
+﻿using HIS.BLL.BLL;
+using HIS.Domain.Models;
+using HIS.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace HIS.Web.Controllers
+{
+    public class PatientController : Controller
+    {
+        public ICommonBll CommonBll { set; get; }
+
+        public PatientController()
+        {
+            CommonBll = new CommonBll();
+        }
+        //
+        // GET: /Patient/
+
+        public ActionResult Index(string searchText, int offset = 0, int pageSize = 10)
+        {
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+
+            int TotalRecords = 0;
+
+            List<Scout> Scouts = CommonBll.GetScouts(searchText ?? "", offset, pageSize, out TotalRecords);
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+
+            return View(Scouts);
+        }
+
+        public ActionResult Register(int id = 0)
+        {
+            Patient pat = new Patient();
+
+            if (id > 0)
+            {
+                // get saved record.. 
+            }
+
+            return View(pat);
+        }
+
+        [HttpPost]
+        public ActionResult Register(Patient patient)
+        {
+            AjaxResponse res = new AjaxResponse() { 
+             Heading = "Success",
+              Message = "Data has been received",
+             Type = "success"
+            };
+
+            return Json(res, JsonRequestBehavior.DenyGet);
+        }
+
+    }
+}

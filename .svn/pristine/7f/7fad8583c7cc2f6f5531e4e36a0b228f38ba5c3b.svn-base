@@ -1,0 +1,37 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Role;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class RoleBLL : IRoleBLL
+    {
+        IRoleDAL _role;
+
+        public RoleBLL()
+        {
+            _role = new RoleDAL();
+        }
+
+        public List<Role> GetRoles(SearchCriteria criteria, out int TotalRecords)
+        {
+            return _role.GetRoles(criteria, out TotalRecords);
+        }
+
+        public bool SaveUserRole(int userId, List<Role> Role)
+        {
+            return _role.SaveUserRole(userId, Role);
+        }
+    }
+
+    public interface IRoleBLL
+    {
+        List<Role> GetRoles(SearchCriteria criteria, out int TotalRecords);
+        bool SaveUserRole(int userId, List<Role> Role);
+    }
+}

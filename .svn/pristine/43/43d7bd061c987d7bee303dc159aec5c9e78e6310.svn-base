@@ -1,0 +1,73 @@
+﻿@model List<HIS.Domain.Models.Scout>
+@{
+    ViewBag.Title = "Home Page";
+    
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);   
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0*TotalRecords)/PageSize));
+    
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        
+        <div>
+            <input class="form-control" id="SearchText"  onkeyup="SearchUsers();" />
+        </div>
+
+        <table class="table table-responsive" id="UserList">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                </tr>
+
+                
+
+            </thead>
+
+            @foreach (HIS.Domain.Models.Scout sc in Model)
+            {
+                <tr class="DataRow">
+                    <td>@sc.Name</td>
+                    <td>28 Years</td>
+                    <td>Male</td>
+
+                </tr>    
+            }
+
+        </table>
+    </div>
+
+
+    @Html.Action("PagingFooter","Common", new{pageSize = 3, totalRecords = TotalRecords, url = Url.Action("Index","Patient").ToString()})
+  
+</div>
+
+    <script type="text/javascript">
+        function SearchUsers() {
+            var text = $.trim($("#SearchText").val().toLowerCase());
+
+            if (text == "") {
+                $(".DataRow").show();
+            }
+            else {
+                $(".DataRow").each(function () {
+                    var name = $(this).find("td:nth-child(1)").html().toLowerCase();
+                    var age = $(this).find("td:nth-child(2)").html().toLowerCase();
+                    var Gender = $(this).find("td:nth-child(3)").html().toLowerCase();
+
+                    if (name.indexOf(text) < 0 && age.indexOf(text) < 0 && Gender.indexOf(text) < 0) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                });
+            }
+
+        }
+    </script>   

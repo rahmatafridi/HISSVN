@@ -1,0 +1,77 @@
+﻿@model List<HIS.Domain.Models.Menu.Menu>
+@{
+    ViewBag.Title = "Sidebar";
+    Layout = null;
+}
+
+<ul class="page-sidebar-menu   " data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200">
+
+    <li class="nav-item start" id="ProfileLi">
+        <a href="#">
+            <div style="float:left; padding: 6px;">
+                <img alt="" style="height:50px;" class="img-circle" src="@Url.Content("~/Content/assets/layouts/layout4/img/avatar9.jpg")">
+            </div>
+            <div style="float:left;margin-left: 5%; margin-top: 3%;width:60%;">
+                <p style="margin:2px; font-size: 18px;">@(HIS.Web.Models.Helper.GetUserObjectFromSession().FirstName)</p>
+                <i class="fa fa-user" onclick="window.location = '@Url.Action("Logout","Login")'" title="Profile"></i>
+                <i class="fa fa-key" onclick="ChangePassword()" title="Change Password"></i> 
+                <i class="fa fa-sign-out" onclick="window.location = '@Url.Action("Logout","Login")'" title="Logout"></i>
+                
+            </div>
+            <div class="clearfix"> </div>
+        </a> 
+        
+    </li>
+
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (HIS.Domain.Models.Menu.Menu mnu in Model)
+            {
+            <li class="nav-item">
+                <a href="@mnu.MenuLink" class="nav-link nav-toggle">
+                    <i class="@mnu.IconClass" aria-hidden="true"></i>
+                    <span class="title">@mnu.MenuName</span>
+                    <span class="selected"></span>
+                    @if (mnu.ChildMenu.Count > 0)
+                    { <span class="arrow open"></span>}
+                </a>
+                @if (mnu.ChildMenu.Count > 0)
+                {
+                    <ul class="sub-menu">
+                        @foreach (HIS.Domain.Models.Menu.Menu cmenu in mnu.ChildMenu)
+                        {
+                            <li class="nav-item">
+                                <a href="@cmenu.MenuLink" class="nav-link ">
+                                    <i class="@cmenu.IconClass" aria-hidden="true"></i>
+                                    <span class="title">@cmenu.MenuName</span>
+                                    @if (cmenu.ChildMenu.Count > 0)
+                                    { <span class="arrow open"></span>}
+                                </a>
+                                @if (cmenu.ChildMenu.Count > 0)
+                                {
+                                    <ul class="sub-menu">
+                                        @foreach (HIS.Domain.Models.Menu.Menu l3menu in cmenu.ChildMenu)
+                                        {
+                                            <li class="nav-item start">
+                                                <a href="@l3menu.MenuLink" class="nav-link ">
+                                                    <i class="@l3menu.IconClass" aria-hidden="true"></i>
+                                                    <span class="title">@l3menu.MenuName</span>
+                                                </a>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                }
+
+                            </li>
+                        }
+                    </ul>
+                }
+
+            </li>
+        }
+    }
+
+
+
+</ul>

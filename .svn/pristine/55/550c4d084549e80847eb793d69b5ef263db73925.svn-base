@@ -1,0 +1,6 @@
+Important Points:
+// By Ammar Muhi ud din
+
+Two Fields added in tblModule one field is IsCore for core module or not if IsCore field value is 1 then its core module for example role user all sections
+include in this field. and if IsCore value is 2 then its mean this module only for admin organization mean us and if its value is 0 then its mean module is for sale.
+other field is price in which price of module will be save each price is in dollar currency.

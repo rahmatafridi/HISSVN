@@ -1,0 +1,197 @@
+﻿@model List<HIS.Domain.Models.Menu.Menu>
+@{
+    ViewBag.Title = "Menu List";
+
+    int TotalRecords = Convert.ToInt32(ViewBag.TotalRecords);
+    int Offset = Convert.ToInt32(ViewBag.Offset);
+    int PageSize = Convert.ToInt32(ViewBag.PageSize);
+    int NextOffset = Offset + PageSize;
+    int TotalPages = Convert.ToInt32(Math.Ceiling((1.0 * TotalRecords) / PageSize));
+
+}
+
+<div class="portlet box green-turquoise bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble"></i>
+            Menu List
+        </div>
+        <div class="actions">
+            <a class="btn btn-outline sbold uppercase portlet-button" href="javascript:;" title="Add New" onclick="AddEditMenu(0)">
+                Add New   <i class="fa fa-plus"></i>
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true"> List </a>
+            </li>
+            <li class="">
+                <a id="idMenuAddEdit" href="#tab_1_2" data-toggle="tab" aria-expanded="false" onclick="AddNewMenu();"> Add New </a>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_1_1">
+
+                <div class="row">
+                    <div class="col-xs-10 col-sm-4">
+                        <input class="form-control" id="SearchText" onkeyup="SearchMenus();" placeholder="Enter text to search" />
+                    </div>
+                    <div class="col-xs-2 col-sm-1">
+                        <button type="button" onclick="SearchFromServer();" class="btn btn-block dark btn-outline sbold uppercase"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="table-responsive">
+                            @if (Model == null || Model.Count < 1)
+                            {
+                                <h2>No Data found</h2>
+                            }
+                            else
+                            {
+                                <table class="table table-bordered table-striped table-condensed table-hover table-light" id="OrganizationList">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Menu Link</th>
+                                            <th>Module Name</th>
+                                            <th>Module Code</th>
+                                            <th>Description</th>
+                                            <th>Icon Class</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    @foreach (HIS.Domain.Models.Menu.Menu sc in Model)
+                                    {
+                                        <tr class="DataRow">
+                                            <td>@sc.MenuName</td>
+                                            <td>@sc.MenuLink</td>
+                                            <td>@sc.ModuleName</td>
+                                            <td>@sc.ModulePermissionCode</td>
+                                            <td>@sc.ModulePermissionDescription</td>
+                                            <td>@sc.IconClass</td>
+                                            <td> <span href="#" onclick="AddEditMenu(@sc.MenuId)"> <i class="fa fa-edit"></i></span> </td>
+                                            <td><span onclick="DeleteMenu(@sc.MenuId)"> <i class="fa fa-remove"></i></span></td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    @Html.Action("PagingFooter", "Common", new { pageSize = PageSize, totalRecords = TotalRecords, url = Url.Action("MenuList", "Menu").ToString() })
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="tab_1_2">
+                <div id="tabAddMenu"></div>
+
+            </div>
+
+
+        </div>
+        <div class="clearfix margin-bottom-20"> </div>
+    </div>
+</div>
+
+
+
+<div class="spacer5"></div>
+
+<script type="text/javascript">
+    function SearchMenus() {
+        var text = $.trim($("#SearchText").val().toLowerCase());
+
+        if (text == "") {
+            $(".DataRow").show();
+        }
+        else {
+            $(".DataRow").each(function () {
+                var menuName = $(this).find("td:nth-child(1)").html().toLowerCase();
+                var moduleCode = $(this).find("td:nth-child(3)").html().toLowerCase();
+                var moduleDescription = $(this).find("td:nth-child(4)").html().toLowerCase();
+
+                if (menuName.indexOf(text) < 0 && moduleCode.indexOf(text) < 0 && moduleDescription.indexOf(text) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        }
+
+    }
+
+    function SearchFromServer() {
+        window.location = "@Url.Action("MenuList", "Menu")/?searchText=" + document.getElementById("SearchText").value;
+    }
+
+    document.getElementById("SearchText").addEventListener("keypress", function (e) {
+
+
+        if (e.keyCode == 13) {
+            SearchFromServer();
+        }
+    });
+
+    function AddEditMenu(id) {
+    //    alert(id);
+        $.ajax({
+            url: '@Url.Action("MenuForm", "Menu")',
+            type: "Get",
+            dataType: "html",
+            data: { id: id},
+            async: true,
+            success: function (msg) {
+                $("#tabAddMenu").html(msg);
+                Global.ActiveTab("idMenuAddEdit");
+            },
+            error: function () {
+                Global.ShowAlertMessage("An error occured", "error", "Error");
+            }
+
+        });
+
+    }
+
+    function DeleteMenu(id) {
+        if (confirm("Do you wish to delete the menu?")) {
+                $.ajax({
+                url: '@Url.Action("DeleteMenuById", "Menu")',
+                type: "Post",
+                dataType: "json",
+                data: { id: id},
+                async: true,
+                success: function (msg) {
+                    Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                    if (msg.RedirectUrl !== "" && msg.RedirectUrl != null && msg.RedirectUrl != "undefined") {
+                        Global.RedirectToUrl(msg.RedirectUrl);
+                    }
+                },
+                error: function () {
+                    Global.ShowAlertMessage("An error occured", "error", "Error");
+                }
+
+            });
+        }
+    }
+
+</script>

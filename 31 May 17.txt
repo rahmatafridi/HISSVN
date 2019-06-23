@@ -1,0 +1,210 @@
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveUpdateUser]    Script Date: 6/1/2017 12:03:07 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_SaveUpdateUser]
+@p_iUserId int
+      ,@p_vUserName varchar(50)
+      ,@p_vEmail varchar(100)
+      ,@p_vFirstName varchar(50)
+      ,@p_vMiddleName varchar(50)=null
+      ,@p_vLastName varchar(50)
+      ,@p_iCountryId int
+      ,@p_iCityId int
+      ,@p_iTitleId int
+      ,@p_iGenderId int
+      ,@p_vPassword varchar(150)
+      ,@p_vFatherHusbandName varchar(50) =null
+      ,@p_bIsFirstTimeLogin bit
+      ,@p_vAddress varchar(150)  = null
+      ,@p_vPhoneNo varchar(50) =null
+      ,@p_vCNIC varchar(50)  =null
+      ,@p_vPassportNo varchar(50)=null
+      ,@p_vEmergencyContactNo varchar(50) =null
+      ,@p_vEmergencyContactPerson varchar(50) =  null
+      ,@p_iCreatedUserId int
+      ,@p_iUpdatedUserId int = null
+      ,@p_vDesignation varchar(50)
+      ,@p_bIsActive bit
+      ,@p_iOrganizationId int
+
+as
+begin
+
+if @p_iUserId > 0 
+begin
+
+ update top (1) tblUser
+ set vFirstName = @p_vFirstName 
+      ,vMiddleName = @p_vMiddleName 
+      ,vLastName = @p_vLastName 
+      ,iCountryId = @p_iCountryId 
+      ,iCityId = @p_iCityId
+      ,iTitleId = @p_iTitleId
+      ,iGenderId = @p_iGenderId
+      ,vPassword = @p_vPassword
+      ,vFatherHusbandName = @p_vFatherHusbandName
+      ,bIsFirstTimeLogin = @p_bIsFirstTimeLogin 
+      ,vAddress = @p_vAddress
+      ,vPhoneNo = @p_vPhoneNo
+      ,vCNIC = @p_vCNIC
+      ,vPassportNo = @p_vPassportNo 
+      ,vEmergencyContactNo = @p_vEmergencyContactNo
+      ,vEmergencyContactPerson = @p_vEmergencyContactPerson
+	  ,vDesignation = @p_vDesignation 
+      ,bIsActive = @p_bIsActive
+      ,iOrganizationId = @p_iOrganizationId
+	  ,iUpdatedUserId = @p_iUpdatedUserId
+      ,dUpdatedDate = SYSDATETIME()
+	  where iUserId = @p_iUserId
+	  select @p_iUserId;
+end
+else
+begin
+ insert into tblUser
+ (vUserName 
+      ,vEmail 
+      ,vFirstName 
+      ,vMiddleName 
+      ,vLastName 
+      ,iCountryId
+      ,iCityId 
+      ,iTitleId
+      ,iGenderId 
+      ,vPassword 
+      ,vFatherHusbandName 
+      ,bIsFirstTimeLogin 
+      ,vAddress 
+      ,vPhoneNo
+      ,vCNIC 
+      ,vPassportNo 
+      ,vEmergencyContactNo 
+      ,vEmergencyContactPerson 
+      ,iCreatedUserId 
+      ,dCreatedDate 
+      ,vDesignation 
+      ,bIsActive
+      ,iOrganizationId)
+ values
+ (@p_vUserName 
+      ,@p_vEmail 
+      ,@p_vFirstName 
+      ,@p_vMiddleName 
+      ,@p_vLastName 
+      ,@p_iCountryId
+      ,@p_iCityId 
+      ,@p_iTitleId
+      ,@p_iGenderId 
+      ,@p_vPassword 
+      ,@p_vFatherHusbandName 
+      ,@p_bIsFirstTimeLogin 
+      ,@p_vAddress 
+      ,@p_vPhoneNo
+      ,@p_vCNIC 
+      ,@p_vPassportNo 
+      ,@p_vEmergencyContactNo 
+      ,@p_vEmergencyContactPerson 
+      ,@p_iCreatedUserId 
+      ,SYSDATETIME() 
+      ,@p_vDesignation 
+      ,@p_bIsActive
+      ,@p_iOrganizationId)
+
+	  select SCOPE_IDENTITY();
+
+end
+
+
+
+
+end
+
+go
+
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUserTypes]    Script Date: 5/31/2017 11:12:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[pr_GetUsers]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int,
+	@p_OrganizationId int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount, *
+	from tblUser usr
+	WHERE (@p_SearchText = ''
+	OR
+	 usr.vEmail like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vFirstName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vLastName like CONCAT('%', @p_SearchText, '%')
+	 or
+	 usr.vUserName like CONCAT('%', @p_SearchText, '%')
+	 )
+	 	 and usr.iOrganizationId = @p_OrganizationId
+
+	order by usr.iUserId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+
+go
+
+create procedure pr_GetUsernameEmailCount
+@p_Username varchar(30),
+@p_Email varchar(70)
+as
+begin
+
+select count(*) from tblUser where vEmail = @p_Email
+or vUserName = @p_Username;
+
+end
+
+go
+
+create procedure pr_DeleteUserRoles
+@p_UserId int
+as
+begin
+
+
+delete from tblUserRole
+where iUserId = @p_UserId;
+
+end
+
+go
+
+create procedure pr_SaveUserRole
+@p_RoleId int,
+@p_UserId int,
+@p_CreatedUserId int
+as
+begin
+
+	insert into tblUserRole
+	(iRoleId, iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_RoleId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+go
+

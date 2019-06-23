@@ -1,0 +1,175 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Organization;
+using HIS.Domain.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class OrganizationDAL : IOrganizationDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public OrganizationDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion       
+
+        #region Organization
+
+        public List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<Organization> Organizations = new List<Organization>();
+            TotalRecords = 0;
+
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+            param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+            param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetOrganizations", CommandType.StoredProcedure, param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                Organizations = ds.Tables[0].AsEnumerable().Select(a => new Organization()
+                {
+                iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+                vOrganizationName = Convert.ToString(a["vOrganizationName"].ToString()),
+                vOrganizationShortName = Convert.ToString(a["vOrganizationShortName"].ToString()),
+                vAddress = Convert.ToString(a["vAddress"].ToString()),
+                vPhoneNo = Convert.ToString(a["vPhoneNo"].ToString()),
+                iCountryId = Convert.ToInt32(a["iCountryId"].ToString()),
+                iCityId = Convert.ToInt32(a["iCityId"].ToString()),
+                dActivationDate = Convert.ToDateTime(a["dActivationDate"].ToString()),
+                dExpiryDate = Convert.ToDateTime(a["dExpiryDate"].ToString()),
+                dRegistrationDate = Convert.ToDateTime(a["dRegistrationDate"].ToString()),
+                bIsActive = Convert.ToBoolean(a["bIsActive"].ToString()),                    
+                vContactPersonName = Convert.ToString(a["vContactPersonName"].ToString()),
+                vContactPersonPhoneNo = Convert.ToString(a["vContactPersonPhoneNo"].ToString()),
+                vEmail = Convert.ToString(a["vEmail"].ToString()),
+                vDomainName = Convert.ToString(a["vDomainName"].ToString()),
+
+            }).ToList();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                }
+                
+            }
+
+            return Organizations;
+        }
+        
+        public Organization GetOrganizationById(int id) {
+
+            Organization organization = new Organization();
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_iOrganizationId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+         
+
+            ds = db.LoadDataSetAgainstQuery("pr_SelectOrganizationById", CommandType.StoredProcedure, param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                organization = ds.Tables[0].AsEnumerable().Select(a => new Organization()
+                {
+                    iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+                    vOrganizationName = Convert.ToString(a["vOrganizationName"].ToString()),
+                    vOrganizationShortName = Convert.ToString(a["vOrganizationShortName"].ToString()),
+                    vAddress = Convert.ToString(a["vAddress"].ToString()),
+                    vPhoneNo = Convert.ToString(a["vPhoneNo"].ToString()),
+                    iCountryId = Convert.ToInt32(a["iCountryId"].ToString()),
+                    iCityId = Convert.ToInt32(a["iCityId"].ToString()),
+                    dActivationDate = Convert.ToDateTime(a["dActivationDate"].ToString()),
+                    dExpiryDate = Convert.ToDateTime(a["dExpiryDate"].ToString()),
+                    dRegistrationDate = Convert.ToDateTime(a["dRegistrationDate"].ToString()),
+                    bIsActive = Convert.ToBoolean(a["bIsActive"].ToString()),
+                    vContactPersonName = Convert.ToString(a["vContactPersonName"].ToString()),
+                    vContactPersonPhoneNo = Convert.ToString(a["vContactPersonPhoneNo"].ToString()),
+                    vEmail = Convert.ToString(a["vEmail"].ToString()),
+                    vDomainName = Convert.ToString(a["vDomainName"].ToString())
+
+                }).FirstOrDefault();
+            }
+            return organization;
+
+
+        }
+
+
+
+        public bool SaveOrganizations(Organization organization)
+        {
+            string query = "pr_SaveOrganization";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "@p_iOrganizationId", Type = DbType.Int32, Value = organization.iOrganizationId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vOrganizationName", Type = DbType.String, Value = organization.vOrganizationName, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vOrganizationShortName", Type = DbType.String, Value = organization.vOrganizationShortName, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vAddress", Type = DbType.String, Value = organization.vAddress, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vPhoneNo", Type = DbType.String, Value = organization.vPhoneNo, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iCountryId", Type = DbType.Int32, Value = organization.iCountryId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iCityId", Type = DbType.Int32, Value = organization.iCityId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dActivationDate", Type = DbType.DateTime, Value = organization.dActivationDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dExpiryDate", Type = DbType.DateTime, Value = organization.dExpiryDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dRegistrationDate", Type = DbType.DateTime, Value = organization.dRegistrationDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_bIsActive", Type = DbType.Boolean, Value = organization.bIsActive, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iCreatedUserId", Type = DbType.Int32, Value = organization.CreatedUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dCreatedDate", Type = DbType.DateTime, Value = organization.CreatedDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iUpdatedUserId", Type = DbType.Int32, Value = organization.UpdateUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dUpdatedDate", Type = DbType.DateTime, Value = organization.UpdateDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vContactPersonName", Type = DbType.String, Value = organization.vContactPersonName, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vContactPersonPhoneNo", Type = DbType.String, Value = organization.vContactPersonPhoneNo, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vEmail", Type = DbType.String, Value = organization.vEmail, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vDomainName", Type = DbType.String, Value = organization.vDomainName, Length = 1000, Direction = ParameterDirection.Input });
+
+            int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, param);
+
+
+            return result > 0;
+        }
+
+        public int DeleteOrganizationById(int id)
+        {
+            int deleted = 0;
+
+            string query = "pr_DeleteOrganizationById";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_iOrganizationId", Value = id  });
+
+            deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, param);
+
+            return deleted;
+        }
+
+        #endregion         
+
+    }
+
+    public interface IOrganizationDAL
+    {
+        #region Organization
+
+        List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords);
+        Organization GetOrganizationById(int id);
+        int DeleteOrganizationById(int id);
+        bool SaveOrganizations(Organization organization);
+
+        #endregion
+    }
+}

@@ -1,0 +1,65 @@
+create procedure pr_DeleteUserAssignedTypes
+@p_UserId int
+as
+begin
+
+
+	delete  from  tblAssignUserType  
+	where  iUserId  =  @p_UserId;
+
+end
+
+go
+
+create procedure pr_SaveUserAssignedTypes
+@p_UserTypeId int,
+@p_OrganizationId int,
+@p_UserId int,
+@p_CreatedUserId  int
+as
+begin
+
+	insert into tblAssignUserType
+	(iUserTypeId, iOrganizationId,  iUserId, iCreatedUserId, dCreatedDate)
+	values
+	(@p_UserTypeId, @p_OrganizationId, @p_UserId, @p_CreatedUserId, SYSDATETIME());
+
+end
+
+go
+
+create procedure pr_GetUserById
+@p_UserId int
+as
+begin
+
+select top 1 *  from  tblUser
+where iUserId = @p_UserId;
+
+end
+
+go
+
+create procedure pr_GetRolesAssignedToUser
+@p_UserId int
+AS
+BEGIN
+
+	SELECT TUR.iRoleId
+	 FROM dbo.tblUserRole TUR	
+	 WHERE TUR.iUserId = @p_UserId;
+
+END
+
+go
+
+create procedure pr_GetTypesAssignedToUser
+@p_UserId int
+AS
+BEGIN
+
+SELECT TAUT.iUserTypeId
+ FROM dbo.tblAssignUserType TAUT
+ WHERE TAUT.iUserId = @p_UserId;
+
+END

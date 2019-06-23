@@ -1,0 +1,269 @@
+ALTER TABLE tblOrganization
+ADD bFirstTimeLogin bit;
+go
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetUsernameEmailCount]    Script Date: 6/25/2017 6:36:33 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[pr_GetUsernameEmailCount]
+@p_Username varchar(30),
+@p_Email varchar(70),
+@p_UserId int
+as
+begin
+if @p_UserId=null or @p_UserId=0
+Begin
+select count(*) from tblUser where vEmail = @p_Email
+or vUserName = @p_Username;
+end
+ELSE IF @p_UserId  >0
+BEGIN
+select count(*) from tblUser where (vEmail = @p_Email
+or vUserName = @p_Username) and iUserId<>@p_UserId;
+END
+
+
+end
+
+GO
+Create Procedure [dbo].[pr_DeleteMenuById]
+(@p_iMenuId  int
+)
+AS
+BEGIN
+Delete  from tblMenu
+Where iMenuId = @p_iMenuId;
+END
+
+GO
+Create procedure [dbo].[pr_DeleteUserById]
+@p_UserId int
+as 
+begin
+
+	delete from tblAssignUserType Where  iUserId = @p_UserId;
+	delete from tblUserRole Where iUserId = @p_UserId;
+	delete from tblUser Where iUserId = @p_UserId;
+
+end
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizations]    Script Date: 6/25/2017 10:36:12 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[pr_GetOrganizations]
+(
+	@p_SearchText varchar(100),
+	@p_Offset int,
+	@p_PageSize int
+)
+AS
+BEGIN
+
+
+	select COUNT(*) OVER () as TotalCount,  ut.iOrganizationId
+,ut.vOrganizationName
+,ut.vOrganizationShortName
+,ut.vAddress
+,ut.vPhoneNo
+,ut.iCountryId
+,ut.iCityId
+,ut.dActivationDate
+,ut.dExpiryDate
+,ut.dRegistrationDate
+,ut.bIsActive
+,ut.iCreatedUserId
+,ut.dCreatedDate
+,ut.iUpdatedUserId
+,ut.dUpdatedDate
+,ut.vContactPersonName
+,ut.vContactPersonPhoneNo
+,ut.vEmail,
+ut.vDomainName
+,ut.iStatus
+,ut.iStatusUserId
+,ut.vReason
+,ut.iTimeZoneId
+,ut.iLanguageId
+,ut.bFirstTimeLogin
+		 from tblOrganization ut
+	WHERE @p_SearchText = ''
+	OR
+	ut.vOrganizationName like CONCAT('%', @p_SearchText, '%')
+
+	order by ut.iOrganizationId OFFSET @p_Offset ROWS  FETCH NEXT @p_PageSize ROWS ONLY;
+
+END
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SaveOrganization]    Script Date: 6/25/2017 10:37:03 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER Procedure [dbo].[pr_SaveOrganization]
+(@p_iOrganizationId int=null
+,@p_vOrganizationName nvarchar(max) =null
+,@p_vOrganizationShortName nvarchar(max)=null
+,@p_vAddress nvarchar(max)=null
+,@p_vPhoneNo nvarchar(max)=null
+,@p_iCountryId int=null
+,@p_iCityId int=null
+,@p_dActivationDate datetime=null
+,@p_dExpiryDate datetime=null
+,@p_dRegistrationDate datetime=null
+,@p_bIsActive bit=null
+,@p_iCreatedUserId int=null
+,@p_dCreatedDate datetime=null
+,@p_iUpdatedUserId int=null
+,@p_dUpdatedDate datetime=null
+,@p_vContactPersonName nvarchar(max)=null
+,@p_vContactPersonPhoneNo nvarchar(max)=null
+,@p_vEmail nvarchar(max)=null
+,@p_vDomainName nvarchar(max) =null
+,@p_vOganizationLogo nvarchar(max)=null
+,@p_iLanguageId int  =null
+,@p_iTimeZoneId int = null
+,@p_iOrganizationStatusId int = null
+,@p_vReason nvarchar(max) = null
+,@p_bFirstTimeLogin bit = null)
+AS
+BEGIN
+IF @p_iOrganizationId = 0
+
+BEGIN
+INSERT INTO tblOrganization (vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName
+,iLanguageId
+,iTimeZoneId
+,iStatus
+,vReason
+,bFirstTimeLogin) values (@p_vOrganizationName 
+,@p_vOrganizationShortName 
+,@p_vAddress 
+,@p_vPhoneNo 
+,@p_iCountryId 
+,@p_iCityId 
+,@p_dActivationDate 
+,@p_dExpiryDate 
+,@p_dRegistrationDate 
+,@p_bIsActive 
+,@p_iCreatedUserId 
+,@p_dCreatedDate 
+,@p_iUpdatedUserId 
+,@p_dUpdatedDate 
+,@p_vContactPersonName 
+,@p_vContactPersonPhoneNo 
+,@p_vEmail 
+,@p_vDomainName
+,@p_iLanguageId
+,@p_iTimeZoneId
+,@p_iOrganizationStatusId
+,@p_vReason
+,@p_bFirstTimeLogin );
+select SCOPE_IDENTITY();
+END
+ELSE IF @p_iOrganizationId  >0
+BEGIN
+Update tblOrganization
+
+SET vOrganizationName=@p_vOrganizationName
+,vOrganizationShortName=@p_vOrganizationShortName
+,vAddress=@p_vAddress
+,vPhoneNo=@p_vPhoneNo
+,iCountryId=@p_iCountryId
+,iCityId=@p_iCityId
+,dActivationDate=@p_dActivationDate
+,dExpiryDate=@p_dExpiryDate
+,bIsActive=@p_bIsActive
+,iCreatedUserId=@p_iCreatedUserId
+,dCreatedDate=@p_dCreatedDate
+,iUpdatedUserId=@p_iUpdatedUserId
+,dUpdatedDate=@p_dUpdatedDate
+,vContactPersonName=@p_vContactPersonName
+,vContactPersonPhoneNo=@p_vContactPersonPhoneNo
+,vEmail=@p_vEmail
+,vDomainName=@p_vDomainName
+,iLanguageId=@p_iLanguageId
+, iTimeZoneId = @p_iTimeZoneId
+, vOrganizationLogo = @p_vOganizationLogo
+,iStatus = @p_iOrganizationStatusId
+,vReason = @p_vReason
+Where iOrganizationId = @p_iOrganizationId;
+Select @p_iOrganizationId;
+END
+END
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_SelectOrganizationById]    Script Date: 6/25/2017 10:39:36 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER Procedure [dbo].[pr_SelectOrganizationById]
+(@p_iOrganizationId  int
+)
+AS
+BEGIN
+Select iOrganizationId
+,vOrganizationName
+,vOrganizationShortName
+,vAddress
+,vPhoneNo
+,iCountryId
+,iCityId
+,dActivationDate
+,dExpiryDate
+,dRegistrationDate
+,bIsActive
+,iCreatedUserId
+,dCreatedDate
+,iUpdatedUserId
+,dUpdatedDate
+,vContactPersonName
+,vContactPersonPhoneNo
+,vEmail
+,vDomainName
+,iLanguageId
+,iTimeZoneId
+,iStatus
+,vReason
+,bFirstTimeLogin from tblOrganization
+Where iOrganizationId = @p_iOrganizationId;
+END
+
+
+
+

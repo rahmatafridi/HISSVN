@@ -1,0 +1,307 @@
+﻿using HIS.DAL.DbHelper;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Role;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.DAL.DAL
+{
+    public class RoleDAL : IRoleDAL
+    {
+
+        #region Initialization
+
+        Database db;
+
+        public RoleDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion
+
+
+        #region Role
+
+        public List<Role> GetRoles(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<Role> roles = new List<Role>();
+            TotalRecords = 0;
+
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+            param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+            param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetRoles", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                roles = ds.Tables[0].AsEnumerable().Select(a => new Role()
+                {
+                    iRoleId = Convert.ToInt32(a["iRoleId"].ToString()),
+                    vRoleName = Convert.ToString(a["vRoleName"].ToString()),
+                    vRoleDescription = Convert.ToString(a["vRoleDescription"].ToString()),
+                    iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),                       
+
+                }).ToList();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                }
+                
+            }
+
+            return roles;
+        }
+        
+        public Role GetRoleById(int id) {
+
+            Role Role = new Role();
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_RoleId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+         
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetRoleById", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                Role = ds.Tables[0].AsEnumerable().Select(a => new Role()
+                {
+                    iRoleId = Convert.ToInt32(a["iRoleId"].ToString()),
+                    vRoleName = Convert.ToString(a["vRoleName"].ToString()),
+                    vRoleDescription = Convert.ToString(a["vRoleDescription"].ToString()),
+                    iOrganizationId = Convert.ToInt32(a["iOrganizationId"].ToString()),
+
+                }).FirstOrDefault();
+            }
+            return Role;
+
+
+        }
+        
+        public bool SaveRole(Role Role)
+        {
+            string query = "pr_SaveRole";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_iRoleId", Type = DbType.Int32, Value = Role.iRoleId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_vRoleName", Type = DbType.String, Value = Role.vRoleName, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_vRoleDescription", Type = DbType.String, Value = Role.vRoleDescription, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_iOrganizationId", Type = DbType.Int32, Value = Role.iOrganizationId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_iCreatedUserId", Type = DbType.Int32, Value = Role.CreatedUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_dCreatedDate", Type = DbType.DateTime, Value = Role.CreatedDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_iUpdatedUserId", Type = DbType.Int32, Value = Role.UpdateUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "p_dUpdatedDate", Type = DbType.DateTime, Value = Role.UpdateDate, Length = 1000, Direction = ParameterDirection.Input });
+
+
+            int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+
+            return result > 0;
+        }
+
+        public int DeleteRoleById(int id)
+        {
+            int deleted = 0;
+
+            string query = "pr_DeleteRoleById";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_Id", Value = id  });
+      
+            deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            return deleted;
+        }
+
+        public bool SaveUserRole(int userId, List<Role> Role)
+        {
+            bool saved = false;
+            DeleteUserRoles(userId);
+
+            string query = "pr_SaveUserRole";
+
+            foreach (Role rol in Role)
+            {
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_RoleId", Value = rol.iRoleId });
+                param.Add(new DbParameter() { Name = "p_UserId", Value = userId});
+                param.Add(new DbParameter() { Name = "p_CreatedUserId", Value = rol.CreatedUserId });
+
+                saved = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param) > 0;
+            }
+
+            
+
+            return saved;
+        }
+
+        private bool DeleteUserRoles(int userId)
+        {
+            string query = "pr_DeleteUserRoles";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_UserId", Value = userId });
+
+            int deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            return deleted > 0;
+
+        }
+
+        public List<int> GetUserAssignedRoleIds(int userId)
+        {
+            List<int> ids = new List<int>();
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_UserId", Direction = ParameterDirection.Input, Value = userId, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetRolesAssignedToUser", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                ids = ds.Tables[0].AsEnumerable().Select(a => Convert.ToInt32(a[0])).ToList();
+            }
+
+            return ids;
+        }
+
+
+        #endregion
+
+        #region Role Detail
+
+        public List<RoleDetail> GetRoleDetails(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<RoleDetail> roledetails = new List<RoleDetail>();
+            TotalRecords = 0;
+
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+            param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+            param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetRoles", CommandType.StoredProcedure,ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                roledetails = ds.Tables[0].AsEnumerable().Select(a => new RoleDetail()
+                {
+                   iRoleDetailId = Convert.ToInt32(a["iRoleDetailId"].ToString()),
+                   iRoleId = Convert.ToInt32(a["iRoleId"].ToString()),
+                   vModulePermissionId = Convert.ToInt32(a["vModulePermissionId"].ToString()),                  
+
+                }).ToList();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                }
+
+            }
+
+            return roledetails;
+        }
+
+        public RoleDetail GetRoleDetailById(int id)
+        {
+
+            RoleDetail RoleDetail = new RoleDetail();
+            DataSet ds = new DataSet();
+
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_RoleDetailId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+            ds = db.LoadDataSetAgainstQuery("pr_GetRoleById", CommandType.StoredProcedure, ref param);
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                RoleDetail = ds.Tables[0].AsEnumerable().Select(a => new RoleDetail()
+                {
+                    iRoleDetailId = Convert.ToInt32(a["iRoleDetailId"].ToString()),
+                    iRoleId = Convert.ToInt32(a["iRoleId"].ToString()),
+                    vModulePermissionId = Convert.ToInt32(a["vModulePermissionId"].ToString()),
+
+                }).FirstOrDefault();
+            }
+            return RoleDetail;
+
+
+        }
+
+
+
+        public bool SaveRoleDetail(RoleDetail RoleDetail)
+        {
+            string query = "pr_SaveRole";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "@p_iRoleDetailId", Type = DbType.Int32, Value = RoleDetail.iRoleDetailId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iRoleId", Type = DbType.Int32, Value = RoleDetail.iRoleId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_vModulePermissionId", Type = DbType.Int32, Value = RoleDetail.vModulePermissionId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iCreatedUserId", Type = DbType.Int32, Value = RoleDetail.CreatedUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dCreatedDate", Type = DbType.DateTime, Value = RoleDetail.CreatedDate, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_iUpdatedUserId", Type = DbType.Int32, Value = RoleDetail.UpdateUserId, Length = 1000, Direction = ParameterDirection.Input });
+            param.Add(new DbParameter() { Name = "@p_dUpdatedDate", Type = DbType.DateTime, Value =RoleDetail.UpdateDate, Length = 1000, Direction = ParameterDirection.Input });
+
+
+            int result = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+
+            return result > 0;
+        }
+
+        public int DeleteRoleDetailById(int id)
+        {
+            int deleted = 0;
+
+            string query = "pr_DeleteRoleById";
+            List<DbParameter> param = new List<DbParameter>();
+            param.Add(new DbParameter() { Name = "p_Id", Value = id });
+
+            deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param);
+
+            return deleted;
+        }
+
+        #endregion
+
+
+    }
+
+    public interface IRoleDAL
+    {
+        #region Role
+
+        List<Role> GetRoles(SearchCriteria criteria, out int TotalRecords);
+        Role GetRoleById(int id);
+        int DeleteRoleById(int id);
+        bool SaveRole(Role Role);
+        bool SaveUserRole(int userId , List<Role> Role);
+        List<int> GetUserAssignedRoleIds(int userId);
+
+        #endregion
+
+        #region Role Detail
+
+        List<RoleDetail> GetRoleDetails(SearchCriteria criteria, out int TotalRecords);
+        RoleDetail GetRoleDetailById(int id);
+        int DeleteRoleDetailById(int id);
+        bool SaveRoleDetail(RoleDetail RoleDetail);
+
+        #endregion
+    }
+}

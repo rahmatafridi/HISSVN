@@ -1,0 +1,85 @@
+﻿using HIS.DAL.DAL;
+using HIS.Domain.Models.Common;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Organization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.BLL
+{
+    public class OrganizationBLL : IOrganizationBLL
+    {
+        #region Initialization
+
+        private IOrganizationDAL OrganizationDal { get; set; }
+
+        public OrganizationBLL()
+        {
+            OrganizationDal = new OrganizationDAL();
+        }
+
+        #endregion
+
+        #region Organization
+
+        public List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords)
+        {
+            return OrganizationDal.GetOrganizations(criteria, out TotalRecords);
+        }
+
+        public Organization GetOrganizationById(int id)
+        {
+            return OrganizationDal.GetOrganizationById(id);
+        }
+
+        public int DeleteOrganizationById(int id)
+        {
+            return OrganizationDal.DeleteOrganizationById(id);
+        }
+
+        public int SaveOrganization(Organization Organization)
+        {
+            return OrganizationDal.SaveOrganization(Organization);
+        }
+
+        public bool DoesOrganizationExists(string email)
+        {
+            return OrganizationDal.DoesOrganizationExists(email);
+        }
+        public bool SaveOrganizationModule(int organizationId, List<Module> module)
+        {
+            return OrganizationDal.SaveOrganizationModule(organizationId, module);
+        }
+
+        public List<int> GetOrganizationModulesAssignedIds(int organizationId)
+        {
+            return OrganizationDal.GetOrganizationModulesAssignedIds(organizationId);
+        }
+
+        #endregion
+
+
+    }
+
+    public interface IOrganizationBLL
+    {
+        #region Organization
+
+        List<Organization> GetOrganizations(SearchCriteria criteria, out int TotalRecords);
+
+        Organization GetOrganizationById(int id);
+
+        int DeleteOrganizationById(int id);
+
+        int SaveOrganization(Organization Organization);  
+        bool DoesOrganizationExists(string email);
+        bool SaveOrganizationModule(int organizationId, List<Module> module);
+        List<int> GetOrganizationModulesAssignedIds(int organizationId);
+
+        #endregion
+
+    }
+}

@@ -1,0 +1,161 @@
+﻿(function ($) {
+
+    $(document).ready(function () {
+
+        Global.Initialize();
+
+    });
+})(jQuery);
+var Global = new function () {
+    this.Initialize = function () {
+
+        this.HandleGlobalEvents();
+    },
+        this.HandleGlobalEvents = function () {
+
+            jQuery.validator.setDefaults({
+                invalidHandler: function (event, validator) {
+
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').addClass("has-error");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+
+                errorElement: 'span',
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) {
+                    //  error.innerHTML = error.innerHTML.replace("This field", element.attr("data-fieldname"));
+                    //  error.innerText = error.innerText.replace("This field", element.attr("data-fieldname"));
+
+                    if (element.parent('.input-group').length) {
+
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+
+                    //if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+                    //    error.insertAfter(element.parent());
+                    //} else {
+                    //    error.insertAfter(element);
+                    //}
+                }
+            });
+        },
+        //this.ValidateRequiredFields = function () {
+        //    var isvalid = true;
+
+
+        //    $(".required").each(function () {
+        //        if ($.trim($(this).val()) === "") {
+        //            $(this).closest(".form-group").addClass("has-error");
+        //            $(this).siblings(".help-block").html($(this).data("fieldname") + " is Required field to Proceed");
+        //            isvalid = false;
+        //            return false;
+        //        }
+        //        else {
+        //            $(this).closest(".form-group").removeClass("has-error has-warning");
+        //        }
+        //    });
+
+        //    return isvalid;
+        //},
+
+        //this.ResetValidationMessages = function () {
+        //    $(".required").each(function () {
+        //        $(this).closest(".form-group").removeClass("has-error has-warning");
+        //        $(this).siblings(".help-block").html("");
+
+        //    });
+        //},
+
+        this.ShowAlertMessage = function (message, type, heading) {
+            toastr[type](message, heading);
+        },
+        this.FormDatePicker = function (inputid) {
+
+            $('.' + inputid).datepicker({                   
+                showStatus: true,
+                showWeeks: true,
+                todayHighlight: 'TRUE',
+                currentText: 'Now',
+                autoSize: true,
+                autoClose: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                dateFormat: "dd/mm/yyyy",
+               // showButtonPanel:true,
+                highlightWeek: true
+            }).on('changeDate', function (ev) {
+                $('.' + inputid).datepicker('hide');
+            });;
+        },
+
+        this.SubmitFormViaAjax = function (formid, url) {
+
+            var data = null;
+            var result = $("#" + formid).valid();
+            //Global.ResetValidationMessages();
+
+            if (!result) {
+                // do nothing
+            }
+
+            else {
+                url = url || $("#" + formid).attr("action");
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    dataType: "json",
+                    data: $("#" + formid).serialize(),
+                    async: false,
+                    success: function (msg) {                        
+                        Global.ShowAlertMessage(msg.Message, msg.Type, msg.Heading);
+                        data = msg.Data;
+                        if (msg.RedirectUrl !== "" && msg.RedirectUrl != null && msg.RedirectUrl !="undefined") {
+                            Global.RedirectToUrl(msg.RedirectUrl);
+                        }
+                    },
+                    error: function (result) {
+                        Global.ShowValidationError(formId, result);
+                        Global.ShowAlertMessage("An error occured", "error", "Error");
+                    }
+
+                });
+            }
+
+            return data;
+        };
+    this.ActiveTab = function (tab) {
+        $('.nav-tabs a[id="' + tab + '"]').tab('show');
+    };
+
+    this.RedirectToUrl = function (url) {
+        setTimeout(function () {
+            window.location = url;
+        }, 1000);
+
+    };
+
+    this.ShowValidationError = function (formName, result) {
+        var formname = formName;
+        var resul = JSON.parse(result.responseText);
+        for (var i = 0; i < resul.length; i++) {
+            $("#" + formname + " :input").each(function () {
+                var id = $(this).attr("name");
+                if (id == resul[i].key) {
+                    $(this).addClass("has-error");
+                    var error = '<span class="help-block" for="' + resul[i].key + '" generated="true">' + resul[i].errors + '</span>';
+                    if ($('#spn' + resul[i].key).val() == undefined) {
+                        $(error).insertAfter($(this));
+                        $(this).closest(".form-group").addClass("has-error");
+                    }
+                }
+
+            });
+        }
+    }
+};

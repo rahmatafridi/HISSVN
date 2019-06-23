@@ -1,0 +1,150 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HIS.Domain.Models.User;
+using HIS.Web.Models;
+using HIS.Domain.Models.Common;
+using HIS.BLL;
+using HIS.Domain.Models.Organization;
+using HIS.BLL.BLL;
+using HIS.Domain.Models.Module;
+using HIS.Domain.Models.Menu;
+
+namespace HIS.Web.Controllers
+{
+    public class MenuController : Controller
+    {
+        #region Initialization
+
+        public IOrganizationBLL _organizationBll { get; set; }
+        public ICommonBll _commonBll { get; set; }
+        public IModuleBll _moduleBll { get; set; }
+        public IMenuBll _menuBll { get; set; }
+        public IModulePermissionBll _modulePermissionBll { get; set; }
+
+        public MenuController()
+        {
+            _organizationBll = new OrganizationBLL();
+            _commonBll = new CommonBll();
+            _moduleBll = new ModuleBLL();
+            _menuBll = new MenuBll();
+            _modulePermissionBll = new ModulePermissionBLL();
+        }
+
+        #endregion
+
+
+        #region Menu
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult MenuList(string searchText, int offset = 0, int pageSize = 10)
+        {
+            List<Menu> menus = new List<Menu>();
+
+            SearchCriteria criteria = new SearchCriteria()
+            {
+                Offset = offset,
+                SearchText = searchText ?? "",
+                PageSize = pageSize
+            };
+            
+            int TotalRecords = 0;
+
+            menus = _menuBll.GetMenus(criteria, out TotalRecords);
+
+            ViewBag.Offset = offset;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = TotalRecords;
+
+            return View(menus);
+        }
+
+        public ActionResult MenuForm(int id = 0)
+        {
+            Menu menu = new Menu();
+            int total = 0;
+            ViewBag.ParentMenus = _menuBll.GetAllMenus().AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.MenuName,
+                Value = a.MenuId.ToString()
+            }).ToList();
+            ViewBag.Modules = _moduleBll.GetModule(new SearchCriteria() { Offset = 0, PageSize = 500, SearchText = "" }, out total)
+              .Where(a => a.OrganizationId == 0 || a.OrganizationId == Helper.GetLoggedInUserOrganization()).AsEnumerable().Select(a => new SelectListItem()
+              {
+                  Text = a.ModuleName,
+                  Value = a.ModuleId.ToString()
+              }).ToList(); 
+            ViewBag.ModulePermission =  _modulePermissionBll.GetModulePermission(new SearchCriteria() { Offset = 0, PageSize = 500, SearchText = "" }, out total).AsEnumerable().Select(a => new SelectListItem()
+            {
+                Text = a.ModulePermissionCode,
+                Value = a.ModulePermissionId.ToString()
+            }).ToList();
+            if (id > 0)
+            {
+                menu = _menuBll.GetMenuById(id);
+                // get saved data
+            }
+
+            return View(menu);
+        }
+
+        [HttpPost]
+        public ActionResult MenuForm(Menu menu)
+        {
+            // sir why do we need country and city for user.. ;(
+            menu.CreatedUserId = Helper.GetLoggedInUserId();
+            AjaxResponse res = new AjaxResponse();              
+           int id = _menuBll.SaveMenu(menu);
+
+                res = new AjaxResponse()
+                {
+                    Message = id > 0 ? "Menu Data saved" : "Unable to save menu data",
+                    Type = id > 0 ? "success" : "error",
+                    Heading = "Menu",
+                    Data = id
+                };
+            
+
+            return Json(res);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteOrganizationById(int id)
+        {
+            string message = "";
+            string mclass = "";
+            int deleted = _organizationBll.DeleteOrganizationById(id);
+            if (deleted > 0)
+            {
+                message = "Operation completed successfully";
+                mclass = "info";
+            }
+            else
+            {
+                message = "Unable to delete Organization";
+                mclass = "error";
+            }
+
+            AjaxResponse res = new AjaxResponse()
+            {
+                Message = message,
+                Type = mclass,
+                Heading = "Organization"
+            };
+
+
+            return Json(res);
+        }
+
+
+        #endregion
+
+
+    }
+}

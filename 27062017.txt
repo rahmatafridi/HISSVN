@@ -1,0 +1,126 @@
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_UpdateOrganizationAndCreateAdminRole]    Script Date: 6/27/2017 4:32:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_UpdateOrganizationAndCreateAdminRole]
+@p_OrganizationId int,
+@p_ActivationDate datetime,
+@p_ExpiryDate datetime,
+@p_Remarks nvarchar(max),
+@p_CreatedUserId int
+as
+begin
+DECLARE @RoleId int
+   
+	update tblOrganization
+	set dActivationDate = @p_ActivationDate,
+	dExpiryDate =  @p_ExpiryDate,
+	vReason = @p_Remarks,
+	iUpdatedUserId = @p_CreatedUserId,
+	bIsActive = 1,
+	iStatus=1,
+	bFirstTimeLogin=1
+	Where iOrganizationId = @p_OrganizationId;
+
+	Insert into tblRole(vRoleName,vRoleDescription,iOrganizationId,iCreatedUserId,dCreatedDate)
+	values('Admin','Role For Clinic Admin',@p_OrganizationId,@p_CreatedUserId,SYSDATETIME());
+	SELECT @RoleId = SCOPE_IDENTITY();
+	Insert into tblRoleDetail(iRoleId,vModulePermissionId,iCreatedUserId,dCreatedDate,iModuleId)
+	Select @RoleId,tmp.iModulePermissionId,@p_CreatedUserId,SysDateTime(),tmp.iModuleId from tblOrganizationModule tom
+	inner join tblModulePermission tmp
+	on  tom.iModuleId = tmp.iModuleId
+	Where tom.iOrganizationId = @p_OrganizationId;
+end
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_NewUserForApproveOrganization]    Script Date: 6/27/2017 4:32:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_NewUserForApproveOrganization]
+@p_OrganizationId int,
+@p_UserPassword nvarchar(max),
+@p_CreatedUserId int
+as
+begin
+DECLARE @UserId int
+Insert into tblUser(vUserName,vEmail,vFirstName,vPassword,iCreatedUserId,dCreatedDate,bIsActive,iOrganizationId,bIsFirstTimeLogin)
+Select tOrg.vEmail,tOrg.vEmail,tOrg.vEmail,@p_UserPassword,@p_CreatedUserId,SYSDATETIME(),1,tOrg.iOrganizationId,1 from tblOrganization tOrg
+Where tOrg.iOrganizationId=@p_OrganizationId;
+
+SELECT @UserId = SCOPE_IDENTITY();
+
+Insert into tblUserRole(iRoleId,iUserId,iCreatedUserId,dCreatedDate)
+Select tRole.iRoleId,@UserId,@p_CreatedUserId,SYSDATETIME() from tblRole tRole
+Where tRole.iOrganizationId = @p_OrganizationId;
+
+Insert into tblAssignUserType(iUserTypeId,iOrganizationId,iUserId,iCreatedUserId,dCreatedDate)
+Select iUserTypeId,@p_OrganizationId,@UserId,@p_CreatedUserId,SYSDATETIME() from tblUserType
+Where vUserTypeName ='Admin';
+
+
+end
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_GetOrganizationEmailCount]    Script Date: 6/27/2017 8:40:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[pr_GetOldPasswordExistsCount]
+@p_UserId int,
+@p_OldPassword nvarchar(20)
+as
+begin
+Select count(*) from tblUser
+Where iUserId = @p_UserId and vPassword = @p_OldPassword;
+
+end
+
+go
+
+USE [HIS]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_DeclineOrganization]    Script Date: 6/27/2017 8:56:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[pr_ChangePassword]
+(
+	@p_UserId int,
+	@p_vNewPassword varchar(MAX)
+	
+	
+)
+AS
+BEGIN
+
+Update tblUser
+Set vPassword = @p_vNewPassword,
+iUpdatedUserId = @p_UserId,
+dUpdatedDate = SYSDATETIME(),
+bIsFirstTimeLogin = 0
+Where iUserId = @p_UserId;
+END
+
+
+
+
+
+
+
+
+

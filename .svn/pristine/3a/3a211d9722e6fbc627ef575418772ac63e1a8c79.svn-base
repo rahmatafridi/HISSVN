@@ -1,0 +1,313 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HIS.Domain.Models.Menu;
+using HIS.DAL.DbHelper;
+using System.Data;
+using HIS.Domain.Models.Common;
+
+namespace HIS.DAL
+{
+    public class MenuDAL : IMenuDAL
+    {
+        #region Intialization
+        Database db;
+
+        public MenuDAL()
+        {
+            db = new Database();
+        }
+
+        #endregion
+
+        #region User Menus
+
+        public List<Menu> GetUserMenus(int userId, int organizationId)
+        {
+            List<Menu> Menus = new List<Menu>();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_UserId", Direction = ParameterDirection.Input, Value = userId });
+                param.Add(new DbParameter() { Name = "p_OrganizationId", Direction = ParameterDirection.Input, Value = organizationId }); ;
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetUserMenus", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    Menus = ds.Tables[0].AsEnumerable().Where(a => Convert.ToInt32(a["iParentMenu"]) == 0).Select(b =>
+                        new Menu
+                        {
+                            MenuId = Convert.ToInt32(b["iMenuId"]),
+                            MenuName = b["vMenuName"].ToString(),
+                            MenuLink = b["vMenuPath"].ToString(),
+                            ModulePermissionId = Convert.ToInt32(b["iModulePermissionId"]),
+                            IconClass = b["vIconClass"].ToString()
+                        }).ToList();
+
+
+                    foreach (Menu mnu in Menus)
+                    {
+                        mnu.ChildMenu = ds.Tables[0].AsEnumerable().Where(a => Convert.ToInt32(a["iParentMenu"]) == mnu.MenuId).Select(b =>
+                        new Menu
+                        {
+                            MenuId = Convert.ToInt32(b["iMenuId"]),
+                            MenuName = b["vMenuName"].ToString(),
+                            MenuLink = b["vMenuPath"].ToString(),
+                            ModulePermissionId = Convert.ToInt32(b["iModulePermissionId"]),
+                            IconClass = b["vIconClass"].ToString()
+                        }).ToList();
+
+
+                        // assuming there may not be more than 3 level Menus.. 
+                        foreach (Menu cmenu in mnu.ChildMenu)
+                        {
+                            cmenu.ChildMenu = ds.Tables[0].AsEnumerable().Where(a => Convert.ToInt32(a["iParentMenu"]) == cmenu.MenuId).Select(b =>
+                            new Menu
+                            {
+                                MenuId = Convert.ToInt32(b["iMenuId"]),
+                                MenuName = b["vMenuName"].ToString(),
+                                MenuLink = b["vMenuPath"].ToString(),
+                                ModulePermissionId = Convert.ToInt32(b["iModulePermissionId"]),
+                                IconClass = b["vIconClass"].ToString()
+                            }).ToList();
+                        }
+                    }
+
+
+
+
+                }
+
+                Menus.RemoveAll(a => a.ChildMenu.Count < 1);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return Menus;
+        }
+
+        #endregion
+
+        #region Menus
+        public List<Menu> GetMenus(SearchCriteria criteria, out int TotalRecords)
+        {
+            List<Menu> menus = new List<Menu>();
+            try
+            {
+
+                TotalRecords = 0;
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_SearchText", Direction = ParameterDirection.Input, Value = criteria.SearchText, Type = DbType.String });
+                param.Add(new DbParameter() { Name = "p_Offset", Direction = ParameterDirection.Input, Value = criteria.Offset, Type = DbType.Int32 });
+                param.Add(new DbParameter() { Name = "p_PageSize", Direction = ParameterDirection.Input, Value = criteria.PageSize, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetMenus", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    menus = ds.Tables[0].AsEnumerable().Select(a => new Menu()
+                    {
+                        MenuId = Convert.ToInt32(a["iMenuId"].ToString()),
+                        MenuName = Convert.ToString(a["vMenuName"].ToString()),
+                        MenuLink = Convert.ToString(a["vMenuPath"].ToString()),
+                        ParentMenu = a["iParentMenu"].ToString() == "" ? 0 : Convert.ToInt32(a["iParentMenu"].ToString()),
+                        SortOrder = Convert.ToInt32(a["iSortOrder"].ToString()),
+                        ModuleId = Convert.ToInt32(a["iModuleId"].ToString()),
+                        ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"].ToString()),
+                        IconClass = Convert.ToString(a["vIconClass"].ToString()),
+                        ModuleName = Convert.ToString(a["vModuleName"].ToString()),
+                        ModulePermissionCode = Convert.ToString(a["vModulePermissionCode"].ToString()),
+                        ModulePermissionDescription = Convert.ToString(a["vDescription"].ToString()),
+
+                    }).ToList();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        TotalRecords = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return menus;
+        }
+
+        public Menu GetMenuById(int id)
+        {
+
+            Menu menu = new Menu();
+            try
+            {
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_MenuId", Direction = ParameterDirection.Input, Value = id, Type = DbType.Int32 });
+
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetMenuById", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    menu = ds.Tables[0].AsEnumerable().Select(a => new Menu()
+                    {
+                        MenuId = Convert.ToInt32(a["iMenuId"].ToString()),
+                        MenuName = Convert.ToString(a["vMenuName"].ToString()),
+                        MenuLink = Convert.ToString(a["vMenuPath"].ToString()),
+                        ParentMenu = a["iParentMenu"].ToString() == "" ? 0 : Convert.ToInt32(a["iParentMenu"].ToString()),
+                        SortOrder = Convert.ToInt32(a["iSortOrder"].ToString()),
+                        ModuleId = Convert.ToInt32(a["iModuleId"].ToString()),
+                        ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"].ToString()),
+                        IconClass = Convert.ToString(a["vIconClass"].ToString())
+
+
+                    }).FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return menu;
+
+
+        }
+
+        public List<Menu> GetAllMenus()
+        {
+            List<Menu> menus = new List<Menu>();
+            try
+            {
+
+                DataSet ds = new DataSet();
+
+                List<DbParameter> param = new List<DbParameter>();
+
+                ds = db.LoadDataSetAgainstQuery("pr_GetAllMenus", CommandType.StoredProcedure, ref param);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    menus = ds.Tables[0].AsEnumerable().Select(a => new Menu()
+                    {
+                        MenuId = Convert.ToInt32(a["iMenuId"].ToString()),
+                        MenuName = Convert.ToString(a["vMenuName"].ToString()),
+                        MenuLink = Convert.ToString(a["vMenuPath"].ToString()),
+                        ParentMenu = a["iParentMenu"].ToString() == "" ? 0 : Convert.ToInt32(a["iParentMenu"].ToString()),
+                        SortOrder = Convert.ToInt32(a["iSortOrder"].ToString()),
+                        ModuleId = Convert.ToInt32(a["iModuleId"].ToString()),
+                        ModulePermissionId = Convert.ToInt32(a["iModulePermissionId"].ToString()),
+                        IconClass = Convert.ToString(a["vIconClass"].ToString()),
+
+                    }).ToList();
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return menus;
+        }
+
+        public int SaveMenu(Menu menu)
+        {
+            int saved = 0;
+            try
+            {
+                string query = "pr_SaveMenu";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "@p_iMenuId", Type = DbType.Int32, Value = menu.MenuId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vMenuName", Type = DbType.String, Value = menu.MenuName, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vMenuPath", Type = DbType.String, Value = menu.MenuLink, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iParentMenu", Type = DbType.Int32, Value = menu.ParentMenu, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iSortOrder", Type = DbType.Int32, Value = menu.SortOrder, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iModuleId", Type = DbType.Int32, Value = menu.ModuleId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iModulePermissionId", Type = DbType.Int32, Value = menu.ModulePermissionId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iCreatedUserId", Type = DbType.Int32, Value = menu.CreatedUserId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dCreatedDate", Type = DbType.DateTime, Value = menu.CreatedDate, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_iUpdatedUserId", Type = DbType.Int32, Value = menu.UpdateUserId, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_dUpdatedDate", Type = DbType.DateTime, Value = menu.UpdateDate, Length = 1000, Direction = ParameterDirection.Input });
+                param.Add(new DbParameter() { Name = "@p_vIconClass", Type = DbType.String, Value = menu.IconClass, Length = 1000, Direction = ParameterDirection.Input });
+
+                saved = Convert.ToInt32(db.ExecuteScalar(query, CommandType.StoredProcedure, ref param));
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return saved;
+        }
+        public bool DeleteMenuById(int id)
+        {
+            try
+            {
+                bool deleted = false;
+
+                string query = "pr_DeleteMenuById";
+                List<DbParameter> param = new List<DbParameter>();
+                param.Add(new DbParameter() { Name = "p_iMenuId", Value = id });
+
+                deleted = db.ExecuteNonQuery(query, CommandType.StoredProcedure, ref param) > 0;
+
+                return deleted;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        #endregion
+    }
+
+    public interface IMenuDAL
+    {
+        #region User Menus
+        List<Menu> GetUserMenus(int userId, int organizationId);
+        #endregion
+
+        #region Menus
+
+        List<Menu> GetMenus(SearchCriteria criteria, out int TotalRecords);
+
+        Menu GetMenuById(int id);
+
+        List<Menu> GetAllMenus();
+
+        int SaveMenu(Menu menu);
+
+        bool DeleteMenuById(int id);
+
+        #endregion
+
+    }
+}
